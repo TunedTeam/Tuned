@@ -1,7 +1,3 @@
-
-Original App Design Project - README
-===
-
 # Tuned (app name still in the works)
 
 ## Table of Contents
