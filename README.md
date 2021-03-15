@@ -75,16 +75,16 @@ Social music app to explore different genres of music and rate, review, and inte
 ## Wireframes
 
 ### [BONUS] Digital Wireframes & Mockups
-<img src="feedUI" width=600>
-<img src="albumUI" width=600>
-<img src="searchUI" width=600>
-<img src="alertsUI" width=600>
-<img src="profileUI" width=600>
-<img src="createReviewUI" width=600>
-<img src="logSignUI" width=600>
+<img src="UI/feedUI.png" width=600>
+<img src="UI/albumUI.png" width=600>
+<img src="UI/searchUI.png" width=600>
+<img src="UI/alertsUI.png" width=600>
+<img src="UI/profileUI.png" width=600>
+<img src="UI/createReviewUI.png" width=600>
+<img src="UI/logSignUI.png" width=600>
 
 ### [BONUS] Interactive Prototype
-<img src="prototype.gif" width=600>
+<img src="UI/prototype.gif" width=600>
 
 ## Schema 
 [This section will be completed in Unit 9]
