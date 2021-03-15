@@ -75,7 +75,7 @@ Social music app to explore different genres of music and rate, review, and inte
 ## Wireframes
 
 ### [BONUS] Digital Wireframes & Mockups
-<img src="UI/feedUI.png" width=250>
+<img src="UI/feedUI.png" width=600>
 <img src="UI/albumUI.png" width=250>
 <img src="UI/searchUI.png" width=250>
 <img src="UI/alertsUI.png" width=250>
