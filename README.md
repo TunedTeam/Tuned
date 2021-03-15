@@ -1,4 +1,4 @@
-# Tuned (app name still in the works)
+# Tuned
 
 ## Table of Contents
 1. [Overview](#Overview)
