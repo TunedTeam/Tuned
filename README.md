@@ -115,7 +115,7 @@ Social music app to explore different genres of music and rate, review, and inte
 
 ### Networking
 #### List of network requests by screen
- - Discover Screen
+- Discover Screen
       - (Read/GET) Query new releases
       - (Read/GET) Query popular albums of the week
       - (Read/GET) Query current top tracks
