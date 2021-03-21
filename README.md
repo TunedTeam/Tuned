@@ -87,10 +87,114 @@ Social music app to explore different genres of music and rate, review, and inte
 <img src="UI/prototype.gif" width=250>
 
 ## Schema 
-[This section will be completed in Unit 9]
+
 ### Models
-[Add table of models]
+#### User
+
+   | Property        | Type     | Description  |
+   | --------------- | -------- | ------------ |
+   | userName        | String   | unique username that displays user page |
+   | displayName     | String   | display username that appears on user's page |
+   | profilePicture  | String   | profile picture that displays on user's page |
+   
+#### Review
+
+   | Property            | Type                | Description   |
+   | ------------------- | ------------------- | ------------- |
+   | objectId            | String              | unique id for the user post (default field) |
+   | author              | Pointer to User     | review author |
+   | reviewTitle         | String              | title of review |
+   | reviewCaption       | String              | review caption by author |
+   | reviewRating        | Number              | rating for album / track  / artist|
+   | reviewComment       | String              | comment made under review |
+   | reviewCommentsLikes | Number              | amount of likes on specific comment under review |
+   | reviewCommentsCount | Number              | number of comments made under review |
+   | reviewLikesCount    | Number              | number of likes for the review |
+   | createdAt           | DateTime            | date when review is created (default field) |
+   | updatedAt           | DateTime            | date when review is last updated (default field) |
+
 ### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+#### List of network requests by screen
+ - Discover Screen
+      - (Read/GET) Query new releases
+      - (Read/GET) Query popular albums of the week
+      - (Read/GET) Query current top tracks
+- Create Review Post Screen
+      - (Create/POST) Create a new review post object
+- Profile Screen
+      - (Read/GET) Query logged in user object
+      - (Update/PUT) Update user profile image
+- Login Screen
+      - (Read/GET) Query logged in user object
+- Sign Up Screen
+      - (Read/GET) Query logged in user object
+      - (Create/POST) Create a new user account
+- Search Screen
+      - (READ/GET) Query search results (artist, album, tracks)
+- Artist Screen
+      - (Read/GET) Query artist name
+      - (Read/GET) Query artist photo
+      - (Read/GET) Query artist biography
+      - (Read/GET) Query artist top tracks
+      - (Read/GET) Query artist albums
+      - (Read/GET) Query artist singles and EPs
+      - (Read/GET) Query artist featured tracks
+      - (Read/GET) Query artist rating
+- Album Screen
+      - (Read/GET) Query album name
+      - (Read/GET) Query album photo
+      - (Read/GET) Query album release year
+      - (Read/GET) Query album rating
+      - (Read/GET) Query album genre(s)
+
+- List Screen
+      - (Read/GET) Query title of list
+      - (Read/GET) Query thumbnail photo of lists
+      - (Read/GET) Query tracks in the list
+      - (Read/GET) Query album / ep art of tracks in the list
+      - (Create/POST) Create a new like on a list
+      - (Delete) Delete existing like
+      - (Create/POST) Create a new comment on a list
+      - (Delete) Delete existing comment
+      - (Create/POST) Create a new like on a comment
+      - (Delete) Delete existing like on a comment
+      - (Read/GET) Query amount of likes
+      - (Read/GET) Query amount of comments
+      - (Read/GET) Query amount of likes on a comment
+- Create List Screen
+      - (Create/POST) Create a new list object
+- User’s Page Screen
+      - (Read/GET) Query user’s username
+      - (Read/GET) Query user’s display name
+      - (Read/GET) Query user’s profile picture
+      - (Read/GET) Query user’s favorite albums / tracks
+      - (Read/GET) Query user’s reviews
+      - (Read/GET) Query user’s lists
+- Review screen
+      - (Read/GET) Query title of review
+      - (Read/GET) Query review caption
+      - (Read/GET) Query review’s album / track art
+      - (Read/GET) Query review’s rating
+      - (Create/POST) Create a new like on a review
+      - (Delete) Delete existing like
+      - (Create/POST) Create a new comment on a post
+      - (Delete) Delete existing comment
+      - (Create/POST) Create a new like on a comment
+      - (Delete) Delete existing like on a comment
+      - (Read/GET) Query amount of likes
+      - (Read/GET) Query amount of comments
+      - (Read/GET) Query amount of likes on a comment
+
+### OPTIONAL: Existing API Endpoints
+
+##### Spotify API
+- Base URL - [https://api.spotify.com/v1]
+
+   HTTP Verb | Endpoint | Description
+   ----------|----------|------------
+    `GET`    | /albums/{id} | gets specific album by :id
+    `GET`    | /artists/{id} | gets specific artist by :id
+    `GET`    | /track/{id} | gets specific track by : id
+    `GET`    | /search | get spotify catalog information about albums, artists, tracks
+    `GET`    | /browse | get all categories
+
