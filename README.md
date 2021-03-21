@@ -115,23 +115,23 @@ Social music app to explore different genres of music and rate, review, and inte
 
 ### Networking
 #### List of network requests by screen
-- Discover Screen
+ - Discover Screen
       - (Read/GET) Query new releases
       - (Read/GET) Query popular albums of the week
       - (Read/GET) Query current top tracks
-- Create Review Post Screen
+ - Create Review Post Screen
       - (Create/POST) Create a new review post object
-- Profile Screen
+ - Profile Screen
       - (Read/GET) Query logged in user object
       - (Update/PUT) Update user profile image
-- Login Screen
+ - Login Screen
       - (Read/GET) Query logged in user object
-- Sign Up Screen
+ - Sign Up Screen
       - (Read/GET) Query logged in user object
       - (Create/POST) Create a new user account
-- Search Screen
+ - Search Screen
       - (READ/GET) Query search results (artist, album, tracks)
-- Artist Screen
+ - Artist Screen
       - (Read/GET) Query artist name
       - (Read/GET) Query artist photo
       - (Read/GET) Query artist biography
@@ -140,14 +140,14 @@ Social music app to explore different genres of music and rate, review, and inte
       - (Read/GET) Query artist singles and EPs
       - (Read/GET) Query artist featured tracks
       - (Read/GET) Query artist rating
-- Album Screen
+ - Album Screen
       - (Read/GET) Query album name
       - (Read/GET) Query album photo
       - (Read/GET) Query album release year
       - (Read/GET) Query album rating
       - (Read/GET) Query album genre(s)
 
-- List Screen
+ - List Screen
       - (Read/GET) Query title of list
       - (Read/GET) Query thumbnail photo of lists
       - (Read/GET) Query tracks in the list
@@ -161,16 +161,16 @@ Social music app to explore different genres of music and rate, review, and inte
       - (Read/GET) Query amount of likes
       - (Read/GET) Query amount of comments
       - (Read/GET) Query amount of likes on a comment
-- Create List Screen
+ - Create List Screen
       - (Create/POST) Create a new list object
-- User’s Page Screen
+ - User’s Page Screen
       - (Read/GET) Query user’s username
       - (Read/GET) Query user’s display name
       - (Read/GET) Query user’s profile picture
       - (Read/GET) Query user’s favorite albums / tracks
       - (Read/GET) Query user’s reviews
       - (Read/GET) Query user’s lists
-- Review screen
+ - Review screen
       - (Read/GET) Query title of review
       - (Read/GET) Query review caption
       - (Read/GET) Query review’s album / track art
