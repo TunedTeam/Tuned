@@ -202,6 +202,9 @@ Social music app to explore different genres of music and rate, review, and inte
       - (Read/GET) Query amount of likes on a comment
  - Create List Screen
       - (Create/POST) Create a new list object
+      - (Create/POST) Create list title
+      - (Create/POST) Create thumbnail photo of list
+      - (Create/POST) Create / Add tracks to list
  - User’s Page Screen
       - (Read/GET) Query user’s username
       - (Read/GET) Query user’s display name
@@ -223,6 +226,13 @@ Social music app to explore different genres of music and rate, review, and inte
       - (Read/GET) Query amount of likes
       - (Read/GET) Query amount of comments
       - (Read/GET) Query amount of likes on a comment
+  - Create Review Screen
+      - (Create/POST) Create a new review object
+      - (Create/POST) Create review title
+      - (Create/POST) Create review caption
+      - (Create/POST) Create review rating
+      - (Read/GET) Query review author (user)
+      - (Read/GET) Query album / artist / track info
   - Alerts’s Page Screen
       - (Read/GET) Query user’s username
       - (Read/GET) Query user’s profile picture
