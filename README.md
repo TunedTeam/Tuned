@@ -186,7 +186,6 @@ Social music app to explore different genres of music and rate, review, and inte
       - (Read/GET) Query album release year
       - (Read/GET) Query album rating
       - (Read/GET) Query album genre(s)
-
  - List Screen
       - (Read/GET) Query title of list
       - (Read/GET) Query thumbnail photo of lists
@@ -224,6 +223,10 @@ Social music app to explore different genres of music and rate, review, and inte
       - (Read/GET) Query amount of likes
       - (Read/GET) Query amount of comments
       - (Read/GET) Query amount of likes on a comment
+  - Alerts’s Page Screen
+      - (Read/GET) Query user’s username
+      - (Read/GET) Query user’s profile picture
+      - (Read/GET) Query notification type
 
 ### OPTIONAL: Existing API Endpoints
 
