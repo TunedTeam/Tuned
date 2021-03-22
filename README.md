@@ -89,6 +89,7 @@ Social music app to explore different genres of music and rate, review, and inte
 ## Schema 
 
 ### Models
+
 #### User
 
    | Property        | Type     | Description  |
@@ -101,7 +102,7 @@ Social music app to explore different genres of music and rate, review, and inte
 
    | Property            | Type                | Description   |
    | ------------------- | ------------------- | ------------- |
-   | objectId            | String              | unique id for the user post (default field) |
+   | reviewID            | String              | unique id for the review post (default field) |
    | author              | Pointer to User     | review author |
    | reviewTitle         | String              | title of review |
    | reviewCaption       | String              | review caption by author |
@@ -112,8 +113,47 @@ Social music app to explore different genres of music and rate, review, and inte
    | reviewLikesCount    | Number              | number of likes for the review |
    | createdAt           | DateTime            | date when review is created (default field) |
    | updatedAt           | DateTime            | date when review is last updated (default field) |
+   
+#### Album
+
+   | Property             | Type                | Description   |
+   | -------------------- | ------------------- | ------------- |
+   | albumID             | String               | unique id for specific album |
+   | albumAverageRating   | Number              | average album rating |
+   
+#### Track
+
+   | Property         | Type                 | Description   |
+   | ---------------- | -------------------- | ------------- |
+   | trackID          | String               | unique id for specific track |
+   | trackRating      | Number               | average rating for specific track |
+   
+#### Artist
+
+   | Property            | Type                | Description   |
+   | ------------------- | ------------------- | ------------- |
+   | artistID            | String              | unique id for specific artist |
+   | artistRating        | Number              | average artist rating |
+   
+#### Lists
+
+   | Property            | Type                | Description   |
+   | ------------------- | ------------------- | ------------- |
+   | objectId            | String              | unique id for the user post (default field) |
+   | author              | Pointer to User     | lists author |
+   | listsTitle          | String              | title of list |
+   | listsPhoto          | File                | thumbnail photo of list |
+   | listsTracks         | String              | tracks in the list |
+   | listTracksPhoto     | File                | displays album / ep art of track in lists |
+   | listComment         | String              | comment made under lists |
+   | listCommentsLikes   | Number              | amount of likes on specific comment under lists |
+   | listsCommentsCount  | Number              | number of comments made under lists |
+   | listsLikesCount     | Number              | number of likes under lists |
+   | createdAt           | DateTime            | date when list is created (default field) |
+   | updatedAt           | DateTime            | date when list is last updated (default field) |
 
 ### Networking
+
 #### List of network requests by screen
  - Discover Screen
       - (Read/GET) Query new releases
@@ -194,7 +234,7 @@ Social music app to explore different genres of music and rate, review, and inte
    ----------|----------|------------
     `GET`    | /albums/{id} | gets specific album by :id
     `GET`    | /artists/{id} | gets specific artist by :id
-    `GET`    | /track/{id} | gets specific track by : id
+    `GET`    | /track/{id} | gets specific track by :id
     `GET`    | /search | get spotify catalog information about albums, artists, tracks
     `GET`    | /browse | get all categories
 
