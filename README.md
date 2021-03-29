@@ -24,20 +24,22 @@ Social music app to explore different genres of music and rate, review, and inte
 
 **Required Must-have Stories**
 
-* User logs in and rates each songs as they listen to it, to build up a diary of their music history.
-* User adds a review and tags to each entry, then shares and discusses it with others.
-* Follow your friends to see what they're listening to and linking in your activity feed.
-* Make lists, find artist info, and see what songs are popular.
-* Track the songs you've listened to, and those you want to listen to.
-* Settings (Accesibility, Notification, General, etc.)
-* Profile page for each user
-* User can add songs / albums to a lsit (playlist) for other users to view
+- [x] User can sign up or login
+- [ ] User can create a review
+- [ ] User can make lists (add tracks / albums to a list for others to view)
+- [ ] User can see lists
+- [ ] User can see reviews
+- [ ] Profile page for each user
+- [ ] User can search up for artists, albums, tracks
+- [ ] User can comment / like a review or list of another user
+- [ ] User can follow other users
+- [ ] User can view new releases, popular albums, top tracks from discover page
 
 **Optional Nice-to-have Stories**
 
-* Ability for user to listen to a 30-second preview of a song from the app
-* Artist page including artist different albums / songs
-* Diary to keep track on what songs user listened to on a specific date
+- [ ] Ability for user to listen to a 30-second preview of a song from the app
+- [ ] Artist page including artist different albums / songs
+- [ ] Diary to keep track on what songs user listened to on a specific date
 
 ### 2. Screen Archetypes
 
