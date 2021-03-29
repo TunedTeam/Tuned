@@ -74,6 +74,10 @@ Social music app to explore different genres of music and rate, review, and inte
 * Create
 * Alerts
 
+## UPDATES
+### 03/28/21
+<img src="UI/updateSprint1.gif" width=250>
+
 ## Wireframes
 
 ### [BONUS] Digital Wireframes & Mockups
