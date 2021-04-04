@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.tuned.fragments.CreateReviewFragment;
 import com.example.tuned.fragments.DiscoverFragment;
+import com.example.tuned.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_create:
                         Toast.makeText(MainActivity.this, "Create Review!", Toast.LENGTH_SHORT).show();
-                        fragment = new DiscoverFragment();
+                        fragment = new CreateReviewFragment();
                         break;
                     case R.id.action_alerts:
                         Toast.makeText(MainActivity.this, "Alerts!", Toast.LENGTH_SHORT).show();
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_profile:
                     default:
                         Toast.makeText(MainActivity.this, "Profile!", Toast.LENGTH_SHORT).show();
-                        fragment = new DiscoverFragment();
+                        fragment = new ProfileFragment();
                         break;
                 }
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
