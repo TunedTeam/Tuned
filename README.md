@@ -75,6 +75,9 @@ Social music app to explore different genres of music and rate, review, and inte
 * Alerts
 
 ## UPDATES
+### 04/05/21
+<img src="UI/updateSprint2.gif" width=250>
+
 ### 03/28/21
 <img src="UI/updateSprint1.gif" width=250>
 
