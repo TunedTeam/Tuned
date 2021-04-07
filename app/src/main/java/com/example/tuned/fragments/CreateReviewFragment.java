@@ -90,6 +90,7 @@ public class CreateReviewFragment extends Fragment {
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
+                savePost(description, currentUser);
             }
         });
 
@@ -143,36 +144,6 @@ public class CreateReviewFragment extends Fragment {
                 etDescription.setText("");
 
             }
-        });
-    }
-
-
-    protected void queryPosts() {
-        ParseQuery<Review> query = ParseQuery.getQuery(Review.class);
-        query.include(Review.KEY_USER);
-        query.setLimit(20);
-        query.addDescendingOrder(Review.KEY_CREATED_KEY);
-        query.findInBackground(new FindCallback<Review>() {
-            @Override
-            public void done(List<Review> posts, ParseException e) {
-                if (e != null)
-                {
-                    Log.e(TAG, "Issue with getting posts", e);
-                    return;
-                }
-
-                for (Review post : posts)
-                {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
-                }
-
-                adapter.clear();
-                //allPosts.addAll(posts);
-                //swipeContainer.setRefreshing(false);
-                //adapter.notifyDataSetChanged();
-            }
-
-
         });
     }
 

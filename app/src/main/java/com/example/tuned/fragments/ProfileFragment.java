@@ -10,7 +10,7 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-public class ProfileFragment extends CreateReviewFragment {
+public class ProfileFragment extends ReviewsFeedFragment {
 
     @Override
     protected void queryPosts() {
@@ -33,10 +33,13 @@ public class ProfileFragment extends CreateReviewFragment {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
                 }
 
-               // allPosts.addAll(posts);
+                allPosts.addAll(posts);
                 adapter.notifyDataSetChanged();
             }
         });
     }
 }
+
+
+
 
