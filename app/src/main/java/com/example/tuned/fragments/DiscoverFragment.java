@@ -50,6 +50,7 @@ public class DiscoverFragment extends Fragment {
         btnLists = view.findViewById(R.id.btnLists);
 
         // TODO: show a darker color on button when selected / inside designated button fragment
+        // TODO: make button size bigger
         btnDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

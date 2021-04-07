@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="113dp"
+        android:layout_marginTop="90dp"
         android:fontFamily="sans-serif"
         android:text="Welcome back, Bob!"
         android:textSize="32sp"
@@ -38,5 +38,7 @@
         android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="@color/white" />
+
+
 
 </RelativeLayout>

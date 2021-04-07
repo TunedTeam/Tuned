@@ -8,8 +8,11 @@ public class Spotify{
 
     public static SpotifyAppApi getSpotifyApi () {
         if (Spotify.instance == null) {
-            Spotify.instance = (SpotifyAppApi) SpotifyApiBuilderKt.spotifyAppApi("clientId", "clientSecret").build(true, null);
+            Spotify.instance = (SpotifyAppApi) SpotifyApiBuilderKt
+                    .spotifyAppApi("clientId", "clientSecret").build(true, null);
         }
         return Spotify.instance;
     }
+
+
 }
