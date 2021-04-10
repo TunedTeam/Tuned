@@ -6,10 +6,11 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 @ParseClassName("Post")
-public class Review extends ParseObject {
+public class Post extends ParseObject {
 
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_USER = "user";
+    public static final String KEY_IMAGE = "image";
     public static final String KEY_CREATED_KEY = "createdAt";
 
     public String getDescription() {
@@ -18,6 +19,14 @@ public class Review extends ParseObject {
 
     public void setDescription(String description) {
         put(KEY_DESCRIPTION, description);
+    }
+
+    public ParseFile getImage() {
+        return getParseFile(KEY_IMAGE);
+    }
+
+    public void setImage(ParseFile parseFile) {
+        put(KEY_IMAGE, parseFile);
     }
 
     public ParseUser getUser() {

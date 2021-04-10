@@ -12,6 +12,7 @@ public class ParseApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ParseObject.registerSubclass(Post.class);
 
         // Register your parse models
         Parse.initialize(new Parse.Configuration.Builder(this)
@@ -22,3 +23,4 @@ public class ParseApplication extends Application {
         );
     }
 }
+

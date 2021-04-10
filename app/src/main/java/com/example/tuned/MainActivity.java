@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.tuned.fragments.CreateReviewFragment;
+import com.example.tuned.fragments.ComposeFragment;
 import com.example.tuned.fragments.DiscoverFragment;
+import com.example.tuned.fragments.PostsFragment;
 import com.example.tuned.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -42,11 +43,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_create:
                         Toast.makeText(MainActivity.this, "Create Review!", Toast.LENGTH_SHORT).show();
-                        fragment = new CreateReviewFragment();
+                        fragment = new ComposeFragment();
                         break;
                     case R.id.action_alerts:
-                        Toast.makeText(MainActivity.this, "Alerts!", Toast.LENGTH_SHORT).show();
-                        fragment = new DiscoverFragment();
+                        Toast.makeText(MainActivity.this, "Posts!", Toast.LENGTH_SHORT).show();
+                        fragment = new PostsFragment();
                         break;
                     case R.id.action_profile:
                     default:

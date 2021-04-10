@@ -11,17 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-//import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
 
 import java.util.List;
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
+public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
     private Context context;
-    private List<Review> posts;
+    private List<Post> posts;
 
-    public ReviewAdapter(Context context, List<Review> posts) {
+    public PostsAdapter(Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
     }
@@ -36,7 +36,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Review post = posts.get(position);
+        Post post = posts.get(position);
         holder.bind(post);
 
     }
@@ -52,7 +52,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<Review> postList) {
+    public void addAll(List<Post> postList) {
         posts.addAll(postList);
         notifyDataSetChanged();
     }
@@ -61,21 +61,27 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
         private TextView tvUsername;
         private TextView tvDescription;
+        private ImageView ivProfileImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvDescription = itemView.findViewById(R.id.tvDescription);
+            ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
         }
 
-        public void bind(Review post) {
+        public void bind(Post post) {
             //Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
+            ParseFile image = post.getImage();
+
+            if( image != null){
+                Glide.with(context).load(post.getImage().getUrl()).into(ivProfileImage);
+            }
 
         }
 
 
     }
 }
-

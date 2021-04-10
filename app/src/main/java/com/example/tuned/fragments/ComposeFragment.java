@@ -25,10 +25,8 @@ import android.widget.Toast;
 
 import com.example.tuned.LoginActivity;
 import com.example.tuned.MainActivity;
-import com.example.tuned.Review;
-import com.example.tuned.ReviewAdapter;
+import com.example.tuned.Post;
 import com.example.tuned.R;
-import com.example.tuned.Review;
 import com.parse.FindCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -45,17 +43,17 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateReviewFragment extends Fragment {
+public class ComposeFragment extends Fragment {
 
-    public static final String TAG = "CreateReview";
-    protected ReviewAdapter adapter;
-    public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    public static final String TAG = "ComposeFragment";
     private EditText etDescription;
     private Button btnSubmit;
     private Button btnLogout;
+    private ImageView ivProfileImage;
+    private File photoFile;
+    public String photoFileName = "photo.jpg";
 
-
-    public CreateReviewFragment() {
+    public ComposeFragment() {
         // Required empty public constructor
     }
 
@@ -64,7 +62,7 @@ public class CreateReviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Defines the xml file for the fragment
-        return inflater.inflate(R.layout.fragment_createreview, container, false);
+        return inflater.inflate(R.layout.fragment_compose, container, false);
     }
 
 
@@ -76,6 +74,7 @@ public class CreateReviewFragment extends Fragment {
         etDescription = view.findViewById(R.id.etDescription);
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnLogout = view.findViewById(R.id.btnLogout);
+        ivProfileImage = view.findViewById(R.id.ivProfileImage);
 
         // queryPosts();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +84,12 @@ public class CreateReviewFragment extends Fragment {
 
                 if (description.isEmpty())
                 {
-                    Toast.makeText(getContext(), "Review cannot be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser);
+                savePost(description, currentUser, photoFile);
             }
         });
 
@@ -126,11 +125,10 @@ public class CreateReviewFragment extends Fragment {
         getActivity().finish();
     }
 
-
-    private void savePost(String description, ParseUser currentUser) {
-        Review post = new Review();
+    private void savePost(String description, ParseUser currentUser, File photofile) {
+        Post post = new Post();
         post.setDescription(description);
-
+        post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
             @Override
@@ -142,9 +140,9 @@ public class CreateReviewFragment extends Fragment {
                 }
                 Log.i(TAG, "Post save was successful!");
                 etDescription.setText("");
-
             }
         });
     }
+
 
 }
