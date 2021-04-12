@@ -45,6 +45,10 @@ public class DiscoverFragment extends Fragment {
 
         FragmentManager childFragment = getChildFragmentManager();
 
+        FragmentTransaction discoverTransaction = childFragment.beginTransaction();
+        Fragment discoverFeedFragment = new DiscoverFeedFragment();
+        discoverTransaction.replace(R.id.child_fragment_container, discoverFeedFragment).commit();
+
         btnDiscover = view.findViewById(R.id.btnDiscover);
         btnReviews = view.findViewById(R.id.btnReviews);
         btnLists = view.findViewById(R.id.btnLists);
@@ -64,8 +68,8 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction reviewsTransaction = childFragment.beginTransaction();
-               // Fragment reviewsFeedFragment = new PostsFragment();
-              //  reviewsTransaction.replace(R.id.child_fragment_container, reviewsFeedFragment).commit();
+                // Fragment reviewsFeedFragment = new ReviewsFeedFragment();
+                // reviewsTransaction.replace(R.id.child_fragment_container, reviewsFeedFragment).commit();
             }
         });
 

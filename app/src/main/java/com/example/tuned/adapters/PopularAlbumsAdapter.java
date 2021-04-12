@@ -18,7 +18,7 @@ import com.example.tuned.R;
 
 import java.util.ArrayList;
 
-public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.ViewHolder> {
+public class PopularAlbumsAdapter extends RecyclerView.Adapter<PopularAlbumsAdapter.ViewHolder> {
 
     private static final String TAG = "NewReleasesAdapter";
 
@@ -28,7 +28,7 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
 
     private Context albumContext;
 
-    public NewReleasesAdapter(Context albumContext, ArrayList<Album> albums) {
+    public PopularAlbumsAdapter(Context albumContext, ArrayList<Album> albums) {
         this.albumContext = albumContext;
         this.albums = albums;
         rvInflater = LayoutInflater.from(albumContext);
@@ -73,9 +73,9 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
         ImageView ivAlbumArt;
         TextView tvAlbumName;
         TextView tvAlbumArtist;
-        final NewReleasesAdapter rvAdapter;
+        final PopularAlbumsAdapter rvAdapter;
 
-        public ViewHolder(@NonNull View itemView, NewReleasesAdapter adapter) {
+        public ViewHolder(@NonNull View itemView, PopularAlbumsAdapter adapter) {
             super(itemView);
 
             ivAlbumArt = itemView.findViewById(R.id.ivAlbumArt);
