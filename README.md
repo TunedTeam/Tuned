@@ -25,15 +25,15 @@ Social music app to explore different genres of music and rate, review, and inte
 **Required Must-have Stories**
 
 - [x] User can sign up or login
-- [ ] User can create a review
+- [x] User can create a review
 - [ ] User can make lists (add tracks / albums to a list for others to view)
 - [ ] User can see lists
-- [ ] User can see reviews
+- [x] User can see reviews
 - [ ] Profile page for each user
-- [ ] User can search up for artists, albums, tracks
+- [x] User can search up for artists, albums, tracks
 - [ ] User can comment / like a review or list of another user
 - [ ] User can follow other users
-- [ ] User can view new releases, popular albums, top tracks from discover page
+- [x] User can view new releases, popular albums, top tracks from discover page
 
 **Optional Nice-to-have Stories**
 
@@ -75,6 +75,10 @@ Social music app to explore different genres of music and rate, review, and inte
 * Alerts
 
 ## UPDATES
+
+### 04/12/21
+<img src="UI/updateSprint3.gif" width=250>
+
 ### 04/05/21
 <img src="UI/updateSprint2.gif" width=250>
 
