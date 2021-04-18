@@ -15,23 +15,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.tuned.models.Album;
 import com.example.tuned.R;
+import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
 
 public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.ViewHolder> {
 
-    private static final String TAG = "NewReleasesAdapter";
+    private static final String TAG = "TopTracksAdapter";
 
-    private ArrayList<Album> albums = new ArrayList<>();
+    private ArrayList<Track> tracks = new ArrayList<>();
 
     private LayoutInflater rvInflater;
 
-    private Context albumContext;
+    private Context trackContext;
 
-    public TopTracksAdapter(Context albumContext, ArrayList<Album> albums) {
-        this.albumContext = albumContext;
-        this.albums = albums;
-        rvInflater = LayoutInflater.from(albumContext);
+    public TopTracksAdapter(Context trackContext, ArrayList<Track> tracks) {
+        this.trackContext = trackContext;
+        this.tracks = tracks;
+        rvInflater = LayoutInflater.from(trackContext);
     }
 
 
@@ -47,26 +48,26 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d(TAG, "onCreateViewHolder: called.");
 
-        Glide.with(albumContext)
+        Glide.with(trackContext)
                 .asBitmap()
-                .load(albums.get(position).albumImageUrl)
+                .load(tracks.get(position).trackImageUrl)
                 .into(holder.ivAlbumArt);
 
-        holder.tvAlbumName.setText(albums.get(position).albumName);
-        holder.tvAlbumArtist.setText(albums.get(position).albumArtist);
+        holder.tvAlbumName.setText(tracks.get(position).trackName);
+        holder.tvAlbumArtist.setText(tracks.get(position).trackArtist);
 
         holder.ivAlbumArt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: clicked on an image: " + albums.get(position).albumName);
-                Toast.makeText(albumContext, albums.get(position).albumName, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onClick: clicked on an image: " + tracks.get(position).trackName);
+                Toast.makeText(trackContext, tracks.get(position).trackName, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return albums.size();
+        return tracks.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

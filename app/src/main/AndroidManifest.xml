@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tuned"
         android:usesCleartextTraffic="true">
+        <activity android:name=".AlbumActivity"></activity>
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

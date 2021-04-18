@@ -25,9 +25,6 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class PostsFragment extends Fragment {
 
     public static final String TAG = "PostsFragment";

@@ -16,9 +16,7 @@ import android.widget.Button;
 
 import com.example.tuned.R;
 
-/**
- * A simple {@link Fragment} subclass..
- */
+
 public class DiscoverFragment extends Fragment {
 
     private Button btnDiscover;

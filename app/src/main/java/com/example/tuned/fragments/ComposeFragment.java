@@ -40,9 +40,7 @@ import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class ComposeFragment extends Fragment {
 
     public static final String TAG = "ComposeFragment";

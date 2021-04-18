@@ -12,27 +12,27 @@ import android.view.ViewGroup;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.adapters.NewReleasesAdapter;
-import com.example.tuned.adapters.PopularAlbumsAdapter;
+import com.example.tuned.adapters.PopularWeekAdapter;
 import com.example.tuned.adapters.TopTracksAdapter;
 import com.example.tuned.models.Album;
 import com.example.tuned.R;
 import com.example.tuned.Spotify.Spotify;
+import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class DiscoverFeedFragment extends Fragment {
 
     private static final String TAG = "DiscoverFeedFragment";
 
     static Spotify spotify = new Spotify();
     static SpotifyAppApi api = spotify.api;
-    static ArrayList<Album> albums = spotify.getNewReleases(api);
+    static ArrayList<Album> newReleases = spotify.getNewReleases(api);
+    static ArrayList<Track> popularWeek = spotify.getPopularWeek(api);
+    static ArrayList<Track> topTracks = spotify.getTopTracks(api);
 
     private RecyclerView rvNewReleases;
-    private RecyclerView rvPopularAlbums;
+    private RecyclerView rvPopularWeek;
     private RecyclerView rvTopTracks;
 
 
@@ -56,20 +56,20 @@ public class DiscoverFeedFragment extends Fragment {
         LinearLayoutManager layoutManagerNewReleases = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rvNewReleases = view.findViewById(R.id.rvNewReleases);
         rvNewReleases.setLayoutManager(layoutManagerNewReleases);
-        NewReleasesAdapter rvAdapterNewReleases = new NewReleasesAdapter(getContext(), albums);
+        NewReleasesAdapter rvAdapterNewReleases = new NewReleasesAdapter(getContext(), newReleases);
         rvNewReleases.setAdapter(rvAdapterNewReleases);
-
-        LinearLayoutManager layoutManagerPopularAlbum = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        rvPopularAlbums = view.findViewById(R.id.rvPopularAlbumWeek);
-        rvPopularAlbums.setLayoutManager(layoutManagerPopularAlbum);
-        PopularAlbumsAdapter rvAdapterPopularAlbum = new PopularAlbumsAdapter(getContext(), albums);
-        rvPopularAlbums.setAdapter(rvAdapterPopularAlbum);
 
         LinearLayoutManager layoutManagerTopTracks = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rvTopTracks = view.findViewById(R.id.rvTopTracks);
         rvTopTracks.setLayoutManager(layoutManagerTopTracks);
-        TopTracksAdapter rvAdapterTopTracks = new TopTracksAdapter(getContext(), albums);
+        TopTracksAdapter rvAdapterTopTracks = new TopTracksAdapter(getContext(), topTracks);
         rvTopTracks.setAdapter(rvAdapterTopTracks);
+
+        LinearLayoutManager layoutManagerPopularAlbum = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rvPopularWeek = view.findViewById(R.id.rvPopularWeek);
+        rvPopularWeek.setLayoutManager(layoutManagerPopularAlbum);
+        PopularWeekAdapter rvAdapterPopularWeek = new PopularWeekAdapter(getContext(), popularWeek);
+        rvPopularWeek.setAdapter(rvAdapterPopularWeek);
 
         return view;
     }

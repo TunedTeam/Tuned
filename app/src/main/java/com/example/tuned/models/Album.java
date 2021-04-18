@@ -1,8 +1,5 @@
 package com.example.tuned.models;
 
-import com.adamratzman.spotify.SpotifyAppApi;
-import com.example.tuned.Spotify.Spotify;
-
 public class Album {
 
     public String albumId;
