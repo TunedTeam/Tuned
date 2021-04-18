@@ -76,7 +76,7 @@ public class SearchFragment extends Fragment {
         });
         */
 
-        return inflater.inflate(R.layout.fragment_search, container, false);;
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     private void setUpData() {
