@@ -47,9 +47,6 @@ public class ComposeFragment extends Fragment {
     private EditText etDescription;
     private Button btnSubmit;
     private Button btnLogout;
-    private ImageView ivProfileImage;
-    private File photoFile;
-    public String photoFileName = "photo.jpg";
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -72,7 +69,6 @@ public class ComposeFragment extends Fragment {
         etDescription = view.findViewById(R.id.etDescription);
         btnSubmit = view.findViewById(R.id.btnSubmit);
         btnLogout = view.findViewById(R.id.btnLogout);
-        ivProfileImage = view.findViewById(R.id.ivProfileImage);
 
         // queryPosts();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +83,7 @@ public class ComposeFragment extends Fragment {
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile);
+                savePost(description, currentUser);
             }
         });
 
@@ -123,10 +119,9 @@ public class ComposeFragment extends Fragment {
         getActivity().finish();
     }
 
-    private void savePost(String description, ParseUser currentUser, File photofile) {
+    private void savePost(String description, ParseUser currentUser) {
         Post post = new Post();
         post.setDescription(description);
-        post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
             @Override
