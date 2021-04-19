@@ -13,6 +13,7 @@ import com.example.tuned.fragments.ComposeFragment;
 import com.example.tuned.fragments.DiscoverFragment;
 import com.example.tuned.fragments.PostsFragment;
 import com.example.tuned.fragments.ProfileFragment;
+import com.example.tuned.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_search:
                         Toast.makeText(MainActivity.this, "Search!", Toast.LENGTH_SHORT).show();
-                        fragment = new DiscoverFragment();
+                        fragment = new SearchFragment();
                         break;
                     case R.id.action_create:
                         Toast.makeText(MainActivity.this, "Create Review!", Toast.LENGTH_SHORT).show();

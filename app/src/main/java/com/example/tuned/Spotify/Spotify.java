@@ -116,7 +116,7 @@ public class Spotify{
 
     public static ArrayList<Album> searchAlbumResult(SpotifyAppApi api, String query) {
 
-        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 20, null, null);
+        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 5, null, null);
 
         ArrayList<Album> albumArrayList = new ArrayList<>();
 
@@ -145,7 +145,7 @@ public class Spotify{
 
     public static ArrayList<Artist> searchArtistResult(SpotifyAppApi api, String query) {
 
-        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 20, null, null);
+        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 5, null, null);
 
         ArrayList<Artist> artistArrayList = new ArrayList<>();
 
@@ -172,7 +172,7 @@ public class Spotify{
 
     public static ArrayList<Track> searchTrackResult(SpotifyAppApi api, String query) {
 
-        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 20, null, null);
+        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 5, null, null);
 
         ArrayList<Track> trackArrayList = new ArrayList<>();
 

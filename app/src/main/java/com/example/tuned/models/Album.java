@@ -7,8 +7,6 @@ public class Album {
     public String albumName;
     public String albumArtist;
 
-
-
     public Album(String albumId, String albumImageUrl, String albumName, String albumArtist) {
         this.albumId = albumId;
         this.albumImageUrl = albumImageUrl;
