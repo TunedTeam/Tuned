@@ -29,7 +29,7 @@ Social music app to explore different genres of music and rate, review, and inte
 - [ ] User can make lists (add tracks / albums to a list for others to view)
 - [ ] User can see lists
 - [x] User can see reviews
-- [ ] Profile page for each user
+- [x] Profile page for each user
 - [x] User can search up for artists, albums, tracks
 - [ ] User can comment / like a review or list of another user
 - [ ] User can follow other users
@@ -75,6 +75,9 @@ Social music app to explore different genres of music and rate, review, and inte
 * Alerts
 
 ## UPDATES
+
+### 04/19/21
+<img src="UI/updateSprint4.gif" width=250>
 
 ### 04/11/21
 <img src="UI/updateSprint3.gif" width=250>
