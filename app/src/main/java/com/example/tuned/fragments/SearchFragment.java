@@ -3,6 +3,7 @@ package com.example.tuned.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,16 +19,18 @@ import com.example.tuned.R;
 import com.example.tuned.Spotify.Spotify;
 import com.example.tuned.adapters.ResultAdapter;
 import com.example.tuned.models.Album;
+import com.example.tuned.models.SearchViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
 public class SearchFragment extends Fragment {
 
    // List<T> arrList = new ArrayList<T>();
     private static final String TAG = "SearchFragment";
+
+    ViewModel viewModel = new SearchViewModel();
 
     static Spotify spotify = new Spotify();
     static SpotifyAppApi api = spotify.api;

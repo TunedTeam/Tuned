@@ -1,6 +1,6 @@
 package com.example.tuned.models;
 
-public class Artist {
+public class Artist implements SearchResults{
 
     public String artistId;
     public String artistImageUrl;

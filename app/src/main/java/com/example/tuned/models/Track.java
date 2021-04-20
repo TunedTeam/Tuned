@@ -1,6 +1,6 @@
 package com.example.tuned.models;
 
-public class Track {
+public class Track implements SearchResults{
 
     public String trackId;
     public String trackImageUrl;

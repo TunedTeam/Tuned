@@ -122,10 +122,9 @@ public class ComposeFragment extends Fragment {
     private void savePost(String description, ParseUser currentUser) {
         Post post = new Post();
         post.setDescription(description);
-<<<<<<< HEAD
+
         //post.setImage(new ParseFile(photoFile));
-=======
->>>>>>> 118707db1e6d69aef95d187595e8d4450ec42ec7
+
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
             @Override
