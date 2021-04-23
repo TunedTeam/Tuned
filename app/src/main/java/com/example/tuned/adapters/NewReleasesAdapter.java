@@ -38,7 +38,7 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = rvInflater.inflate(R.layout.card_view_design, parent, false);
+        View view = rvInflater.inflate(R.layout.discover_feed_cell, parent, false);
 
         return new ViewHolder(view,this);
     }
