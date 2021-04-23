@@ -32,6 +32,7 @@ public class SearchViewModel extends ViewModel {
         ArrayList<Track> searchTrackResult = spotify.searchTrackResult(api, query);
     }
 
+
     LiveData<ArrayList<Album>> albumsLiveData = spotify.searchAlbumResult(api, query);
     LiveData<ArrayList<Artist>> artistsLiveData = searchArtistResult;
     LiveData<ArrayList<Track>> tracksLiveData = searchTrackResult;

@@ -1,4 +1,6 @@
 package com.example.tuned.fragments;
+
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,8 +16,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tuned.Post;
+//import com.example.instagram.PostsAdapter;
 import com.example.tuned.PostsAdapter;
 import com.example.tuned.R;
+import com.example.tuned.PostsAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -25,6 +29,9 @@ import org.json.JSONArray;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
 public class PostsFragment extends Fragment {
 
     public static final String TAG = "PostsFragment";
