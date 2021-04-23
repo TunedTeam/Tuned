@@ -14,4 +14,18 @@ public class Album implements SearchResults {
         this.albumArtist = albumArtist;
     }
 
+    @Override
+    public String getName() {
+
+        return albumName;
+    }
+
+    @Override
+    public String getType() {
+        return "album";
+    }
+
+    public String getImage() {
+        return albumImageUrl;
+    }
 }

@@ -12,6 +12,7 @@ import com.adamratzman.spotify.models.SimpleTrack;
 import com.adamratzman.spotify.models.SpotifySearchResult;
 import com.example.tuned.models.Album;
 import com.example.tuned.models.Artist;
+import com.example.tuned.models.SearchResults;
 import com.example.tuned.models.Track;
 
 import org.jetbrains.annotations.NotNull;
@@ -114,11 +115,11 @@ public class Spotify{
         return tracksArrayList;
     }
 
-    public static ArrayList<Album> searchAlbumResult(SpotifyAppApi api, String query) {
+    public static ArrayList<SearchResults> searchAlbumResult(SpotifyAppApi api, String query) {
 
-        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 5, null, null);
+        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 10, null, null);
 
-        ArrayList<Album> albumArrayList = new ArrayList<>();
+        ArrayList<SearchResults> albumArrayList = new ArrayList<>();
 
         Album albumInfo;
 
@@ -143,11 +144,11 @@ public class Spotify{
         return albumArrayList;
     }
 
-    public static ArrayList<Artist> searchArtistResult(SpotifyAppApi api, String query) {
+    public static ArrayList<SearchResults> searchArtistResult(SpotifyAppApi api, String query) {
 
-        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 5, null, null);
+        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 10, null, null);
 
-        ArrayList<Artist> artistArrayList = new ArrayList<>();
+        ArrayList<SearchResults> artistArrayList = new ArrayList<>();
 
         Artist artistInfo;
 
@@ -170,11 +171,11 @@ public class Spotify{
         return artistArrayList;
     }
 
-    public static ArrayList<Track> searchTrackResult(SpotifyAppApi api, String query) {
+    public static ArrayList<SearchResults> searchTrackResult(SpotifyAppApi api, String query) {
 
-        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 5, null, null);
+        SpotifyRestAction<SpotifySearchResult> searchResult = api.getSearch().searchAllTypesRestAction(query, 10, null, null);
 
-        ArrayList<Track> trackArrayList = new ArrayList<>();
+        ArrayList<SearchResults> trackArrayList = new ArrayList<>();
 
         Track trackInfo;
 

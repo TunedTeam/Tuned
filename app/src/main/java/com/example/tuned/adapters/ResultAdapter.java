@@ -11,38 +11,47 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tuned.R;
-import com.example.tuned.models.Album;
-import com.example.tuned.models.Result;
+import com.example.tuned.models.SearchResults;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ResultAdapter extends ArrayAdapter<Album> {
+public class ResultAdapter extends ArrayAdapter<SearchResults> {
 
     private static final String TAG = "ResultAdapter";
-    private ArrayList<Album> albums = new ArrayList<>();
 
-    public ResultAdapter(Context context, int resource, ArrayList<Album> albums) {
-        super(context, resource, albums);
+    //private ArrayList<SearchResults> results = new ArrayList<>();
+
+    public ResultAdapter(Context context, int resource, ArrayList<SearchResults> results) {
+        super(context, resource, results);
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Album album = getItem(position);
+        SearchResults result = getItem(position);
 
         if (convertView == null) {
             Log.i(TAG, "Is null");
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.result_cell, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_result_cell, parent, false);
         }
 
-        TextView tvResultName = (TextView) convertView.findViewById((R.id.tvResultName));
+        TextView tvResultType = (TextView) convertView.findViewById(R.id.tvResultType);
+        TextView tvResultName = (TextView) convertView.findViewById(R.id.tvResultName);
         ImageView ivResultImage =  convertView.findViewById(R.id.ivResultImage);
 
-        tvResultName.setText(album.albumName);
-        // ivResultImage.setImageResource(Integer.parseInt(result.albumImageUrl));
-//        Glide.with(getContext())
-//                .asBitmap()
-//                .load(album.get(position).albumImageUrl)
-//                .into(ivResultImage);
+        tvResultType.setText(result.getType());
+        tvResultName.setText(result.getName());
+
+        try {
+        Glide.with(getContext())
+                .asBitmap()
+                .load(result.getImage())
+                .into(ivResultImage);
+        } catch (Exception e) {
+            // in the case that there is no image found
+            Glide.with(getContext())
+                    .asBitmap()
+                    .load(R.drawable.image_not_found)
+                    .into(ivResultImage);
+        }
 
 
         return convertView;

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/lavender"
     tools:context=".fragments.SearchFragment">
 
     <SearchView
@@ -11,14 +12,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-        android:queryHint="Search. . ." >
+        android:background="@color/dark_purple"
+        android:queryHint="Search. . ."
+        android:queryBackground="@color/dark_purple">
     </SearchView>
 
     <ListView
         android:id="@+id/lvResults"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     </ListView>
+
+    <!--
+   <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearchResults"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    </androidx.recyclerview.widget.RecyclerView>
+    -->
 
 </LinearLayout>
