@@ -3,32 +3,22 @@ package com.example.tuned.fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.R;
 import com.example.tuned.Spotify.Spotify;
-import com.example.tuned.adapters.NewReleasesAdapter;
 import com.example.tuned.adapters.ResultAdapter;
-import com.example.tuned.adapters.SearchResultsAdapter;
-import com.example.tuned.models.Album;
 import com.example.tuned.models.SearchResults;
-import com.example.tuned.models.SearchViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SearchFragment extends Fragment {
 
