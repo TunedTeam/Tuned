@@ -23,6 +23,7 @@ import com.example.tuned.PostsAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.json.JSONArray;
 
@@ -96,6 +97,7 @@ public class PostsFragment extends Fragment {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
+
         query.addDescendingOrder(Post.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -108,9 +110,11 @@ public class PostsFragment extends Fragment {
 
                 for (Post post : posts)
                 {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername()
+                       +post.getImage());
                 }
-
+                /*post.getUser().getParseFile("profilePicture")*/
+                /*ParseUser.getCurrentUser().get("profile_picture") */
                 adapter.clear();
                 allPosts.addAll(posts);
                 swipeContainer.setRefreshing(false);

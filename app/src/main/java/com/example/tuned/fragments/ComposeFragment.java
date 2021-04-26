@@ -47,6 +47,11 @@ public class ComposeFragment extends Fragment {
     private EditText etDescription;
     private Button btnSubmit;
     private Button btnLogout;
+    public static final String PROFILE_PICTURE = "profile_picture";
+    public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 42;
+    private File photoFile;
+    private String photoFileName = "photo.jpg";
+    private List<Post> userPosts;
 
     public ComposeFragment() {
         // Required empty public constructor
@@ -83,7 +88,9 @@ public class ComposeFragment extends Fragment {
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser);
+                savePost(description, currentUser, photoFile);
+
+
             }
         });
 
@@ -119,11 +126,11 @@ public class ComposeFragment extends Fragment {
         getActivity().finish();
     }
 
-    private void savePost(String description, ParseUser currentUser) {
+    private void savePost(String description, ParseUser currentUser, File photoFile) {
         Post post = new Post();
         post.setDescription(description);
 
-        //post.setImage(new ParseFile(photoFile));
+        post.setImage(new ParseFile(photoFile));
 
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {

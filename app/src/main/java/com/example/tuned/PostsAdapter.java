@@ -2,6 +2,7 @@ package com.example.tuned;
 
 import android.content.Context;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseFile;
+import com.parse.ParseUser;
 
 import java.util.List;
 
@@ -70,15 +72,26 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
         }
 
+
         public void bind(Post post) {
             //Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
-            ParseFile image = post.getImage();
+            //ParseFile userProfilePic = post.getImage();
 
+           ParseFile userProfilePic = ParseUser.getCurrentUser().getParseFile("profile_picture");
+            Log.i("PostsAdapter", "user profile" + userProfilePic);
+            Log.i("PostsAdapter", "user profile" + userProfilePic.getUrl());
+            if(userProfilePic != null) {
+                Glide.with(context).load(userProfilePic.getUrl())
+                        .placeholder(R.drawable.defaultavatar)
+                        .into(ivProfileImage);
+            }
+            /*
             if( image != null){
                 Glide.with(context).load(post.getImage().getUrl()).into(ivProfileImage);
             }
+            */
 
         }
 

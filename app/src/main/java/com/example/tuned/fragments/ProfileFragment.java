@@ -149,6 +149,7 @@ public class ProfileFragment extends Fragment {
         query.include(Post.KEY_USER);
         query.whereEqualTo(Post.KEY_USER, ParseUser.getCurrentUser());
         query.setLimit(20);
+
         query.addDescendingOrder(Post.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -161,9 +162,11 @@ public class ProfileFragment extends Fragment {
 
                 for (Post post : posts)
                 {
-                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
-                }
+                    Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername()
+                     + ParseUser.getCurrentUser().get("profile_picture") );
 
+                }
+                /*ParseUser.getCurrentUser().get("profile_picture") */
                 userPosts.addAll(posts);
                 postsAdapter.notifyDataSetChanged();
             }
