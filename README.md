@@ -26,13 +26,10 @@ Social music app to explore different genres of music and rate, review, and inte
 
 - [x] User can sign up or login
 - [x] User can create a review
-- [ ] User can make lists (add tracks / albums to a list for others to view)
-- [ ] User can see lists
 - [x] User can see reviews
+- [x] User can rate an album, artist, or track
 - [x] Profile page for each user
 - [x] User can search up for artists, albums, tracks
-- [ ] User can comment / like a review or list of another user
-- [ ] User can follow other users
 - [x] User can view new releases, popular albums, top tracks from discover page
 
 **Optional Nice-to-have Stories**
@@ -40,6 +37,10 @@ Social music app to explore different genres of music and rate, review, and inte
 - [ ] Ability for user to listen to a 30-second preview of a song from the app
 - [ ] Artist page including artist different albums / songs
 - [ ] Diary to keep track on what songs user listened to on a specific date
+- [ ] User can make lists (add tracks / albums to a list for others to view)
+- [ ] User can see lists
+- [ ] User can comment / like a review or list of another user
+- [ ] User can follow other users
 
 ### 2. Screen Archetypes
 
