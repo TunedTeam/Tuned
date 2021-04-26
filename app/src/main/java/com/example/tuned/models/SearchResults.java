@@ -7,4 +7,10 @@ public interface SearchResults {
     public String getType();
 
     public String getImage();
+
+    public String getId();
+
+    public String getArtist();
+
+    public int getReleaseDate();
 }

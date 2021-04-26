@@ -1,14 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/beige"
+    android:orientation="vertical"
     tools:context=".fragments.CreateReviewFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:background="@color/lavender">
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Back"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvCreateAReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/roboto_black"
+            android:text="I listened to..."
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <View style="@style/Divider.Horizontal" />
+
+    <RelativeLayout
+        android:id="@+id/rlTypeInfo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingTop="30dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+
+        <ImageView
+            android:id="@+id/ivResultImage"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/tvResultName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivResultImage"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Result Name"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/tvResultArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivResultImage"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/tvResultName"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Result Artist"
+            android:textColor="@color/light_gray"
+            android:textSize="22sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/tvResultType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivResultImage"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/tvResultArtist"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Result Type"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+
+        <TextView
+            android:id="@+id/tvResultBullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvResultType"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/tvResultArtist"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_medium"
+            android:text="•"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tvResultYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvResultBullet"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/tvResultArtist"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_medium"
+            android:text="2020"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlRate"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <TextView
+            android:id="@+id/tvRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Rate"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvRate"
+            android:layout_marginTop="5dp"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:progressTint="@color/purple"
+            android:secondaryProgressTint="@color/purple"
+            android:progressBackgroundTint="@color/light_gray"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlReview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/tvReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Rate"
+            android:textColor="@color/white"
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/etReviewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvReview"
+            android:hint="Title"
+            android:textColorHint="@color/white"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_medium"
+            android:background="@drawable/custom_input"
+            android:paddingStart="10dp"/>
+
+        <EditText
+            android:id="@+id/etReviewComment"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/etReviewTitle"
+            android:layout_marginTop="10dp"
+            android:gravity="start"
+            android:paddingTop="10dp"
+            android:hint="Write a review"
+            android:textColorHint="@color/white"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_medium"
+            android:background="@drawable/custom_input"
+            android:paddingStart="10dp"/>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

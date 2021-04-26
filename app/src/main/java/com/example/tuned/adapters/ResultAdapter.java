@@ -40,16 +40,15 @@ public class ResultAdapter extends ArrayAdapter<SearchResults> {
         tvResultType.setText(result.getType());
         tvResultName.setText(result.getName());
 
-        try {
-        Glide.with(getContext())
-                .asBitmap()
-                .load(result.getImage())
-                .into(ivResultImage);
-        } catch (Exception e) {
-            // in the case that there is no image found
+        if (result.getImage().equals("")) {
             Glide.with(getContext())
                     .asBitmap()
                     .load(R.drawable.image_not_found)
+                    .into(ivResultImage);
+        } else {
+            Glide.with(getContext())
+                    .asBitmap()
+                    .load(result.getImage())
                     .into(ivResultImage);
         }
 

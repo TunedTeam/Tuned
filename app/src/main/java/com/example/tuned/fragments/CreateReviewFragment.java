@@ -2,59 +2,61 @@ package com.example.tuned.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.tuned.R;
+import com.example.tuned.models.Album;
+import com.example.tuned.models.SearchResults;
+import com.parse.ParseUser;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CreateReviewFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CreateReviewFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    String resultType;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    String albumId;
+    String albumImageUrl;
+    String albumName;
+    String albumArtist;
+    int albumReleaseDate;
+
+    String artistId;
+    String artistImageUrl;
+    String artistName;
+
+    String trackId;
+    String trackImageUrl;
+    String trackName;
+    String trackArtist;
+    int trackReleaseDate;
+
+    ImageView ivResultImage;
+    TextView tvResultName;
+    TextView tvResultArtist;
+    TextView tvResultType;
+    TextView tvResultYear;
+
+    TextView tvSave;
+    EditText etReviewComment;
 
     public CreateReviewFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CreateReviewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CreateReviewFragment newInstance(String param1, String param2) {
-        CreateReviewFragment fragment = new CreateReviewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -62,5 +64,100 @@ public class CreateReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_create_review, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ivResultImage = view.findViewById(R.id.ivResultImage);
+        tvResultName = view.findViewById(R.id.tvResultName);
+        tvResultArtist = view.findViewById(R.id.tvResultArtist);
+        tvResultType = view.findViewById(R.id.tvResultType);
+        tvResultYear = view.findViewById(R.id.tvResultYear);
+
+        tvSave = view.findViewById(R.id.tvSave);
+        etReviewComment = view.findViewById(R.id.etReviewComment);
+
+        if (getArguments().getString("resultType").equals("album")) {
+
+            resultType = "Album";
+
+            albumId = getArguments().getString("albumId");
+            albumImageUrl = getArguments().getString("albumImageUrl");
+            albumName = getArguments().getString("albumName");
+            albumArtist = getArguments().getString("albumArtist");
+            albumReleaseDate = getArguments().getInt("albumReleaseDate");
+
+            tvResultName.setText(albumName);
+            tvResultArtist.setText(albumArtist);
+            tvResultType.setText(resultType);
+            tvResultYear.setText("" + albumReleaseDate);
+
+            Glide.with(getContext())
+                    .asBitmap()
+                    .load(albumImageUrl)
+                    .into(ivResultImage);
+
+        } else if (getArguments().getString("resultType").equals("artist")) {
+
+            resultType = "Artist";
+
+            artistId = getArguments().getString("artistId");
+            artistImageUrl = getArguments().getString("artistImageUrl");
+            artistName = getArguments().getString("artistName");
+
+            tvResultName.setText(artistName);
+            tvResultArtist.setText("");
+            tvResultType.setText(resultType);
+            tvResultYear.setText("");
+
+            Glide.with(getContext())
+                    .asBitmap()
+                    .load(artistImageUrl)
+                    .circleCrop()
+                    .into(ivResultImage);
+
+        } else if (getArguments().getString("resultType").equals("track")) {
+
+            resultType = "Track";
+
+            trackId = getArguments().getString("trackId");
+            trackImageUrl = getArguments().getString("trackImageUrl");
+            trackName = getArguments().getString("trackName");
+            trackArtist = getArguments().getString("trackArtist");
+            trackReleaseDate = getArguments().getInt("trackReleaseDate");
+
+            tvResultName.setText(trackName);
+            tvResultArtist.setText(trackArtist);
+            tvResultType.setText(resultType);
+            tvResultYear.setText("" + trackReleaseDate);
+
+            Glide.with(getContext())
+                    .asBitmap()
+                    .load(trackImageUrl)
+                    .into(ivResultImage);
+        }
+
+        tvSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String reviewComment = etReviewComment.getText().toString();
+
+                if (reviewComment.isEmpty())
+                {
+                    Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                savePost(reviewComment, currentUser);
+            }
+        });
+
+    }
+
+    private void savePost(String reviewComment, ParseUser currentUser) {
+
     }
 }

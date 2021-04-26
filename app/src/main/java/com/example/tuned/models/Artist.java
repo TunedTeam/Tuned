@@ -22,7 +22,22 @@ public class Artist implements SearchResults{
         return "artist";
     }
 
+    @Override
     public String getImage() {
         return artistImageUrl;
+    }
+
+    @Override
+    public String getId() {
+        return artistId;
+    }
+
+    @Override
+    public String getArtist() {
+        return null;
+    }
+
+    public int getReleaseDate() {
+        return 0;
     }
 }
