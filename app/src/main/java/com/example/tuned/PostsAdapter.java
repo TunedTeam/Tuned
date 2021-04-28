@@ -80,19 +80,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             ParseFile userProfilePic =  (ParseFile) post.getUser().get("profile_picture");
 
-           // ParseFile userProfilePic = ParseUser.getCurrentUser().getParseFile("profile_picture");
             Log.i("PostsAdapter", "user profile " + userProfilePic);
-          //  Log.i("PostsAdapter", "user profile" + userProfilePic.getUrl());
+
             if(userProfilePic != null) {
                 Glide.with(context).load(userProfilePic.getUrl())
                         .placeholder(R.drawable.defaultavatar)
                         .into(ivProfileImage);
             }
-            /*
-            if( image != null){
-                Glide.with(context).load(post.getImage().getUrl()).into(ivProfileImage);
-            }
-            */
 
         }
 

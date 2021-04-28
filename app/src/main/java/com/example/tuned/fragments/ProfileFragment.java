@@ -65,9 +65,7 @@ public class ProfileFragment extends Fragment {
     PostsAdapter postsAdapter;
     Button btnLogout;
     ImageView ivProfilePicture;
-    //TextView tvScreenName;
     TextView tvUserName;
-    //TextView tvJoined;
     RecyclerView rvUserPosts;
     Post post;
 
@@ -92,9 +90,9 @@ public class ProfileFragment extends Fragment {
 
         btnLogout = view.findViewById(R.id.btnLogout);
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
-        //tvScreenName = view.findViewById(R.id.tvScreenName);
+
         tvUserName = view.findViewById(R.id.tvUsername);
-        //tvJoined = view.findViewById(R.id.tvJoined);
+
         rvUserPosts = view.findViewById(R.id.rvUserPosts);
 
         rvUserPosts.setAdapter(postsAdapter);
@@ -102,26 +100,7 @@ public class ProfileFragment extends Fragment {
 
         queryPosts();
 
-        // tvScreenName.setText((user.get("screenname")).toString());
-        //Log.i(TAG, "ScreenName:" + (String) user.get("screenname"));
-        // String screenName = parseUser.getString("screenname").toString();
-        // tvScreenName.setText(parseUser.get("screenname").toString());
-        /*
-        if (parseUser.getString("screenname") != null) {
-            tvScreenName.setText(parseUser.getString("screenname"));
-        }
-        */
-        //tvScreenName.setText(post.getUser().getString("screenname"));
-        //tvScreenName.setText(parseUser.getUsername().toUpperCase());
-
         tvUserName.setText("@" + parseUser.getUsername());
-
-        /*
-        String pattern = "E, dd MMMM yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String date = simpleDateFormat.format(parseUser.getCreatedAt());
-        tvJoined.setText(date);
-        */
 
         ParseFile userProfilePic = (ParseFile) parseUser.get(PROFILE_PICTURE);
         if(userProfilePic != null)
@@ -166,7 +145,7 @@ public class ProfileFragment extends Fragment {
                      + ParseUser.getCurrentUser().get("profile_picture") );
 
                 }
-                /*ParseUser.getCurrentUser().get("profile_picture") */
+
                 userPosts.addAll(posts);
                 postsAdapter.notifyDataSetChanged();
             }
@@ -221,7 +200,6 @@ public class ProfileFragment extends Fragment {
 
         // wrap File object into a content provider
         // required for API >= 24
-        // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
         Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
