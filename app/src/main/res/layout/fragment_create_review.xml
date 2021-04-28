@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/beige"
+    android:background="@color/lavender"
     android:orientation="vertical"
     tools:context=".fragments.CreateReviewFragment">
 
@@ -13,10 +13,10 @@
         android:layout_height="50dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/lavender">
+        android:background="@color/purple">
 
         <TextView
-            android:id="@+id/tvCancel"
+            android:id="@+id/tvBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -55,16 +55,16 @@
     <RelativeLayout
         android:id="@+id/rlTypeInfo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="160dp"
         android:paddingTop="30dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp">
 
 
         <ImageView
             android:id="@+id/ivResultImage"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop"
@@ -82,7 +82,7 @@
             android:fontFamily="@font/roboto_bold"
             android:text="Result Name"
             android:textColor="@color/white"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:ellipsize="end"
             android:maxLines="1"/>
 
@@ -98,7 +98,7 @@
             android:fontFamily="@font/roboto_bold"
             android:text="Result Artist"
             android:textColor="@color/light_gray"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:ellipsize="end"
             android:maxLines="1"/>
 
@@ -107,12 +107,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/ivResultImage"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="20dp"
             android:layout_below="@+id/tvResultArtist"
             android:gravity="center"
             android:textAlignment="center"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_bold"
             android:text="Result Type"
             android:textColor="@color/white"
             android:textSize="20sp"/>
@@ -123,12 +123,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvResultType"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="5dp"
             android:layout_below="@+id/tvResultArtist"
             android:gravity="center"
             android:textAlignment="center"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_bold"
             android:text="•"
             android:textColor="@color/white"
             android:textSize="20sp"/>
@@ -138,12 +138,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/tvResultBullet"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginLeft="5dp"
             android:layout_below="@+id/tvResultArtist"
             android:gravity="center"
             android:textAlignment="center"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/roboto_bold"
             android:text="2020"
             android:textColor="@color/white"
             android:textSize="20sp"/>
@@ -217,7 +217,8 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_medium"
             android:background="@drawable/custom_input"
-            android:paddingStart="10dp"/>
+            android:paddingStart="10dp"
+            android:theme="@style/SearchViewStyle"/>
 
         <EditText
             android:id="@+id/etReviewComment"
@@ -234,8 +235,8 @@
             android:textColor="@color/white"
             android:fontFamily="@font/roboto_medium"
             android:background="@drawable/custom_input"
-            android:paddingStart="10dp"/>
-
+            android:paddingStart="10dp"
+            android:theme="@style/SearchViewStyle"/>
 
     </RelativeLayout>
 

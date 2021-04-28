@@ -1,41 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
-    android:background="#808080">
+    android:layout_height="100dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:background="@color/light_purple">
 
-    <TextView
-        android:id="@+id/tvResultType"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:text="Type"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp" >
-    </TextView>
+    <ImageView
+    android:id="@+id/ivResultImage"
+    android:layout_width="100dp"
+    android:layout_height="100dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:scaleType="centerCrop"
+    android:layout_centerHorizontal="true"
+    android:src="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/tvResultName"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivResultImage"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Result Name"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tvResultType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivResultImage"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/tvResultName"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Result Type"
+        android:textColor="@color/light_gray"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/tvResultBullet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/tvResultType"
-        android:text="Result name"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp" >
-    </TextView>
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/tvResultName"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="•"
+        android:textColor="@color/light_gray"
+        android:textSize="18sp"/>
 
-    <ImageView
-        android:id="@+id/ivResultImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="20dp">
-    </ImageView>
-
+    <TextView
+        android:id="@+id/tvResultArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvResultBullet"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/tvResultName"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Result Artist"
+        android:textColor="@color/light_gray"
+        android:textSize="18sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
 
 </RelativeLayout>

@@ -112,7 +112,7 @@ public class CreateReviewSearchFragment extends Fragment {
                     Bundle bundle = new Bundle();
 
                     bundle.putString("albumId", albumId);
-                    bundle.putString("albumImageUrl", albumImageUrl);
+                    bundle.putString("resultImageUrl", albumImageUrl);
                     bundle.putString("albumName", albumName);
                     bundle.putString("albumArtist", albumArtist);
                     bundle.putInt("albumReleaseDate", albumReleaseDate);
@@ -132,12 +132,12 @@ public class CreateReviewSearchFragment extends Fragment {
                     String artistId = searchResults.get(i).getId();
                     String artistImageUrl = searchResults.get(i).getImage();
                     String artistName = searchResults.get(i).getName();
-                    resultType = "album";
+                    resultType = "artist";
 
                     Bundle bundle = new Bundle();
 
                     bundle.putString("artistId", artistId);
-                    bundle.putString("artistImageUrl", artistImageUrl);
+                    bundle.putString("resultImageUrl", artistImageUrl);
                     bundle.putString("artistName", artistName);
                     bundle.putString("resultType", resultType);
 
@@ -162,7 +162,7 @@ public class CreateReviewSearchFragment extends Fragment {
                     Bundle bundle = new Bundle();
 
                     bundle.putString("trackId", trackId);
-                    bundle.putString("trackImageUrl", trackImageUrl);
+                    bundle.putString("resultImageUrl", trackImageUrl);
                     bundle.putString("trackName", trackName);
                     bundle.putString("trackArtist", trackArtist);
                     bundle.putInt("trackReleaseDate", trackReleaseDate);

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CreateReviewSearchFragment"
     android:orientation="vertical"
-    android:background="@color/beige">
+    android:background="@color/lavender">
 
 
     <RelativeLayout
@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/lavender">
+        android:background="@color/purple">
 
         <TextView
             android:id="@+id/tvCancel"
