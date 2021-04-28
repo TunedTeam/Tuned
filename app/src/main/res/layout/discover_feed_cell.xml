@@ -21,7 +21,7 @@
             android:layout_height="20dp"
             android:text="Album Name"
             android:textSize="18sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/roboto_bold"
             android:layout_below="@id/ivAlbumArt"
             android:gravity="center"
             android:textAlignment="center"
@@ -30,7 +30,7 @@
             android:layout_marginBottom="5dp"
             android:scrollHorizontally="true"
             android:ellipsize="end"
-            android:maxLines="1"/>
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/tvAlbumArtist"
@@ -41,9 +41,9 @@
             android:gravity="center"
             android:text="Album Artist"
             android:textAlignment="center"
-            android:textColor="#E9E8E8"
+            android:textColor="@color/light_gray"
             android:textSize="16sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/roboto_bold"
             android:scrollHorizontally="true"
             android:ellipsize="end"
             android:maxLines="1"/>

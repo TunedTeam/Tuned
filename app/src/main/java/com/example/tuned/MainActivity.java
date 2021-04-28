@@ -4,12 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.example.tuned.fragments.ComposeFragment;
+import com.example.tuned.fragments.CreateReviewFragment;
+import com.example.tuned.fragments.CreateReviewSearchFragment;
 import com.example.tuned.fragments.DiscoverFragment;
 import com.example.tuned.fragments.PostsFragment;
 import com.example.tuned.fragments.ProfileFragment;
@@ -20,12 +25,13 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     final FragmentManager fragmentManager = getSupportFragmentManager();
+    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //setCustomAnimations(R.anim.slide_up, R.anim.slide_down);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.action_create:
                         Toast.makeText(MainActivity.this, "Create Review!", Toast.LENGTH_SHORT).show();
-                        fragment = new ComposeFragment();
+                        fragment = new CreateReviewSearchFragment();
+//                        getSupportFragmentManager().beginTransaction()
+//                                .setCustomAnimations(R.anim.slide_up, R.anim.slide_down)
+//                                .replace(R.id.flContainer, fragment)
+//                                .addToBackStack(null)
+//                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+//                                .commit();
                         break;
                     case R.id.action_alerts:
                         Toast.makeText(MainActivity.this, "Posts!", Toast.LENGTH_SHORT).show();
@@ -56,11 +68,36 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ProfileFragment();
                         break;
                 }
+
                 fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
+
                 return true;
             }
         });
         // Set default selection
         bottomNavigationView.setSelectedItemId(R.id.action_discover);
+    }
+
+
+    public Animation onCreateAnimation(int transit, final boolean enter, int nextAnim) {
+        Animation nextAnimation = AnimationUtils.loadAnimation(this, nextAnim);
+        nextAnimation.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        return nextAnimation;
     }
 }

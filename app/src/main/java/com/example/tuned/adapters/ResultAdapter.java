@@ -33,26 +33,69 @@ public class ResultAdapter extends ArrayAdapter<SearchResults> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_result_cell, parent, false);
         }
 
-        TextView tvResultType = (TextView) convertView.findViewById(R.id.tvResultType);
-        TextView tvResultName = (TextView) convertView.findViewById(R.id.tvResultName);
-        ImageView ivResultImage =  convertView.findViewById(R.id.ivResultImage);
+        TextView tvResultType = convertView.findViewById(R.id.tvResultType);
+        TextView tvResultName = convertView.findViewById(R.id.tvResultName);
+        TextView tvResultArtist = convertView.findViewById(R.id.tvResultArtist);
+        TextView tvResultBullet = convertView.findViewById(R.id.tvResultBullet);
+        ImageView ivResultImage = convertView.findViewById(R.id.ivResultImage);
 
         tvResultType.setText(result.getType());
         tvResultName.setText(result.getName());
 
-        try {
-        Glide.with(getContext())
-                .asBitmap()
-                .load(result.getImage())
-                .into(ivResultImage);
-        } catch (Exception e) {
-            // in the case that there is no image found
-            Glide.with(getContext())
-                    .asBitmap()
-                    .load(R.drawable.image_not_found)
-                    .into(ivResultImage);
-        }
+        if (result.getType().equals("artist")) {
+            tvResultType.setText("Artist");
+            tvResultName.setText(result.getName());
+            tvResultBullet.setText("");
+            tvResultArtist.setText("");
 
+            if (result.getImage().equals("")) {
+                Glide.with(getContext())
+                        .asBitmap()
+                        .load(R.drawable.image_not_found)
+                        .circleCrop()
+                        .into(ivResultImage);
+            } else {
+                Glide.with(getContext())
+                        .asBitmap()
+                        .load(result.getImage())
+                        .circleCrop()
+                        .into(ivResultImage);
+            }
+        } else if (result.getType().equals("album")) {
+            tvResultType.setText("Album");
+            tvResultName.setText(result.getName());
+            tvResultBullet.setText("•");
+            tvResultArtist.setText(result.getArtist());
+
+            if (result.getImage().equals("")) {
+                Glide.with(getContext())
+                        .asBitmap()
+                        .load(R.drawable.image_not_found)
+                        .into(ivResultImage);
+            } else {
+                Glide.with(getContext())
+                        .asBitmap()
+                        .load(result.getImage())
+                        .into(ivResultImage);
+            }
+        } else if (result.getType().equals("track")) {
+            tvResultType.setText("Track");
+            tvResultName.setText(result.getName());
+            tvResultBullet.setText("•");
+            tvResultArtist.setText(result.getArtist());
+
+            if (result.getImage().equals("")) {
+                Glide.with(getContext())
+                        .asBitmap()
+                        .load(R.drawable.image_not_found)
+                        .into(ivResultImage);
+            } else {
+                Glide.with(getContext())
+                        .asBitmap()
+                        .load(result.getImage())
+                        .into(ivResultImage);
+            }
+        }
 
         return convertView;
     }

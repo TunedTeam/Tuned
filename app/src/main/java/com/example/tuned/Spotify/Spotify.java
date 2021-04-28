@@ -6,6 +6,7 @@ import com.adamratzman.spotify.SpotifyRestAction;
 import com.adamratzman.spotify.javainterop.SpotifyContinuation;
 import com.adamratzman.spotify.models.PagingObject;
 import com.adamratzman.spotify.models.PlaylistTrack;
+import com.adamratzman.spotify.models.ReleaseDate;
 import com.adamratzman.spotify.models.SimpleAlbum;
 import com.adamratzman.spotify.models.SimpleArtist;
 import com.adamratzman.spotify.models.SimpleTrack;
@@ -41,6 +42,7 @@ public class Spotify{
         String albumImageUrls;
         String albumNames;
         String albumArtists;
+        int albumReleaseDate;
 
 
         for (SimpleAlbum album : browseNewReleases.getItems()) {
@@ -49,8 +51,9 @@ public class Spotify{
             albumImageUrls = album.getImages().get(0).getUrl();
             albumNames = album.getName();
             albumArtists = album.getArtists().get(0).getName();
+            albumReleaseDate = album.getReleaseDate().getYear();
 
-            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists);
+            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists, albumReleaseDate);
 
             albumArrayList.add(albumInfo);
         }
@@ -70,6 +73,7 @@ public class Spotify{
         String trackImageUrls;
         String trackNames;
         String trackArtists;
+        int trackReleaseDate;
 
         for (PlaylistTrack track : playlistTopTracks.getItems()) {
 
@@ -77,8 +81,9 @@ public class Spotify{
             trackImageUrls = track.getTrack().getAsTrack().getAlbum().getImages().get(0).getUrl();
             trackNames = track.getTrack().getAsTrack().getName();
             trackArtists = track.getTrack().getAsTrack().getAlbum().getArtists().get(0).getName();
+            trackReleaseDate = track.getTrack().getAsTrack().getAlbum().getReleaseDate().getYear();
 
-            trackInfo = new Track(trackIds, trackImageUrls, trackNames, trackArtists);
+            trackInfo = new Track(trackIds, trackImageUrls, trackNames, trackArtists, trackReleaseDate);
 
             tracksArrayList.add(trackInfo);
         }
@@ -99,6 +104,7 @@ public class Spotify{
         String trackImageUrls;
         String trackNames;
         String trackArtists;
+        int trackReleaseDate;
 
         for (PlaylistTrack track : playlistTopTracks.getItems()) {
 
@@ -106,8 +112,9 @@ public class Spotify{
             trackImageUrls = track.getTrack().getAsTrack().getAlbum().getImages().get(0).getUrl();
             trackNames = track.getTrack().getAsTrack().getName();
             trackArtists = track.getTrack().getAsTrack().getAlbum().getArtists().get(0).getName();
+            trackReleaseDate = track.getTrack().getAsTrack().getAlbum().getReleaseDate().getYear();
 
-            trackInfo = new Track(trackIds, trackImageUrls, trackNames, trackArtists);
+            trackInfo = new Track(trackIds, trackImageUrls, trackNames, trackArtists, trackReleaseDate);
 
             tracksArrayList.add(trackInfo);
         }
@@ -127,6 +134,7 @@ public class Spotify{
         String albumImageUrls;
         String albumNames;
         String albumArtists;
+        int albumReleaseDate;
 
 
         for (SimpleAlbum album : searchResult.complete().getAlbums().getItems()) {
@@ -135,8 +143,9 @@ public class Spotify{
             albumImageUrls = album.getImages().get(0).getUrl();
             albumNames = album.getName();
             albumArtists = album.getArtists().get(0).getName();
+            albumReleaseDate = album.getReleaseDate().getYear();
 
-            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists);
+            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists, albumReleaseDate);
 
             albumArrayList.add(albumInfo);
         }
@@ -160,7 +169,11 @@ public class Spotify{
         for (com.adamratzman.spotify.models.Artist artist : searchResult.complete().getArtists().getItems()) {
 
             artistIds = artist.getId();
-            artistImageUrls = artist.getImages().get(0).getUrl();
+            try {
+                artistImageUrls = artist.getImages().get(0).getUrl();
+            } catch (Exception e) {
+                artistImageUrls = "";
+            }
             artistNames = artist.getName();
 
             artistInfo = new Artist(artistIds, artistImageUrls, artistNames);
@@ -183,6 +196,7 @@ public class Spotify{
         String trackImageUrls;
         String trackNames;
         String trackArtists;
+        int trackReleaseDate;
 
 
         for (com.adamratzman.spotify.models.Track track : searchResult.complete().getTracks().getItems()) {
@@ -191,12 +205,18 @@ public class Spotify{
             trackImageUrls = track.getAsTrack().getAlbum().getImages().get(0).getUrl();
             trackNames = track.getAsTrack().getName();
             trackArtists = track.getArtists().get(0).getName();
+            trackReleaseDate = track.getAsTrack().getAlbum().getReleaseDate().getYear();
 
-            trackInfo = new Track(trackIds, trackImageUrls, trackNames, trackArtists);
+            trackInfo = new Track(trackIds, trackImageUrls, trackNames, trackArtists, trackReleaseDate);
 
             trackArrayList.add(trackInfo);
         }
 
         return trackArrayList;
     }
+
+//    public static ArrayList<Track> getAlbumTracks(SpotifyAppApi api, String query) {
+//
+//        //PagingObject<SimpleTrack> albumTracks = api.getAlbums().getAlbumTracksRestAction()
+//    }
 }
