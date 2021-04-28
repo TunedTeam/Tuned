@@ -77,11 +77,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             //Bind the post data to the view elements
             tvDescription.setText(post.getDescription());
             tvUsername.setText(post.getUser().getUsername());
-            //ParseFile userProfilePic = post.getImage();
 
-           ParseFile userProfilePic = ParseUser.getCurrentUser().getParseFile("profile_picture");
-            Log.i("PostsAdapter", "user profile" + userProfilePic);
-            Log.i("PostsAdapter", "user profile" + userProfilePic.getUrl());
+            ParseFile userProfilePic =  (ParseFile) post.getUser().get("profile_picture");
+
+           // ParseFile userProfilePic = ParseUser.getCurrentUser().getParseFile("profile_picture");
+            Log.i("PostsAdapter", "user profile " + userProfilePic);
+          //  Log.i("PostsAdapter", "user profile" + userProfilePic.getUrl());
             if(userProfilePic != null) {
                 Glide.with(context).load(userProfilePic.getUrl())
                         .placeholder(R.drawable.defaultavatar)

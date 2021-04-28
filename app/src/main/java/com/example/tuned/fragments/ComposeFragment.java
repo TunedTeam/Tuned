@@ -1,44 +1,30 @@
 package com.example.tuned.fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.tuned.LoginActivity;
-import com.example.tuned.MainActivity;
 import com.example.tuned.Post;
 import com.example.tuned.R;
-import com.parse.FindCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
 import java.util.List;
-
-import static android.app.Activity.RESULT_OK;
 
 
 public class ComposeFragment extends Fragment {
@@ -88,7 +74,7 @@ public class ComposeFragment extends Fragment {
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile);
+                savePost(description, currentUser);
 
 
             }
@@ -126,11 +112,11 @@ public class ComposeFragment extends Fragment {
         getActivity().finish();
     }
 
-    private void savePost(String description, ParseUser currentUser, File photoFile) {
+    private void savePost(String description, ParseUser currentUser) {
         Post post = new Post();
         post.setDescription(description);
 
-        post.setImage(new ParseFile(photoFile));
+        //post.setImage(new ParseFile(photoFile));
 
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
