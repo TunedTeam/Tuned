@@ -20,7 +20,7 @@
     <item
         android:id="@+id/action_alerts"
         android:icon="@drawable/alerts_icon"
-        android:title="Alerts"
+        android:title="Reviews"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"
