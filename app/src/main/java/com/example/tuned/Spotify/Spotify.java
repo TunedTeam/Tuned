@@ -215,8 +215,28 @@ public class Spotify{
         return trackArrayList;
     }
 
-//    public static ArrayList<Track> getAlbumTracks(SpotifyAppApi api, String query) {
-//
-//        //PagingObject<SimpleTrack> albumTracks = api.getAlbums().getAlbumTracksRestAction()
-//    }
+    public static ArrayList<Track> getAlbumTracks(SpotifyAppApi api, String albumId) {
+
+        SpotifyRestAction<PagingObject<SimpleTrack>> albumTracks = api.getAlbums().getAlbumTracksRestAction(albumId, 10, null, null);
+
+        ArrayList<Track> trackArrayList = new ArrayList<>();
+
+        Track trackInfo;
+
+        String trackId;
+        String trackName;
+        String trackArtists;
+
+        for (SimpleTrack track : albumTracks.complete().getItems()) {
+            trackId = track.getId();
+            trackName = track.getName();
+            trackArtists = track.getArtists().get(0).getName();
+
+            trackInfo = new Track(trackId,"", trackName, trackArtists, 0);
+
+            trackArrayList.add(trackInfo);
+        }
+
+        return trackArrayList;
+    }
 }
