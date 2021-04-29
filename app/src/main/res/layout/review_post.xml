@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="10dp"
+    android:background="@color/lavender">
+
+    <ImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@drawable/defaultavatar" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/ivProfilePicture"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Username"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <ImageView
+        android:id="@+id/ivResultImage"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_launcher_background" />
+
+    <TextView
+        android:id="@+id/tvResultName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivResultImage"
+        android:layout_marginLeft="5dp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Result Name"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tvResultType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/ivResultImage"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/tvResultName"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Result Type"
+        android:textColor="@color/light_gray"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tvResultBullet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvResultType"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/tvResultName"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="•"
+        android:textColor="@color/light_gray"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvResultArtist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tvResultBullet"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/tvResultName"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Result Artist"
+        android:textColor="@color/light_gray"
+        android:textSize="16sp"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ivResultImage"
+        android:layout_marginTop="5dp"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:scaleX="0.45"
+        android:scaleY="0.45"
+        android:transformPivotX="-5dp"
+        android:transformPivotY="-5dp"
+        android:progressTint="@color/purple"
+        android:secondaryProgressTint="@color/purple"
+        android:progressBackgroundTint="@color/light_gray"/>
+
+    <TextView
+        android:id="@+id/tvReviewTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ivResultImage"
+        android:layout_marginTop="30dp"
+        android:text="Title"
+        android:textColorHint="@color/white"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_bold"
+        android:ellipsize="end"
+        android:maxLines="1"/>
+
+    <TextView
+        android:id="@+id/tvReviewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvReviewTitle"
+        android:layout_marginTop="10dp"
+        android:text="Review description"
+        android:textColorHint="@color/white"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto_medium"
+        android:ellipsize="end"
+        android:maxLines="5"/>
+
+</RelativeLayout>

@@ -66,8 +66,8 @@ public class DiscoverFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FragmentTransaction reviewsTransaction = childFragment.beginTransaction();
-                // Fragment reviewsFeedFragment = new ReviewsFeedFragment();
-                // reviewsTransaction.replace(R.id.child_fragment_container, reviewsFeedFragment).commit();
+                Fragment reviewsFeedFragment = new ReviewsFeedFragment();
+                reviewsTransaction.replace(R.id.child_fragment_container, reviewsFeedFragment).commit();
             }
         });
 

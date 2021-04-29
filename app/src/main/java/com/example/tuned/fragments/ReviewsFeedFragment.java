@@ -26,18 +26,15 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class PostsFragment extends Fragment {
+public class ReviewsFeedFragment extends Fragment {
 
-    public static final String TAG = "PostsFragment";
+    public static final String TAG = "ReviewsFeedFragment";
     private RecyclerView rvPosts;
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     private SwipeRefreshLayout swipeContainer;
 
-    public PostsFragment() {
+    public ReviewsFeedFragment() {
         // Required empty public constructor
     }
 
@@ -45,7 +42,7 @@ public class PostsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_posts, container, false);
+        return inflater.inflate(R.layout.fragment_reviews_feed, container, false);
     }
 
     @Override
@@ -107,7 +104,7 @@ public class PostsFragment extends Fragment {
                 for (Post post : posts)
                 {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername()
-                       +post.getProfilePicture());
+                            +post.getProfilePicture());
                 }
                 /*post.getUser().getParseFile("profilePicture")*/
                 /*ParseUser.getCurrentUser().get("profile_picture") */

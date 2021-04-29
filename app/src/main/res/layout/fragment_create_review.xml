@@ -221,7 +221,7 @@
             android:theme="@style/SearchViewStyle"/>
 
         <EditText
-            android:id="@+id/etReviewComment"
+            android:id="@+id/tvReviewDescription"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_alignParentStart="true"

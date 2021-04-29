@@ -1,7 +1,6 @@
 package com.example.tuned.fragments;
 
-import android.content.Context;
-        import android.content.Intent;
+import android.content.Intent;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
         import android.net.Uri;
@@ -30,24 +29,21 @@ import android.content.Context;
         import com.bumptech.glide.Glide;
         import com.example.tuned.LoginActivity;
         import com.example.tuned.Post;
-        import com.example.tuned.PostsAdapter;
+        import com.example.tuned.adapters.PostsAdapter;
         import com.example.tuned.R;
         import com.parse.FindCallback;
         import com.parse.LogOutCallback;
-        import com.parse.Parse;
-        import com.parse.ParseException;
+import com.parse.ParseException;
         import com.parse.ParseFile;
         import com.parse.ParseQuery;
         import com.parse.ParseUser;
         import com.parse.SaveCallback;
 
         import java.io.File;
-        import java.text.SimpleDateFormat;
-        import java.util.ArrayList;
+import java.util.ArrayList;
         import java.util.List;
-        import java.util.Objects;
 
-        import static android.app.Activity.RESULT_OK;
+import static android.app.Activity.RESULT_OK;
 
 
 /**

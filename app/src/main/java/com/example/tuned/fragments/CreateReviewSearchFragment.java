@@ -111,11 +111,11 @@ public class CreateReviewSearchFragment extends Fragment {
 
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("albumId", albumId);
+                    bundle.putString("resultId", albumId);
                     bundle.putString("resultImageUrl", albumImageUrl);
-                    bundle.putString("albumName", albumName);
-                    bundle.putString("albumArtist", albumArtist);
-                    bundle.putInt("albumReleaseDate", albumReleaseDate);
+                    bundle.putString("resultName", albumName);
+                    bundle.putString("resultArtist", albumArtist);
+                    bundle.putInt("resultReleaseDate", albumReleaseDate);
                     bundle.putString("resultType", resultType);
 
                     CreateReviewFragment createReviewFragment = new CreateReviewFragment();
@@ -136,9 +136,9 @@ public class CreateReviewSearchFragment extends Fragment {
 
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("artistId", artistId);
+                    bundle.putString("resultId", artistId);
                     bundle.putString("resultImageUrl", artistImageUrl);
-                    bundle.putString("artistName", artistName);
+                    bundle.putString("resultName", artistName);
                     bundle.putString("resultType", resultType);
 
                     CreateReviewFragment createReviewFragment = new CreateReviewFragment();
@@ -161,11 +161,11 @@ public class CreateReviewSearchFragment extends Fragment {
 
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("trackId", trackId);
+                    bundle.putString("resultId", trackId);
                     bundle.putString("resultImageUrl", trackImageUrl);
-                    bundle.putString("trackName", trackName);
-                    bundle.putString("trackArtist", trackArtist);
-                    bundle.putInt("trackReleaseDate", trackReleaseDate);
+                    bundle.putString("resultName", trackName);
+                    bundle.putString("resultArtist", trackArtist);
+                    bundle.putInt("resultReleaseDate", trackReleaseDate);
                     bundle.putString("resultType", resultType);
 
                     CreateReviewFragment createReviewFragment = new CreateReviewFragment();

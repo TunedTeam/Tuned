@@ -14,14 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.tuned.Post;
 import com.example.tuned.R;
-import com.example.tuned.models.Album;
-import com.example.tuned.models.SearchResults;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -30,23 +29,12 @@ public class CreateReviewFragment extends Fragment {
 
     private static final String TAG = "CreateReviewFragment";
 
+    String resultId;
+    String resultImageUrl;
+    String resultName;
+    String resultArtist;
     String resultType;
-
-    String albumId;
-    String albumImageUrl;
-    String albumName;
-    String albumArtist;
-    int albumReleaseDate;
-
-    String artistId;
-    String artistImageUrl;
-    String artistName;
-
-    String trackId;
-    String trackImageUrl;
-    String trackName;
-    String trackArtist;
-    int trackReleaseDate;
+    int resultReleaseDate;
 
     ImageView ivResultImage;
     TextView tvResultName;
@@ -55,8 +43,11 @@ public class CreateReviewFragment extends Fragment {
     TextView tvResultYear;
     TextView tvResultBullet;
 
+    RatingBar ratingBar;
+
     TextView tvBack;
     TextView tvSave;
+    EditText etReviewTitle;
     EditText etReviewComment;
 
     public CreateReviewFragment() {
@@ -86,39 +77,42 @@ public class CreateReviewFragment extends Fragment {
         tvResultYear = view.findViewById(R.id.tvResultYear);
         tvResultBullet = view.findViewById(R.id.tvResultBullet);
 
+        ratingBar = view.findViewById(R.id.ratingBar);
+
         tvBack = view.findViewById(R.id.tvBack);
         tvSave = view.findViewById(R.id.tvSave);
-        etReviewComment = view.findViewById(R.id.etReviewComment);
+        etReviewTitle = view.findViewById(R.id.etReviewTitle);
+        etReviewComment = view.findViewById(R.id.tvReviewDescription);
 
         if (getArguments().getString("resultType").equals("album")) {
 
             resultType = "Album";
 
-            albumId = getArguments().getString("albumId");
-            albumImageUrl = getArguments().getString("resultImageUrl");
-            albumName = getArguments().getString("albumName");
-            albumArtist = getArguments().getString("albumArtist");
-            albumReleaseDate = getArguments().getInt("albumReleaseDate");
+            resultId = getArguments().getString("resultId");
+            resultImageUrl = getArguments().getString("resultImageUrl");
+            resultName = getArguments().getString("resultName");
+            resultArtist = getArguments().getString("resultArtist");
+            resultReleaseDate = getArguments().getInt("resultReleaseDate");
 
-            tvResultName.setText(albumName);
-            tvResultArtist.setText(albumArtist);
+            tvResultName.setText(resultName);
+            tvResultArtist.setText(resultArtist);
             tvResultType.setText(resultType);
-            tvResultYear.setText("" + albumReleaseDate);
+            tvResultYear.setText("" + resultReleaseDate);
 
             Glide.with(getContext())
                     .asBitmap()
-                    .load(albumImageUrl)
+                    .load(resultImageUrl)
                     .into(ivResultImage);
 
         } else if (getArguments().getString("resultType").equals("artist")) {
 
             resultType = "Artist";
 
-            artistId = getArguments().getString("artistId");
-            artistImageUrl = getArguments().getString("resultImageUrl");
-            artistName = getArguments().getString("artistName");
+            resultId = getArguments().getString("resultId");
+            resultImageUrl = getArguments().getString("resultImageUrl");
+            resultName = getArguments().getString("resultName");
 
-            tvResultName.setText(artistName);
+            tvResultName.setText(resultName);
             tvResultArtist.setText("");
             tvResultType.setText(resultType);
             tvResultYear.setText("");
@@ -126,7 +120,7 @@ public class CreateReviewFragment extends Fragment {
 
             Glide.with(getContext())
                     .asBitmap()
-                    .load(artistImageUrl)
+                    .load(resultImageUrl)
                     .circleCrop()
                     .into(ivResultImage);
 
@@ -134,27 +128,34 @@ public class CreateReviewFragment extends Fragment {
 
             resultType = "Track";
 
-            trackId = getArguments().getString("trackId");
-            trackImageUrl = getArguments().getString("resultImageUrl");
-            trackName = getArguments().getString("trackName");
-            trackArtist = getArguments().getString("trackArtist");
-            trackReleaseDate = getArguments().getInt("trackReleaseDate");
+            resultId = getArguments().getString("resultId");
+            resultImageUrl = getArguments().getString("resultImageUrl");
+            resultName = getArguments().getString("resultName");
+            resultArtist = getArguments().getString("resultArtist");
+            resultReleaseDate = getArguments().getInt("resultReleaseDate");
 
-            tvResultName.setText(trackName);
-            tvResultArtist.setText(trackArtist);
+            tvResultName.setText(resultName);
+            tvResultArtist.setText(resultArtist);
             tvResultType.setText(resultType);
-            tvResultYear.setText("" + trackReleaseDate);
+            tvResultYear.setText("" + resultReleaseDate);
 
             Glide.with(getContext())
                     .asBitmap()
-                    .load(trackImageUrl)
+                    .load(resultImageUrl)
                     .into(ivResultImage);
         }
 
+        // Save your review post
         tvSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Float reviewRating = ratingBar.getRating();
+                String reviewTitle = etReviewTitle.getText().toString();
                 String reviewComment = etReviewComment.getText().toString();
+                String resultName = tvResultName.getText().toString();
+                String resultArtist = tvResultArtist.getText().toString();
+                String resultType = tvResultType.getText().toString();
+                String reviewImage = resultImageUrl;
 
                 if (reviewComment.isEmpty())
                 {
@@ -163,10 +164,11 @@ public class CreateReviewFragment extends Fragment {
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(reviewComment, currentUser);
+                savePost(reviewRating, reviewTitle, reviewComment, resultName, resultArtist, resultType, resultId, reviewImage, currentUser);
             }
         });
 
+        // Go back to your old search result
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,13 +184,17 @@ public class CreateReviewFragment extends Fragment {
 
     }
 
-    private void savePost(String reviewComment, ParseUser currentUser) {
+    private void savePost(Float reviewRating, String reviewTitle, String reviewComment, String resultName, String resultArtist, String resultType, String resultId, String reviewImage, ParseUser currentUser) {
         Post post = new Post();
+
+        post.setRating(reviewRating);
+        post.setReviewTitle(reviewTitle);
         post.setDescription(reviewComment);
-
-        //post.setImage(new ParseFile(photoFile));
-
-        //post.setImage(getArguments().getString("resultImageUrl"));
+        post.setResultName(resultName);
+        post.setResultArtist(resultArtist);
+        post.setResultType(resultType);
+        post.setResultId(resultId);
+        post.setResultImageUrl(resultImageUrl);
 
         post.setUser(currentUser);
         post.saveInBackground(new SaveCallback() {
@@ -200,6 +206,9 @@ public class CreateReviewFragment extends Fragment {
                     Toast.makeText(getContext(), "Error while saving!", Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post save was successful!");
+
+                ratingBar.setRating(0);
+                etReviewTitle.setText("");
                 etReviewComment.setText("");
             }
         });
