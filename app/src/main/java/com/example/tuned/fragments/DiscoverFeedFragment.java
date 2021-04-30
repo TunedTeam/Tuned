@@ -1,10 +1,6 @@
 package com.example.tuned.fragments;
 
-<<<<<<< HEAD
-import android.content.Intent;
-=======
 import android.os.Build;
->>>>>>> 791cee3d076b3459762729f4d9f14cad8bec95ba
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,24 +13,17 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-<<<<<<< HEAD
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
-=======
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ScrollView;
->>>>>>> 791cee3d076b3459762729f4d9f14cad8bec95ba
 
-import android.content.Intent;
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.adapters.NewReleasesAdapter;
 import com.example.tuned.adapters.PopularWeekAdapter;
@@ -42,7 +31,6 @@ import com.example.tuned.adapters.TopTracksAdapter;
 import com.example.tuned.models.Album;
 import com.example.tuned.R;
 import com.example.tuned.Spotify.Spotify;
-import com.example.tuned.models.SearchResults;
 import com.example.tuned.models.Track;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -81,7 +69,7 @@ public class DiscoverFeedFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                   Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discover_feed, container, false);
 
@@ -103,39 +91,8 @@ public class DiscoverFeedFragment extends Fragment {
         PopularWeekAdapter rvAdapterPopularWeek = new PopularWeekAdapter(getContext(), popularWeek);
         rvPopularWeek.setAdapter(rvAdapterPopularWeek);
 
-
-
         return view;
     }
-
-
-
-    private void setUpOnClickListener(ListView listView, ArrayList<Album> getNewReleases) {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String resultType = "";
-
-                if (getNewReleases.get(i).getType().equals("album")) {
-                    String albumId = getNewReleases.get(i).getId();
-
-                    resultType = "album";
-
-                    Bundle bundle = new Bundle();
-
-                    bundle.putString("resultId", albumId);
-
-                    AlbumFragment albumFragment = new AlbumFragment();
-                    albumFragment.setArguments(bundle);
-
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.flContainer, albumFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
-
-                }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -174,12 +131,8 @@ public class DiscoverFeedFragment extends Fragment {
                 fragmentTransaction.replace(R.id.flContainer, reviewsFeedFragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
-
             }
         });
-
-
-    }
 
 
         fabLists.setOnClickListener(new View.OnClickListener() {
@@ -199,7 +152,7 @@ public class DiscoverFeedFragment extends Fragment {
     }
 
 
-    public void hideFabScroll (ScrollView scrollView) {
+    public void hideFabScroll(ScrollView scrollView) {
 
         Animation animScaleUp = AnimationUtils.loadAnimation(getContext(), R.anim.scale_up);
         Animation animScaleDown = AnimationUtils.loadAnimation(getContext(), R.anim.scale_down);
@@ -224,4 +177,35 @@ public class DiscoverFeedFragment extends Fragment {
         });
     }
 
+
+    private void setUpOnClickListener(ListView listView, ArrayList<Album> getNewReleases) {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String resultType = "";
+
+                if (getNewReleases.get(i).getType().equals("album")) {
+                    String albumId = getNewReleases.get(i).getId();
+
+                    resultType = "album";
+
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("resultId", albumId);
+
+                    AlbumFragment albumFragment = new AlbumFragment();
+                    albumFragment.setArguments(bundle);
+
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.flContainer, albumFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
+                }
+            }
+        });
+
+    }
 }

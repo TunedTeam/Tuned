@@ -65,7 +65,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvUsername;
-        private ImageView ivProfilePicture;
+        private ImageView ivProfileImage;
         private ImageView ivResultImage;
         private TextView tvResultName;
         private TextView tvResultArtist;
@@ -78,11 +78,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvUsername = itemView.findViewById(R.id.tvTrack);
-            ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
-
             tvUsername = itemView.findViewById(R.id.tvUsername);
-            ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
+            ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
 
             ivResultImage = itemView.findViewById(R.id.ivResultImage);
             tvResultName = itemView.findViewById(R.id.tvResultName);
@@ -105,17 +102,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             Log.i("PostsAdapter", "user profile " + userProfilePic);
 
 
-           if(userProfilePic != null) {
-              Glide.with(context).load(userProfilePic.getUrl())
-                        .placeholder(R.drawable.defaultavatar)
-                        .circleCrop()
-                        .into(ivProfileImage);
-
             if(userProfilePic != null) {
                 Glide.with(context).load(userProfilePic.getUrl())
                         .placeholder(R.drawable.defaultavatar)
                         .circleCrop()
-                        .into(ivProfilePicture);
+                        .into(ivProfileImage);
 
             }
 

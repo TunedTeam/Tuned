@@ -7,13 +7,15 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="bottom"
+    android:background="@drawable/albumcover2"
     tools:context="com.example.tuned.SignupActivity">
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:ems="10"
         android:hint="email" />
 
@@ -21,6 +23,7 @@
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:ems="10"
         android:hint="username" />
 
@@ -28,6 +31,7 @@
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:ems="10"
         android:hint="password"
         android:inputType="textPassword" />

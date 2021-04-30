@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/defaultavatar" />
 
     <TextView
-        android:id="@+id/tvTrack"
+        android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/ivProfilePicture"
