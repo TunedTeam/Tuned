@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.tuned.fragments.ComposeFragment;
 import com.example.tuned.fragments.CreateReviewFragment;
 import com.example.tuned.fragments.CreateReviewSearchFragment;
-import com.example.tuned.fragments.DiscoverFragment;
+import com.example.tuned.fragments.DiscoverFeedFragment;
 import com.example.tuned.fragments.PostsFragment;
 import com.example.tuned.fragments.ProfileFragment;
 import com.example.tuned.fragments.SearchFragment;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_discover:
                         Toast.makeText(MainActivity.this, "Discover!", Toast.LENGTH_SHORT).show();
-                        fragment = new DiscoverFragment();
+                        fragment = new DiscoverFeedFragment();
                         break;
                     case R.id.action_search:
                         Toast.makeText(MainActivity.this, "Search!", Toast.LENGTH_SHORT).show();

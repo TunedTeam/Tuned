@@ -21,6 +21,8 @@ import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
 
+    private static final String TAG = "PostsAdapter";
+
     private Context context;
     private List<Post> posts;
 
@@ -63,7 +65,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
     class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvUsername;
-        private ImageView ivProfileImage;
+        private ImageView ivProfilePicture;
         private ImageView ivResultImage;
         private TextView tvResultName;
         private TextView tvResultArtist;
@@ -75,8 +77,13 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             tvUsername = itemView.findViewById(R.id.tvTrack);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
+
+            tvUsername = itemView.findViewById(R.id.tvUsername);
+            ivProfilePicture = itemView.findViewById(R.id.ivProfilePicture);
+
             ivResultImage = itemView.findViewById(R.id.ivResultImage);
             tvResultName = itemView.findViewById(R.id.tvResultName);
             tvResultArtist = itemView.findViewById(R.id.tvResultArtist);
@@ -93,15 +100,23 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             tvUsername.setText(post.getUser().getUsername());
 
-            ParseFile userProfilePic =  (ParseFile) post.getUser().get("profile_picture");
+            ParseFile userProfilePic = (ParseFile) post.getUser().get("profile_picture");
 
             Log.i("PostsAdapter", "user profile " + userProfilePic);
+
 
            if(userProfilePic != null) {
               Glide.with(context).load(userProfilePic.getUrl())
                         .placeholder(R.drawable.defaultavatar)
                         .circleCrop()
                         .into(ivProfileImage);
+
+            if(userProfilePic != null) {
+                Glide.with(context).load(userProfilePic.getUrl())
+                        .placeholder(R.drawable.defaultavatar)
+                        .circleCrop()
+                        .into(ivProfilePicture);
+
             }
 
             if (post.getResultType().equals("Artist")) {
