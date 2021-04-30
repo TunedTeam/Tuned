@@ -87,7 +87,7 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
 
-        tvUserName = view.findViewById(R.id.tvUsername);
+        tvUserName = view.findViewById(R.id.tvTrack);
 
         rvUserPosts = view.findViewById(R.id.rvUserPosts);
 

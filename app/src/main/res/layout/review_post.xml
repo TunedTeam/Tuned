@@ -10,7 +10,7 @@
     android:background="@color/lavender">
 
     <ImageView
-        android:id="@+id/ivProfilePicture"
+        android:id="@+id/ivProfileImage"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"
@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/defaultavatar" />
 
     <TextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvTrack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/ivProfilePicture"

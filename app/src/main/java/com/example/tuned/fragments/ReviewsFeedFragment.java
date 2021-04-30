@@ -104,7 +104,7 @@ public class ReviewsFeedFragment extends Fragment {
                 for (Post post : posts)
                 {
                     Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername()
-                            +post.getProfilePicture());
+                            +post.getImage());
                 }
                 /*post.getUser().getParseFile("profilePicture")*/
                 /*ParseUser.getCurrentUser().get("profile_picture") */

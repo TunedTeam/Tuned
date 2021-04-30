@@ -1,5 +1,6 @@
 package com.example.tuned.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,11 +11,16 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import android.content.Intent;
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.adapters.NewReleasesAdapter;
 import com.example.tuned.adapters.PopularWeekAdapter;
@@ -22,6 +28,7 @@ import com.example.tuned.adapters.TopTracksAdapter;
 import com.example.tuned.models.Album;
 import com.example.tuned.R;
 import com.example.tuned.Spotify.Spotify;
+import com.example.tuned.models.SearchResults;
 import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
@@ -75,7 +82,11 @@ public class DiscoverFeedFragment extends Fragment {
         PopularWeekAdapter rvAdapterPopularWeek = new PopularWeekAdapter(getContext(), popularWeek);
         rvPopularWeek.setAdapter(rvAdapterPopularWeek);
 
+
+
         return view;
     }
+
+
 
 }

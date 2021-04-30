@@ -75,7 +75,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvUsername = itemView.findViewById(R.id.tvUsername);
+            tvUsername = itemView.findViewById(R.id.tvTrack);
             ivProfileImage = itemView.findViewById(R.id.ivProfileImage);
             ivResultImage = itemView.findViewById(R.id.ivResultImage);
             tvResultName = itemView.findViewById(R.id.tvResultName);
@@ -97,12 +97,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             Log.i("PostsAdapter", "user profile " + userProfilePic);
 
-//            if(userProfilePic != null) {
-//                Glide.with(context).load(userProfilePic.getUrl())
-//                        .placeholder(R.drawable.defaultavatar)
-//                        .circleCrop()
-//                        .into(ivProfileImage);
-//            }
+           if(userProfilePic != null) {
+              Glide.with(context).load(userProfilePic.getUrl())
+                        .placeholder(R.drawable.defaultavatar)
+                        .circleCrop()
+                        .into(ivProfileImage);
+            }
 
             if (post.getResultType().equals("Artist")) {
                 tvResultType.setText(post.getResultType());

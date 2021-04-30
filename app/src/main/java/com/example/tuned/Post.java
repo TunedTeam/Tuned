@@ -28,11 +28,11 @@ public class Post extends ParseObject {
         put(KEY_DESCRIPTION, description);
     }
 
-    public ParseFile getProfilePicture() {
+    public ParseFile getImage() {
         return getUser().getParseFile(PROFILE_PICTURE);
     }
 
-    public void setProfilePicture(ParseFile parseFile) {
+    public void setImage(ParseFile parseFile) {
         put(PROFILE_PICTURE, parseFile);
     }
 
