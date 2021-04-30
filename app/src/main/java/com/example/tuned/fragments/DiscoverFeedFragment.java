@@ -1,9 +1,12 @@
 package com.example.tuned.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,7 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.adapters.NewReleasesAdapter;
@@ -23,6 +30,8 @@ import com.example.tuned.models.Album;
 import com.example.tuned.R;
 import com.example.tuned.Spotify.Spotify;
 import com.example.tuned.models.Track;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -40,6 +49,11 @@ public class DiscoverFeedFragment extends Fragment {
     private RecyclerView rvPopularWeek;
     private RecyclerView rvTopTracks;
 
+    private ExtendedFloatingActionButton fabDiscover;
+    private ExtendedFloatingActionButton fabReviews;
+    private ExtendedFloatingActionButton fabLists;
+
+    private ScrollView scrollView;
 
     public DiscoverFeedFragment() {
         // Required empty public constructor
@@ -78,4 +92,86 @@ public class DiscoverFeedFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        fabDiscover = view.findViewById(R.id.fabDiscover);
+        fabReviews = view.findViewById(R.id.fabReviews);
+        fabLists = view.findViewById(R.id.fabLists);
+
+        scrollView = view.findViewById(R.id.scrollView);
+
+        hideFabScroll(scrollView);
+
+        fabDiscover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DiscoverFeedFragment discoverFeedFragment = new DiscoverFeedFragment();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContainer, discoverFeedFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        fabReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReviewsFeedFragment reviewsFeedFragment = new ReviewsFeedFragment();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContainer, reviewsFeedFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+        fabLists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListsFeedFragment listsFeedFragment = new ListsFeedFragment();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContainer, listsFeedFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+    }
+
+
+    public void hideFabScroll (ScrollView scrollView) {
+
+        Animation animScaleUp = AnimationUtils.loadAnimation(getContext(), R.anim.scale_up);
+        Animation animScaleDown = AnimationUtils.loadAnimation(getContext(), R.anim.scale_down);
+
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                int scrollY = scrollView.getScrollY(); // For ScrollView
+                int scrollX = scrollView.getScrollX(); // For HorizontalScrollView
+
+                // Hide top FABs when scrolling, reappear when at the top
+                if (scrollY < 0 && !fabDiscover.isShown() && !fabReviews.isShown() && !fabLists.isShown()) {
+                    fabDiscover.startAnimation(animScaleDown);
+                    fabReviews.startAnimation(animScaleDown);
+                    fabLists.startAnimation(animScaleDown);
+                } else if (scrollY > 0 && fabDiscover.isShown() && fabReviews.isShown() && fabLists.isShown()) {
+                    fabDiscover.startAnimation(animScaleUp);
+                    fabReviews.startAnimation(animScaleUp);
+                    fabLists.startAnimation(animScaleUp);
+                }
+            }
+        });
+    }
 }

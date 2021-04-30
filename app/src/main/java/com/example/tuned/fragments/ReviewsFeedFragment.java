@@ -6,6 +6,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -14,11 +17,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ScrollView;
 
 import com.example.tuned.Post;
 //import com.example.instagram.PostsAdapter;
 import com.example.tuned.adapters.PostsAdapter;
 import com.example.tuned.R;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -33,6 +41,10 @@ public class ReviewsFeedFragment extends Fragment {
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
     private SwipeRefreshLayout swipeContainer;
+
+    private ExtendedFloatingActionButton fabDiscover;
+    private ExtendedFloatingActionButton fabReviews;
+    private ExtendedFloatingActionButton fabLists;
 
     public ReviewsFeedFragment() {
         // Required empty public constructor
@@ -63,6 +75,9 @@ public class ReviewsFeedFragment extends Fragment {
         // 4. Set the layout manager on the recycler view
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        rvPosts.addItemDecoration(new DividerItemDecoration(getContext(),
+                DividerItemDecoration.VERTICAL));
+
 
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         // Configure the refreshing colors
@@ -79,6 +94,55 @@ public class ReviewsFeedFragment extends Fragment {
                 // once the network request has completed successfully.
                 Log.i(TAG,"Fetching new data!");
                 queryPosts();
+            }
+        });
+
+        fabDiscover = view.findViewById(R.id.fabDiscover);
+        fabReviews = view.findViewById(R.id.fabReviews);
+        fabLists = view.findViewById(R.id.fabLists);
+
+        //hideFabScroll(rvPosts);
+
+        fabDiscover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DiscoverFeedFragment discoverFeedFragment = new DiscoverFeedFragment();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContainer, discoverFeedFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+        fabReviews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ReviewsFeedFragment reviewsFeedFragment = new ReviewsFeedFragment();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContainer, reviewsFeedFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
+
+
+        fabLists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ListsFeedFragment listsFeedFragment = new ListsFeedFragment();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContainer, listsFeedFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
@@ -115,6 +179,29 @@ public class ReviewsFeedFragment extends Fragment {
             }
 
 
+        });
+    }
+
+    public void hideFabScroll (RecyclerView recyclerView) {
+
+        Animation animScaleUp = AnimationUtils.loadAnimation(getContext(), R.anim.scale_up);
+        Animation animScaleDown = AnimationUtils.loadAnimation(getContext(), R.anim.scale_down);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx,int dy){
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy < 0 && !fabDiscover.isShown() && !fabReviews.isShown() && !fabLists.isShown()) {
+                    fabDiscover.startAnimation(animScaleDown);
+                    fabReviews.startAnimation(animScaleDown);
+                    fabLists.startAnimation(animScaleDown);
+                } else if (dy > 0 && fabDiscover.isShown() && fabReviews.isShown() && fabLists.isShown()) {
+                    fabDiscover.startAnimation(animScaleUp);
+                    fabReviews.startAnimation(animScaleUp);
+                    fabLists.startAnimation(animScaleUp);
+                }
+            }
         });
     }
 }

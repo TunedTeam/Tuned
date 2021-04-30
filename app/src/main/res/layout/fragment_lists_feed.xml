@@ -3,8 +3,74 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/lavender"
     tools:context=".fragments.ListsFeedFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabDiscover"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:text="Discover"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:backgroundTint="@color/dark_purple"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabReviews"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="Reviews"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:backgroundTint="@color/dark_purple"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabLists"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:text="Lists"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:backgroundTint="@color/dark_purple"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tvWelcome"
