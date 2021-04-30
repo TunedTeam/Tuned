@@ -1,20 +1,32 @@
 package com.example.tuned.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
+import com.example.tuned.AlbumActivity;
+import com.example.tuned.Spotify.Spotify;
+import com.example.tuned.fragments.AlbumFragment;
 import com.example.tuned.models.Album;
 import com.example.tuned.R;
+import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
 
@@ -27,6 +39,9 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
     private LayoutInflater rvInflater;
 
     private Context albumContext;
+
+    static Spotify spotify = new Spotify();
+    static SpotifyAppApi api = spotify.api;
 
     public NewReleasesAdapter(Context albumContext, ArrayList<Album> albums) {
         this.albumContext = albumContext;
@@ -60,6 +75,15 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on an image: " + albums.get(position).albumName);
                 Toast.makeText(albumContext, albums.get(position).albumName, Toast.LENGTH_SHORT).show();
+
+                String albumId = albums.get(position).albumId;
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("albumId",albumId);
+                Intent i = new Intent(albumContext, AlbumActivity.class);
+                i.putExtras(bundle);
+                albumContext.startActivity(i);
             }
         });
     }
@@ -84,5 +108,7 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
             this.rvAdapter = adapter;
         }
     }
+
+
 
 }

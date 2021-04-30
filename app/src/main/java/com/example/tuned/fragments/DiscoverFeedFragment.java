@@ -91,6 +91,7 @@ public class DiscoverFeedFragment extends Fragment {
         PopularWeekAdapter rvAdapterPopularWeek = new PopularWeekAdapter(getContext(), popularWeek);
         rvPopularWeek.setAdapter(rvAdapterPopularWeek);
 
+
         return view;
     }
 
@@ -177,35 +178,32 @@ public class DiscoverFeedFragment extends Fragment {
         });
     }
 
-
-    private void setUpOnClickListener(ListView listView, ArrayList<Album> getNewReleases) {
+    private void setUpOnClickListener(ListView listView, String albumId) {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String resultType = "";
 
-                if (getNewReleases.get(i).getType().equals("album")) {
-                    String albumId = getNewReleases.get(i).getId();
+                ArrayList<Track> albumTracks = spotify.getAlbumTracks(api, albumId);
 
-                    resultType = "album";
+                Bundle bundle = new Bundle();
 
-                    Bundle bundle = new Bundle();
+                bundle.putString("resultId", albumId);
 
-                    bundle.putString("resultId", albumId);
+                AlbumFragment albumFragment = new AlbumFragment();
+                albumFragment.setArguments(bundle);
 
-                    AlbumFragment albumFragment = new AlbumFragment();
-                    albumFragment.setArguments(bundle);
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 
-                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.flContainer, albumFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
 
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.flContainer, albumFragment);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.commit();
 
-                }
             }
         });
 
     }
+
+
 }
