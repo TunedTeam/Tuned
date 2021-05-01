@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.R;
@@ -40,6 +41,8 @@ public class CreateReviewSearchFragment extends Fragment {
 
     private ListView listView;
 
+//    private TextView tvCancel;
+
     public CreateReviewSearchFragment() {
         // Required empty public constructor
     }
@@ -60,7 +63,7 @@ public class CreateReviewSearchFragment extends Fragment {
         // hides the bnv when keyboard pops up
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        View view = inflater.inflate(R.layout.fragment_create_review_search, container, false);
 
         SearchView searchView = (SearchView) view.findViewById(R.id.svBar);
 
@@ -91,6 +94,15 @@ public class CreateReviewSearchFragment extends Fragment {
                 return false;
             }
         });
+
+//        tvCancel = view.findViewById(R.id.tvCancel);
+//
+//        tvCancel.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                getActivity().onBackPressed();
+//            }
+//        });
 
         return view;
     }

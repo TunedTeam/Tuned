@@ -178,32 +178,5 @@ public class DiscoverFeedFragment extends Fragment {
         });
     }
 
-    private void setUpOnClickListener(ListView listView, String albumId) {
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                ArrayList<Track> albumTracks = spotify.getAlbumTracks(api, albumId);
-
-                Bundle bundle = new Bundle();
-
-                bundle.putString("resultId", albumId);
-
-                AlbumFragment albumFragment = new AlbumFragment();
-                albumFragment.setArguments(bundle);
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.flContainer, albumFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-
-
-            }
-        });
-
-    }
-
 
 }

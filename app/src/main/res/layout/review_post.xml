@@ -13,7 +13,7 @@
     android:background="@color/lavender">
 
     <ImageView
-        android:id="@+id/ivProfileImage"
+        android:id="@+id/ivProfilePicture"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignParentTop="true"

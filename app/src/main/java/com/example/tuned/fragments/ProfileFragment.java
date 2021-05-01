@@ -87,7 +87,7 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture);
 
-        tvUserName = view.findViewById(R.id.tvTrack);
+        tvUserName = view.findViewById(R.id.tvUsername);
 
         rvUserPosts = view.findViewById(R.id.rvUserPosts);
 
@@ -102,6 +102,7 @@ public class ProfileFragment extends Fragment {
         if(userProfilePic != null)
             Glide.with(this).load(userProfilePic.getUrl())
                     .placeholder(R.drawable.defaultavatar)
+                    .circleCrop()
                     .into(ivProfilePicture);
 
         btnLogout.setOnClickListener(new View.OnClickListener() {

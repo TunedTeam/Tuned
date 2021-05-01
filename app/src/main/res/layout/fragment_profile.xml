@@ -1,108 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/lavender"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingStart="20dp"
+    android:paddingTop="20dp"
+    android:paddingEnd="20dp"
     tools:context=".fragments.ProfileFragment">
 
-    <RelativeLayout
+
+    <ImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/defaultavatar"
+        tools:ignore="VectorDrawableCompat" />
+
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivProfilePicture"
+        android:layout_centerHorizontal="true"
+        android:text="\@user"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+
+    <Button
+        android:id="@+id/btnLogout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUsername"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="-60dp"
+        android:backgroundTint="@color/black"
+        android:background="@drawable/feed_button"
+        android:text="logout" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cvFrame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="100dp"
-            android:layout_alignParentLeft="true">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/btnLogout"
+        android:layout_marginTop="8dp"
+        android:background="@color/lavender" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvUserPosts"
+        android:layout_width="match_parent"
+        android:layout_height="496dp"
+        android:layout_below="@+id/btnLogout"
+        android:layout_marginTop="69dp" />
 
-            <ImageView
-                android:id="@+id/ivProfilePicture"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/defaultavatar"
-                tools:ignore="VectorDrawableCompat" />
-
-
-        </androidx.cardview.widget.CardView>
-
-
-        <TextView
-            android:id="@+id/tvScreenName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="30dp"
-            android:layout_toEndOf="@+id/cvFrame"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_toRightOf="@+id/cvFrame" />
-
-
-        <TextView
-            android:id="@+id/tvTrack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_alignParentEnd="true"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/cvFrame"
-            android:textSize="30sp"
-            android:text="\@user"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/cvFrame" />
-
-
-        <TextView
-            android:id="@+id/tvJoined"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvTrack"
-            android:layout_alignParentEnd="true"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/cvFrame"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:text="January 1, 2021"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/cvFrame" />
-
-
-        <Button
-            android:id="@+id/btnLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/cvFrame"
-            android:layout_marginBottom="-60dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:backgroundTint="@color/black"
-            android:text="logout" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#d6d4d1"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/btnLogout"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvUserPosts"
-            android:layout_width="match_parent"
-            android:layout_height="496dp"
-            android:layout_below="@+id/btnLogout"
-            android:layout_marginTop="69dp" />
-
-    </RelativeLayout>
-
-
-</FrameLayout>
+</RelativeLayout>

@@ -5,13 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_centerInParent="true"
     android:orientation="vertical"
-    android:background="@color/purple"
-    android:padding="11dp">
+    android:background="@color/lavender"
+    android:paddingTop="20dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
 
     <ImageView
         android:id="@+id/ivAlbumArt"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
@@ -20,9 +22,9 @@
     <TextView
         android:id="@+id/tvAlbumName"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:text="Album Name"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:fontFamily="@font/roboto_bold"
         android:layout_below="@id/ivAlbumArt"
         android:gravity="center"
@@ -37,39 +39,52 @@
     <TextView
         android:id="@+id/tvAlbumArtist"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvAlbumName"
         android:layout_marginTop="-5dp"
         android:gravity="center"
         android:text="Album Artist"
         android:textAlignment="center"
         android:textColor="@color/light_gray"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:fontFamily="@font/roboto_bold"
         android:scrollHorizontally="true"
         android:ellipsize="end"
         android:maxLines="1"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAlbumArtist"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-10dp"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:scaleX="0.60"
+        android:scaleY="0.60"
+        android:progressTint="@color/purple"
+        android:secondaryProgressTint="@color/purple"
+        android:progressBackgroundTint="@color/light_gray"/>
 
     <TextView
         android:id="@+id/tvListTracks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="-15dp"
         android:fontFamily="@font/roboto_black"
         android:text="Tracklist"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListTracks"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:clipToPadding="false">
 
     </androidx.recyclerview.widget.RecyclerView>
 

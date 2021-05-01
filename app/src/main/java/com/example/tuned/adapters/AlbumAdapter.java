@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,11 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         holder.tvTrack.setText(tracks.get(position).trackName);
         holder.tvArtist.setText(tracks.get(position).trackArtist);
 
+//        int rating =
+//        holder.ratingBar.setRating();
+//
+//        holder.tvRating.setText();
+
     }
 
     @Override
@@ -62,6 +68,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         TextView tvTrack;
         TextView tvArtist;
+        RatingBar ratingBar;
+        TextView tvRating;
         final AlbumAdapter rvAdapter;
 
         public ViewHolder(@NonNull View itemView, AlbumAdapter adapter) {
@@ -69,6 +77,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
             tvTrack = itemView.findViewById(R.id.tvTrack);
             tvArtist = itemView.findViewById(R.id.tvArtist);
+            ratingBar = itemView.findViewById(R.id.ratingBar);
+            tvRating = itemView.findViewById(R.id.tvRating);
             this.rvAdapter = adapter;
         }
     }

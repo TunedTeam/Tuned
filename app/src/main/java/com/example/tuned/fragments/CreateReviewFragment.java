@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.tuned.Post;
 import com.example.tuned.R;
+import com.example.tuned.SignupActivity;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -165,6 +166,7 @@ public class CreateReviewFragment extends Fragment {
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(reviewRating, reviewTitle, reviewComment, resultName, resultArtist, resultType, resultId, reviewImage, currentUser);
+
             }
         });
 
@@ -172,13 +174,7 @@ public class CreateReviewFragment extends Fragment {
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreateReviewSearchFragment createReviewSearchFragment = new CreateReviewSearchFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.flContainer, createReviewSearchFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
+                getActivity().onBackPressed();
             }
         });
 
@@ -212,5 +208,18 @@ public class CreateReviewFragment extends Fragment {
                 etReviewComment.setText("");
             }
         });
+    }
+
+    public void returnBack() {
+        Toast.makeText(getContext(), "Successfully created review!", Toast.LENGTH_SHORT).show();
+
+        DiscoverFeedFragment discoverFeedFragment = new DiscoverFeedFragment();
+
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.flContainer, discoverFeedFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }
