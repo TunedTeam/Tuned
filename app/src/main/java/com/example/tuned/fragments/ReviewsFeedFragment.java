@@ -1,6 +1,7 @@
 package com.example.tuned.fragments;
 
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -102,6 +103,9 @@ public class ReviewsFeedFragment extends Fragment {
         fabLists = view.findViewById(R.id.fabLists);
 
         //hideFabScroll(rvPosts);
+
+        // set current fab color to purple to differentiate from other fabs
+        fabReviews.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
 
         fabDiscover.setOnClickListener(new View.OnClickListener() {
             @Override

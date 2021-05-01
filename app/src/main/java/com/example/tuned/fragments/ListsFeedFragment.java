@@ -1,5 +1,6 @@
 package com.example.tuned.fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,13 @@ public class ListsFeedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fabDiscover = view.findViewById(R.id.fabDiscover);
+        fabReviews = view.findViewById(R.id.fabReviews);
+        fabLists = view.findViewById(R.id.fabLists);
+
+        // set current fab color to purple to differentiate from other fabs
+        fabLists.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+
         fabDiscover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,19 +78,5 @@ public class ListsFeedFragment extends Fragment {
             }
         });
 
-
-        fabLists.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ListsFeedFragment listsFeedFragment = new ListsFeedFragment();
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.flContainer, listsFeedFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
     }
 }

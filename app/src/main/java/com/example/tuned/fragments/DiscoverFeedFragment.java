@@ -1,5 +1,6 @@
 package com.example.tuned.fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -23,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.adapters.NewReleasesAdapter;
@@ -34,6 +36,7 @@ import com.example.tuned.Spotify.Spotify;
 import com.example.tuned.models.Track;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -56,6 +59,8 @@ public class DiscoverFeedFragment extends Fragment {
     private ExtendedFloatingActionButton fabLists;
 
     private ScrollView scrollView;
+
+    private TextView tvWelcome;
 
     public DiscoverFeedFragment() {
         // Required empty public constructor
@@ -105,21 +110,16 @@ public class DiscoverFeedFragment extends Fragment {
 
         scrollView = view.findViewById(R.id.scrollView);
 
+        tvWelcome = view.findViewById(R.id.tvWelcome);
+
+        ParseUser parseUser = ParseUser.getCurrentUser();
+
+        tvWelcome.setText("Welcome back, " + parseUser.getUsername() + "!");
+
         hideFabScroll(scrollView);
 
-        fabDiscover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DiscoverFeedFragment discoverFeedFragment = new DiscoverFeedFragment();
-
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.flContainer, discoverFeedFragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        });
+        // set current fab color to purple to differentiate from other fabs
+        fabDiscover.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
 
         fabReviews.setOnClickListener(new View.OnClickListener() {
             @Override
