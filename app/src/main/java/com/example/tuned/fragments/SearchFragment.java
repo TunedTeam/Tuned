@@ -1,18 +1,23 @@
 package com.example.tuned.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
+import com.example.tuned.AlbumActivity;
 import com.example.tuned.R;
 import com.example.tuned.Spotify.Spotify;
 import com.example.tuned.adapters.ResultAdapter;
@@ -76,6 +81,7 @@ public class SearchFragment extends Fragment {
 
                     adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
                     listView.setAdapter(adapter);
+                    setUpOnClickListener(listView, searchResults);
                 }
                 else {
                     listView.setAdapter(null);
@@ -84,8 +90,6 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
-
-
 
         return view;
     }
@@ -97,5 +101,32 @@ public class SearchFragment extends Fragment {
     private void removeBNV(View view) {
         bnv = getView().findViewById(R.id.bottom_navigation);
         //bnv.setV
+    }
+
+    private void setUpOnClickListener(ListView listView, ArrayList<SearchResults> searchResults) {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String resultType = "";
+
+                if (searchResults.get(i).getType().equals("album")) {
+                    String albumId = searchResults.get(i).getId();
+                    String albumImage = searchResults.get(i).getImage();
+                    String albumName = searchResults.get(i).getName();
+                    String albumArtist = searchResults.get(i).getArtist();
+                    int albumReleaseDate = searchResults.get(i).getReleaseDate();
+
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("albumId",albumId);
+                    bundle.putString("albumImage",albumImage);
+                    bundle.putString("albumName",albumName);
+                    bundle.putString("albumArtist",albumArtist);
+                    Intent intent = new Intent(getContext(), AlbumActivity.class);
+                    intent.putExtras(bundle);
+                    getContext().startActivity(intent);
+                }
+            }
+        });
     }
 }
