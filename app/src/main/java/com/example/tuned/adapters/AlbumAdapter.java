@@ -51,8 +51,6 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         holder.tvTrack.setText(tracks.get(position).trackName);
         holder.tvArtist.setText(tracks.get(position).trackArtist);
 
-
-
     }
 
     @Override

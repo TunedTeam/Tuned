@@ -77,13 +77,22 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
                 Toast.makeText(albumContext, albums.get(position).albumName, Toast.LENGTH_SHORT).show();
 
                 String albumId = albums.get(position).albumId;
+                String albumImage = albums.get(position).albumImageUrl;
+                String albumName = albums.get(position).albumName;
+                String albumArtist = albums.get(position).albumArtist;
 
                 Bundle bundle = new Bundle();
 
                 bundle.putString("albumId",albumId);
+                bundle.putString("albumImage",albumImage);
+                bundle.putString("albumName",albumName);
+                bundle.putString("albumArtist",albumArtist);
                 Intent i = new Intent(albumContext, AlbumActivity.class);
                 i.putExtras(bundle);
                 albumContext.startActivity(i);
+
+
+
             }
         });
     }
