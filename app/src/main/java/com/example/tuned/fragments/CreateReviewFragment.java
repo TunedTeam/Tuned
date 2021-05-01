@@ -166,7 +166,7 @@ public class CreateReviewFragment extends Fragment {
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(reviewRating, reviewTitle, reviewComment, resultName, resultArtist, resultType, resultId, reviewImage, currentUser);
-
+                returnBack();
             }
         });
 
