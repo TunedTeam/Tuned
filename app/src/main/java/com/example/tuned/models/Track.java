@@ -7,13 +7,20 @@ public class Track implements SearchResults{
     public String trackName;
     public String trackArtist;
     public int trackReleaseDate;
+    public String trackAlbumId;
+    public String trackAlbumName;
+    public String trackAlbumArtist;
 
-    public Track(String trackId, String trackImageUrl, String trackName, String trackArtist, int trackReleaseDate) {
+
+    public Track(String trackId, String trackImageUrl, String trackName, String trackArtist, int trackReleaseDate, String trackAlbumId, String trackAlbumName, String trackAlbumArtist) {
         this.trackId = trackId;
         this.trackImageUrl = trackImageUrl;
         this.trackName = trackName;
         this.trackArtist = trackArtist;
         this.trackReleaseDate = trackReleaseDate;
+        this.trackAlbumId = trackAlbumId;
+        this.trackAlbumName = trackAlbumName;
+        this.trackAlbumArtist = trackAlbumArtist;
     }
 
     @Override
@@ -43,5 +50,17 @@ public class Track implements SearchResults{
 
     public int getReleaseDate() {
         return trackReleaseDate;
+    }
+
+    public String getAlbumId() {
+        return trackAlbumId;
+    }
+
+    public String getAlbumName() {
+        return trackAlbumName;
+    }
+
+    public String getAlbumArtist() {
+        return trackAlbumArtist;
     }
 }

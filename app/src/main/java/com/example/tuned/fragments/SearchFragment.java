@@ -46,8 +46,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setUpOnClickListener();
     }
 
     @Override
@@ -94,10 +92,6 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void setUpOnClickListener() {
-        Log.i(TAG, "Clicked on");
-    }
-
     private void removeBNV(View view) {
         bnv = getView().findViewById(R.id.bottom_navigation);
         //bnv.setV
@@ -114,7 +108,23 @@ public class SearchFragment extends Fragment {
                     String albumImage = searchResults.get(i).getImage();
                     String albumName = searchResults.get(i).getName();
                     String albumArtist = searchResults.get(i).getArtist();
-                    int albumReleaseDate = searchResults.get(i).getReleaseDate();
+
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("albumId",albumId);
+                    bundle.putString("albumImage",albumImage);
+                    bundle.putString("albumName",albumName);
+                    bundle.putString("albumArtist",albumArtist);
+                    Intent intent = new Intent(getContext(), AlbumActivity.class);
+                    intent.putExtras(bundle);
+                    getContext().startActivity(intent);
+                }
+                else if (searchResults.get(i).getType().equals("track")) {
+
+                    String albumId = searchResults.get(i).getAlbumId();
+                    String albumImage = spotify.getAlbumImage(api, albumId);
+                    String albumName = spotify.getAlbumName(api, albumId);
+                    String albumArtist = spotify.getAlbumArtist(api, albumId);
 
                     Bundle bundle = new Bundle();
 

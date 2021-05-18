@@ -47,4 +47,16 @@ public class Album implements SearchResults, Serializable {
     public int getReleaseDate() {
         return albumReleaseDate;
     }
+
+    public String getAlbumId() {
+        return null;
+    }
+
+    public String getAlbumName() {
+        return null;
+    }
+
+    public String getAlbumArtist() {
+        return null;
+    }
 }

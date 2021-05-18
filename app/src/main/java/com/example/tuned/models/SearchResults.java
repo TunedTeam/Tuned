@@ -13,4 +13,10 @@ public interface SearchResults {
     public String getArtist();
 
     public int getReleaseDate();
+
+    public String getAlbumId();
+
+    public String getAlbumName();
+
+    public String getAlbumArtist();
 }

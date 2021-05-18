@@ -74,7 +74,7 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on an image: " + albums.get(position).albumName);
-                Toast.makeText(albumContext, albums.get(position).albumName, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(albumContext, albums.get(position).albumName, Toast.LENGTH_SHORT).show();
 
                 String albumId = albums.get(position).albumId;
                 String albumImage = albums.get(position).albumImageUrl;
@@ -90,9 +90,6 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
                 Intent i = new Intent(albumContext, AlbumActivity.class);
                 i.putExtras(bundle);
                 albumContext.startActivity(i);
-
-
-
             }
         });
     }

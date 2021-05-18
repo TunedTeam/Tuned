@@ -40,4 +40,16 @@ public class Artist implements SearchResults{
     public int getReleaseDate() {
         return 0;
     }
+
+    public String getAlbumId() {
+        return null;
+    }
+
+    public String getAlbumName() {
+        return null;
+    }
+
+    public String getAlbumArtist() {
+        return null;
+    }
 }
