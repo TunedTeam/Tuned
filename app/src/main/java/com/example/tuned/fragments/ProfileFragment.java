@@ -2,6 +2,7 @@ package com.example.tuned.fragments;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,10 +20,12 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.os.Build;
@@ -57,6 +60,7 @@ import com.example.tuned.adapters.PostsAdapter;
 import com.example.tuned.R;
 import com.parse.FindCallback;
 import com.parse.LogOutCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
@@ -68,6 +72,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -154,8 +159,8 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int item) {
                         if (options[item].equals("Take Photo")) {
-                           // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                           // startActivityForResult(intent, RESULT_OK);
+                            // Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            // startActivityForResult(intent, RESULT_OK);
                             launchCamera();
                         } else if (options[item].equals("Choose from Gallery")) {
                             onPickPhoto(v);
@@ -200,19 +205,11 @@ public class ProfileFragment extends Fragment {
     }
 
 
-
     // Trigger gallery selection for a photo
     public void onPickPhoto(View view) {
         // Create intent for picking a photo from the gallery
         Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-
-        photoFile = getPhotoFileUri(photoFileName);
-
-        // wrap File object into a content provider
-        // required for API >= 24
-        Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
 
 
         // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
@@ -229,7 +226,7 @@ public class ProfileFragment extends Fragment {
 
         try {
             // check version of Android on device
-            if(Build.VERSION.SDK_INT > 27){
+            if (Build.VERSION.SDK_INT > 27) {
                 // on newer versions of Android, use the new decodeBitmap method
                 ImageDecoder.Source source = ImageDecoder.createSource(this.getContext().getContentResolver(), photoUri);
                 image = ImageDecoder.decodeBitmap(source);
@@ -255,28 +252,67 @@ public class ProfileFragment extends Fragment {
 
                 saveProfilePicture();
 
-            }
-
-            else {
+            } else {
                 Toast.makeText(getContext(), "Picture was not taken!", Toast.LENGTH_SHORT).show();
             }
-        }
-        else if(requestCode == PICK_PHOTO_CODE && (data != null)){
+        } else if (requestCode == PICK_PHOTO_CODE && (data != null)) {
 
-                Uri photoUri = data.getData();
-                // Uri fileProvider = data.getData();
+            Uri fileProvider = data.getData();
+            InputStream inputStream = null;
 
-                // Load the image located at photoUri into selectedImage
-                 Bitmap selectedImage = loadFromUri(photoUri);
-                //Bitmap selectedImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
 
-                    // Load the selected image into a preview
-                    // ImageView ivProfilePicture = (ImageView) getView().findViewById(R.id.ivProfilePicture);
-                    ivProfilePicture.setImageBitmap(selectedImage);
-                    saveProfilePicture();
+            try {
+                inputStream = this.getContext().getContentResolver().openInputStream(fileProvider);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                photoFile = new File(this.getContext().getCacheDir(), "cacheFileAppeal.srl");
+                try (OutputStream output = new FileOutputStream(photoFile)) {
+                    byte[] buffer = new byte[4 * 1024]; // or other buffer size
+                    int read;
+
+                    while ((read = inputStream.read(buffer)) != -1) {
+                        output.write(buffer, 0, read);
+                    }
+
+                    output.flush();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } finally {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            // wrap File object into a content provider
+            // required for API >= 24
+
+            //photoFile = new File(fileProvider.getPath());
+
+            // Load the image located at photoUri into selectedImage
+            // Bitmap selectedImage = loadFromUri(fileProvider);
+            Bitmap selectedImage = BitmapFactory.decodeFile(photoFile.getPath());
+
+            // Load the selected image into a preview
+            // ImageView ivProfilePicture = (ImageView) getView().findViewById(R.id.ivProfilePicture);
+
+            ivProfilePicture.setImageBitmap(selectedImage);
+
+
+            saveProfilePicture();
 
         }
     }
+
 
     private void saveProfilePicture() {
 
