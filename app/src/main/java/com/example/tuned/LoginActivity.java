@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tuned.R;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btnLogin;
     private Button btnSignup;
+    private TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         btnSignup = findViewById(R.id.btnSignup);
+        forgotPassword = findViewById(R.id.forgotPassword);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +59,15 @@ public class LoginActivity extends AppCompatActivity {
                 goSignupActvity();
             }
         });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i(TAG, "onClick Signup button");
+                goForgotPassword();
+            }
+        });
+
     }
 
     private void goSignupActvity() {
@@ -86,4 +98,10 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(i);
         //finish();
     }
+
+    public void goForgotPassword() {
+        Intent i = new Intent(this, ResetPasswordActivity.class);
+        startActivity(i);
+    }
+
 }

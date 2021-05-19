@@ -267,6 +267,7 @@ public class Spotify {
         return trackArrayList;
     }
 
+
     public static String getAlbumName(SpotifyAppApi api, String albumId) {
         SpotifyRestAction<com.adamratzman.spotify.models.Album> albumRestAction = api.getAlbums().getAlbumRestAction(albumId, null);
 
@@ -290,4 +291,5 @@ public class Spotify {
 
         return albumArtist;
     }
+
 }

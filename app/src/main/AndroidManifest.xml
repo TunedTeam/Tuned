@@ -19,6 +19,8 @@
         <activity android:name=".ReviewPostActivity"></activity>
         <activity android:name=".AlbumActivity" />
         <activity android:name=".SignupActivity" />
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".StreamingActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
