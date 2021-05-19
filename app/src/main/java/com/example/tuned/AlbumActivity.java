@@ -54,8 +54,6 @@ public class AlbumActivity extends AppCompatActivity {
         tvAlbumName = findViewById(R.id.tvAlbumName);
         tvAlbumArtist = findViewById(R.id.tvAlbumArtist);
         tvListTracks = findViewById(R.id.tvListTracks);
-        // rvListTracks = findViewById(R.id.rvListTracks);
-
         rvListTracks = findViewById(R.id.rvListTracks);
 
         Bundle bundle = getIntent().getExtras();

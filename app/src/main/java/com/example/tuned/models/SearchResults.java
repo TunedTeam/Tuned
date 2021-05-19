@@ -19,4 +19,6 @@ public interface SearchResults {
     public String getAlbumName();
 
     public String getAlbumArtist();
+
+    public String getPreviewUrl();
 }

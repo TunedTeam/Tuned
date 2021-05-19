@@ -79,7 +79,6 @@ public class ReviewsFeedFragment extends Fragment {
         rvPosts.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
 
-
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         // Configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,

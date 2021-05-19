@@ -157,4 +157,52 @@
         android:ellipsize="end"
         android:maxLines="5"/>
 
+    <ImageView
+        android:id="@+id/ivLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_like"
+        android:layout_below="@id/tvReviewDescription"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tvLikes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvReviewDescription"
+        android:layout_toRightOf="@id/ivLike"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:text="20 likes"
+        android:textAlignment="center"
+        android:textColor="@color/light_gray"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/ivComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_comment"
+        android:layout_below="@id/tvReviewDescription"
+        android:layout_toRightOf="@id/tvLikes"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/tvComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvReviewDescription"
+        android:layout_toRightOf="@id/ivComment"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:text="5 comments"
+        android:textAlignment="center"
+        android:textColor="@color/light_gray"
+        android:textSize="16sp" />
+
 </RelativeLayout>

@@ -1,6 +1,8 @@
 package com.example.tuned.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +12,21 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tuned.AlbumActivity;
 import com.example.tuned.Post;
 import com.example.tuned.R;
+import com.example.tuned.ReviewPostActivity;
+import com.example.tuned.fragments.CreateReviewFragment;
 import com.parse.ParseFile;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> {
@@ -44,6 +54,44 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         Post post = posts.get(position);
         holder.bind(post);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String postId = post.getObjectId();
+                String postUserId = post.getUser().toString();
+                //String postUserPicture;
+                //ParseFile userProfilePic = (ParseFile) post.getUser().get("profile_picture");
+                String postDescription = post.getDescription();
+                String postTitle = post.getReviewTitle();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                String postDate = formatter.format(post.getCreatedAt());
+                Float postRating = post.getRating();
+                String resultId = post.getResultId();
+                String resultImageUrl = post.getResultImageUrl();
+                String resultName = post.getResultName();
+                String resultType = post.getResultType();
+                String resultArtist = post.getResultArtist();
+                //ArrayList<String> likedByUser;
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("postId", postId);
+                bundle.putString("postUsername", postUserId);
+                bundle.putString("postDescription", postDescription);
+                bundle.putString("postTitle", postTitle);
+                bundle.putString("postDate", postDate);
+                bundle.putFloat("postRating", postRating);
+                bundle.putString("resultId", resultId);
+                bundle.putString("resultImageUrl", resultImageUrl);
+                bundle.putString("resultName", resultName);
+                bundle.putString("resultType", resultType);
+                bundle.putString("resultArtist", resultArtist);
+
+                Intent i = new Intent(context, ReviewPostActivity.class);
+                i.putExtras(bundle);
+                context.startActivity(i);
+            }
+        });
     }
 
     @Override
