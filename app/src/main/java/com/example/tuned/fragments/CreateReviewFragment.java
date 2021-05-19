@@ -1,5 +1,6 @@
 package com.example.tuned.fragments;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.tuned.Post;
 import com.example.tuned.R;
 import com.example.tuned.SignupActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -51,6 +53,8 @@ public class CreateReviewFragment extends Fragment {
     EditText etReviewTitle;
     EditText etReviewComment;
 
+    FloatingActionButton fabCreate;
+
     public CreateReviewFragment() {
         // Required empty public constructor
     }
@@ -70,6 +74,9 @@ public class CreateReviewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+//        fabCreate = view.findViewById(R.id.fabCreate);
+//        fabCreate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.lavender)));
 
         ivResultImage = view.findViewById(R.id.ivResultImage);
         tvResultName = view.findViewById(R.id.tvResultName);

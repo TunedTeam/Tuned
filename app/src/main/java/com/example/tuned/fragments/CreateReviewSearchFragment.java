@@ -1,8 +1,12 @@
 package com.example.tuned.fragments;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,9 +29,11 @@ import com.example.tuned.adapters.ResultAdapter;
 import com.example.tuned.models.Album;
 import com.example.tuned.models.SearchResults;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CreateReviewSearchFragment extends Fragment {
 
@@ -37,7 +43,7 @@ public class CreateReviewSearchFragment extends Fragment {
     static Spotify spotify = new Spotify();
     static SpotifyAppApi api = spotify.api;
 
-    BottomNavigationView bnv;
+    FloatingActionButton fabCreate;
 
     private ListView listView;
 
@@ -59,9 +65,6 @@ public class CreateReviewSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        // hides the bnv when keyboard pops up
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         View view = inflater.inflate(R.layout.fragment_create_review_search, container, false);
 
@@ -105,6 +108,17 @@ public class CreateReviewSearchFragment extends Fragment {
 //        });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // hides the bnv when keyboard pops up
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+//        fabCreate = view.findViewById(R.id.fabCreate);
+//        fabCreate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.lavender)));
+        //fabCreate.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()),R.color.lavender)));
     }
 
     private void setUpOnClickListener(ListView listView, ArrayList<SearchResults> searchResults) {

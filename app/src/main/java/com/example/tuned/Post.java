@@ -5,6 +5,9 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
@@ -19,6 +22,7 @@ public class Post extends ParseObject {
     public static final String RESULT_TYPE = "resultType";
     public static final String REVIEW_TITLE = "reviewTitle";
     public static final String REVIEW_RATING = "reviewRating";
+    public static final String LIKED_BY_USER = "likedByUser";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -100,4 +104,11 @@ public class Post extends ParseObject {
         put(RESULT_TYPE, resultType);
     }
 
+    public List<String> getLikedbyUser() {
+        return getList(LIKED_BY_USER);
+    }
+
+    public void setLikedByUser(List<String> likedByUser) {
+        put(LIKED_BY_USER, likedByUser);
+    }
 }
