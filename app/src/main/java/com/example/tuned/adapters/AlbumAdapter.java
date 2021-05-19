@@ -1,7 +1,10 @@
 package com.example.tuned.adapters;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +18,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tuned.AlbumActivity;
 import com.example.tuned.R;
+import com.example.tuned.StreamingActivity;
 import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
@@ -51,6 +56,31 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
         holder.tvTrack.setText(tracks.get(position).trackName);
         holder.tvArtist.setText(tracks.get(position).trackArtist);
+
+
+        holder.tvTrack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: clicked on a track: " + tracks.get(position).trackName);
+                Toast.makeText(trackContext, tracks.get(position).trackName, Toast.LENGTH_SHORT).show();
+
+                String trackId = tracks.get(position).trackId;
+                String trackName = tracks.get(position).trackName;
+                String trackArtist = tracks.get(position).trackArtist;
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("trackId",trackId);
+                bundle.putString("trackName",trackName);
+                bundle.putString("trackArtist",trackArtist);
+                Intent i = new Intent(trackContext, StreamingActivity.class);
+                i.putExtras(bundle);
+                trackContext.startActivity(i);
+
+
+
+            }
+        });
 
 //        int rating =
 //        holder.ratingBar.setRating();

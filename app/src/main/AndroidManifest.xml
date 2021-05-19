@@ -18,7 +18,9 @@
         android:theme="@style/Theme.Tuned"
         android:usesCleartextTraffic="true">
         <activity android:name=".AlbumActivity"></activity>
+        <activity android:name=".StreamingActivity"></activity>
         <activity android:name=".SignupActivity" />
+        <activity android:name=".ResetPasswordActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

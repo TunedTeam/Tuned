@@ -15,8 +15,9 @@
         android:id="@+id/etUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:background="@color/white"
+
+        android:ems="10"
         android:hint="username" />
 
     <EditText
@@ -39,5 +40,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign up" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/forgotPassword"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Forgot your password?"
+        android:textColor="@color/white" />
+
 
 </LinearLayout>
