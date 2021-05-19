@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.tuned.Post;
+
 import com.bumptech.glide.Glide;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -64,44 +66,8 @@ public class ReviewPostActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
 
         String postId = bundle.getString("postId");
-        String postUserId = bundle.getString("postUserId");
-        try {
-            ParseUser user = ParseUser.getQuery().get(postUserId);
-            String postUsername = user.getUsername();
-            ParseFile userProfilePic = (ParseFile) user.get("profile_picture");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String postUsername;
-        String postUserPicture;
-
-//        ParseQuery<ParseObject> query = ParseQuery.getQuery("User");
-//        query.whereEqualTo("objectId", postUserId);
-//        // this will find the user.
-//        // then find the first instance
-//        query.findInBackground(new FindCallback<ParseObject>() {
-//            @Override
-//            public void done(List<ParseObject> objects, ParseException e) {
-//                if (e == null) {
-//                    objects.g
-//                    postUsername = objects.get
-//                } else {
-//                    Log.d(TAG, "Error: " + e.getMessage());
-//                }
-//            }
-//        });
-//        query.findFirstInBackground(new FindCallback<ParseObject>() {
-//            public void done(List<ParseObject> object, ParseException e) {
-//                if (e == null) {
-//                    textView.setText(object.getString("device"));
-//                } else {
-//                    Log.d(TAG, "Error: " + e.getMessage());
-//                }
-//            }
-//        });
-
-        //String postUserPicture;
-        //ParseFile userProfilePic = (ParseFile) post.getUser().get("profile_picture");
+        String postUsername = bundle.getString("postUsername");
+        ParseFile postUserPicture = bundle.getParcelable("postUserPicture");
         String postDescription = bundle.getString("postDescription");
         String postTitle = bundle.getString("postTitle");
         String postDate = bundle.getString("postDate");
@@ -118,15 +84,14 @@ public class ReviewPostActivity extends AppCompatActivity {
 //        Log.i("PostsAdapter", "user profile " + userProfilePic);
 //
 //
-//        if(userProfilePic != null) {
-//            Glide.with(context).load(userProfilePic.getUrl())
-//                    .placeholder(R.drawable.defaultavatar)
-//                    .circleCrop()
-//                    .into(ivProfileImage);
-//
-//        }
+        if(postUserPicture != null) {
+            Glide.with(getApplicationContext()).load(postUserPicture.getUrl())
+                    .placeholder(R.drawable.defaultavatar)
+                    .circleCrop()
+                    .into(ivProfilePicture);
+        }
 
-        //tvUsername.setText(postUsername);
+        tvUsername.setText(postUsername);
         tvReviewDescription.setText(postDescription);
         tvReviewTitle.setText(postTitle);
         tvReviewDate.setText("Reviewed on " + postDate);

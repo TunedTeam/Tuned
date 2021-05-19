@@ -58,12 +58,11 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             @Override
             public void onClick(View view) {
                 String postId = post.getObjectId();
-                String postUserId = post.getUser().toString();
-                //String postUserPicture;
-                //ParseFile userProfilePic = (ParseFile) post.getUser().get("profile_picture");
+                String postUsername = post.getUser().getUsername();
+                ParseFile userProfilePic = (ParseFile) post.getUser().get("profile_picture");
                 String postDescription = post.getDescription();
                 String postTitle = post.getReviewTitle();
-                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
                 String postDate = formatter.format(post.getCreatedAt());
                 Float postRating = post.getRating();
                 String resultId = post.getResultId();
@@ -76,7 +75,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Bundle bundle = new Bundle();
 
                 bundle.putString("postId", postId);
-                bundle.putString("postUsername", postUserId);
+                bundle.putString("postUsername", postUsername);
+                bundle.putParcelable("postUserPicture", userProfilePic);
                 bundle.putString("postDescription", postDescription);
                 bundle.putString("postTitle", postTitle);
                 bundle.putString("postDate", postDate);

@@ -52,4 +52,8 @@ public class Artist implements SearchResults{
     public String getAlbumArtist() {
         return null;
     }
+
+    public String getPreviewUrl() {
+        return null;
+    }
 }

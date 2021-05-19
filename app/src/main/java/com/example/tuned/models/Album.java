@@ -59,4 +59,8 @@ public class Album implements SearchResults, Serializable {
     public String getAlbumArtist() {
         return null;
     }
+
+    public String getPreviewUrl() {
+        return null;
+    }
 }
