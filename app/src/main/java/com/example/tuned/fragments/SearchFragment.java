@@ -3,6 +3,8 @@ package com.example.tuned.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -42,12 +44,9 @@ public class SearchFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setUpOnClickListener();
     }
 
     @Override
@@ -94,13 +93,12 @@ public class SearchFragment extends Fragment {
         return view;
     }
 
-    private void setUpOnClickListener() {
-        Log.i(TAG, "Clicked on");
-    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-    private void removeBNV(View view) {
-        bnv = getView().findViewById(R.id.bottom_navigation);
-        //bnv.setV
+        // hides the bnv when keyboard pops up
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     private void setUpOnClickListener(ListView listView, ArrayList<SearchResults> searchResults) {
@@ -114,7 +112,23 @@ public class SearchFragment extends Fragment {
                     String albumImage = searchResults.get(i).getImage();
                     String albumName = searchResults.get(i).getName();
                     String albumArtist = searchResults.get(i).getArtist();
-                    int albumReleaseDate = searchResults.get(i).getReleaseDate();
+
+                    Bundle bundle = new Bundle();
+
+                    bundle.putString("albumId",albumId);
+                    bundle.putString("albumImage",albumImage);
+                    bundle.putString("albumName",albumName);
+                    bundle.putString("albumArtist",albumArtist);
+                    Intent intent = new Intent(getContext(), AlbumActivity.class);
+                    intent.putExtras(bundle);
+                    getContext().startActivity(intent);
+                }
+                else if (searchResults.get(i).getType().equals("track")) {
+
+                    String albumId = searchResults.get(i).getAlbumId();
+                    String albumImage = spotify.getAlbumImage(api, albumId);
+                    String albumName = spotify.getAlbumName(api, albumId);
+                    String albumArtist = spotify.getAlbumArtist(api, albumId);
 
                     Bundle bundle = new Bundle();
 

@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
     <application
         android:name=".ParseApplication"
         android:allowBackup="true"
@@ -17,10 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tuned"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AlbumActivity"></activity>
-        <activity android:name=".StreamingActivity"></activity>
+        <activity android:name=".ReviewPostActivity"></activity>
+        <activity android:name=".AlbumActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".StreamingActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -32,11 +32,9 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                android:theme:"@style/
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

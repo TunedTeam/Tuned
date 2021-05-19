@@ -1,6 +1,8 @@
 package com.example.tuned.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +14,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
+import com.example.tuned.AlbumActivity;
 import com.example.tuned.R;
+import com.example.tuned.Spotify.Spotify;
 import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
@@ -27,6 +32,9 @@ public class PopularWeekAdapter extends RecyclerView.Adapter<PopularWeekAdapter.
     private LayoutInflater rvInflater;
 
     private Context trackContext;
+
+    static Spotify spotify = new Spotify();
+    static SpotifyAppApi api = spotify.api;
 
     public PopularWeekAdapter(Context trackContext, ArrayList<Track> tracks) {
         this.trackContext = trackContext;
@@ -59,7 +67,22 @@ public class PopularWeekAdapter extends RecyclerView.Adapter<PopularWeekAdapter.
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on an image: " + tracks.get(position).trackName);
-                Toast.makeText(trackContext, tracks.get(position).trackName, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(trackContext, tracks.get(position).trackName, Toast.LENGTH_SHORT).show();
+
+                String albumId = tracks.get(position).trackAlbumId;
+                String albumImage = spotify.getAlbumImage(api, albumId);
+                String albumName = spotify.getAlbumName(api, albumId);
+                String albumArtist = spotify.getAlbumArtist(api, albumId);
+
+                Bundle bundle = new Bundle();
+
+                bundle.putString("albumId",albumId);
+                bundle.putString("albumImage",albumImage);
+                bundle.putString("albumName",albumName);
+                bundle.putString("albumArtist",albumArtist);
+                Intent i = new Intent(trackContext, AlbumActivity.class);
+                i.putExtras(bundle);
+                trackContext.startActivity(i);
             }
         });
     }
