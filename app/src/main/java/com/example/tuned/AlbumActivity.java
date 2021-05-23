@@ -45,6 +45,8 @@ public class AlbumActivity extends AppCompatActivity {
     static SpotifyAppApi api = spotify.api;
     static ArrayList<Track> track;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class AlbumActivity extends AppCompatActivity {
         String albumImage = bundle.getString("albumImage");
         String albumName = bundle.getString("albumName");
         String albumArtist = bundle.getString("albumArtist");
+        int totalTracks = bundle.getInt("totalTracks");
 
         track = spotify.getAlbumTracks(api, albumId);
 

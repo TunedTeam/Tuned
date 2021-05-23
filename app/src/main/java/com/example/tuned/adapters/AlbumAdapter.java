@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.bumptech.glide.Glide;
 import com.example.tuned.AlbumActivity;
 import com.example.tuned.R;
 import com.example.tuned.StreamingActivity;
+import com.example.tuned.models.Album;
 import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
@@ -34,6 +36,8 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     private LayoutInflater rvInflater;
 
     private Context trackContext;
+
+    RelativeLayout container;
 
     public AlbumAdapter(Context trackContext, ArrayList<Track> tracks) {
         this.trackContext = trackContext;
@@ -58,7 +62,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         holder.tvArtist.setText(tracks.get(position).trackArtist);
 
 
-        holder.tvTrack.setOnClickListener(new View.OnClickListener() {
+        container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on a track: " + tracks.get(position).trackName);
@@ -66,14 +70,30 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                 String trackId = tracks.get(position).trackId;
                 String trackName = tracks.get(position).trackName;
-                String trackArtist = tracks.get(position).trackArtist;
+                String trackAlbumId = tracks.get(position).trackAlbumId;
+                Log.d(TAG,"the id:" +  trackAlbumId);
+
+                //Log.d(TAG, "track photo: " + albumImage);
+                Log.d(TAG,"TOTAL TRACKS:" + tracks.size());
+
+                //String trackArtist = tracks.get(position).trackArtist;
+                String url = tracks.get(position).trackPreviewUrl;
+
+                Log.d(TAG,"url: " + url);
 
                 Bundle bundle = new Bundle();
 
                 bundle.putString("trackId",trackId);
                 bundle.putString("trackName",trackName);
-                bundle.putString("trackArtist",trackArtist);
+                bundle.putString("trackAlbumId", trackAlbumId);
+                bundle.putInt("position", position);
+               // bundle.putString("trackImage",trackImage);
+               // bundle.putString("trackArtist",trackArtist);
+                bundle.putString("url", url);
                 Intent i = new Intent(trackContext, StreamingActivity.class);
+                //Intent intent = new Intent(albumContext, StreamingActivity.class);
+               // intent.putExtra("albumImage",albumImage);
+                //i.putExtra("position", position);
                 i.putExtras(bundle);
                 trackContext.startActivity(i);
 
@@ -102,6 +122,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
         TextView tvRating;
         final AlbumAdapter rvAdapter;
 
+
         public ViewHolder(@NonNull View itemView, AlbumAdapter adapter) {
             super(itemView);
 
@@ -109,6 +130,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
             tvArtist = itemView.findViewById(R.id.tvArtist);
             ratingBar = itemView.findViewById(R.id.ratingBar);
             tvRating = itemView.findViewById(R.id.tvRating);
+            container = itemView.findViewById(R.id.container);
             this.rvAdapter = adapter;
         }
     }

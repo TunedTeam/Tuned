@@ -135,7 +135,7 @@ public class ProfileFragment extends Fragment {
         tvUserName.setText("@" + parseUser.getUsername());
 
         ParseFile userProfilePic = (ParseFile) parseUser.get(PROFILE_PICTURE);
-        if (userProfilePic != null)
+       if (userProfilePic != null)
             Glide.with(this).load(userProfilePic.getUrl())
                     .placeholder(R.drawable.defaultavatar)
                     .circleCrop()

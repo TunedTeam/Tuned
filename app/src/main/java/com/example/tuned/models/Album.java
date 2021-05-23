@@ -9,13 +9,15 @@ public class Album implements SearchResults, Serializable {
     public String albumName;
     public String albumArtist;
     public int albumReleaseDate;
+    public int totalTracks;
 
-    public Album(String albumId, String albumImageUrl, String albumName, String albumArtist, int albumReleaseDate) {
+    public Album(String albumId, String albumImageUrl, String albumName, String albumArtist, int albumReleaseDate, int totalTracks) {
         this.albumId = albumId;
         this.albumImageUrl = albumImageUrl;
         this.albumName = albumName;
         this.albumArtist = albumArtist;
         this.albumReleaseDate = albumReleaseDate;
+        this.totalTracks = totalTracks;
     }
 
     @Override
@@ -48,6 +50,10 @@ public class Album implements SearchResults, Serializable {
         return albumReleaseDate;
     }
 
+    public int getTotalTracks(){
+        return totalTracks;
+    }
+
     public String getAlbumId() {
         return null;
     }
@@ -63,4 +69,6 @@ public class Album implements SearchResults, Serializable {
     public String getPreviewUrl() {
         return null;
     }
+
+
 }

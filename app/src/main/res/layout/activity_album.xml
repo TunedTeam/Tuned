@@ -19,6 +19,7 @@
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background" />
 
+
     <TextView
         android:id="@+id/tvAlbumName"
         android:layout_width="match_parent"

@@ -44,6 +44,7 @@ public class Spotify {
         String albumNames;
         String albumArtists;
         int albumReleaseDate;
+        int totalTracks;
 
 
         for (SimpleAlbum album : browseNewReleases.getItems()) {
@@ -53,8 +54,9 @@ public class Spotify {
             albumNames = album.getName();
             albumArtists = album.getArtists().get(0).getName();
             albumReleaseDate = album.getReleaseDate().getYear();
+            totalTracks = album.getTotalTracks();
 
-            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists, albumReleaseDate);
+            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists, albumReleaseDate, totalTracks);
 
             albumArrayList.add(albumInfo);
         }
@@ -152,7 +154,7 @@ public class Spotify {
         String albumNames;
         String albumArtists;
         int albumReleaseDate;
-
+        int totalTracks;
 
         for (SimpleAlbum album : searchResult.complete().getAlbums().getItems()) {
 
@@ -161,8 +163,9 @@ public class Spotify {
             albumNames = album.getName();
             albumArtists = album.getArtists().get(0).getName();
             albumReleaseDate = album.getReleaseDate().getYear();
+            totalTracks = album.getTotalTracks();
 
-            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists, albumReleaseDate);
+            albumInfo = new Album(albumIds, albumImageUrls, albumNames, albumArtists, albumReleaseDate, totalTracks);
 
             albumArrayList.add(albumInfo);
         }
@@ -219,7 +222,6 @@ public class Spotify {
         int trackReleaseDate;
         String trackPreviewUrl;
 
-
         for (com.adamratzman.spotify.models.Track track : searchResult.complete().getTracks().getItems()) {
 
             trackIds = track.getAsTrack().getId();
@@ -252,14 +254,16 @@ public class Spotify {
         String trackName;
         String trackArtists;
         String trackPreviewUrl;
+        String trackAlbumId;
 
         for (SimpleTrack track : albumTracks.complete().getItems()) {
             trackId = track.getId();
             trackName = track.getName();
             trackArtists = track.getArtists().get(0).getName();
             trackPreviewUrl = track.getPreviewUrl();
+            trackAlbumId = albumId;
 
-            trackInfo = new Track(trackId, "", trackName, trackArtists, 0, null, null, null, trackPreviewUrl);
+            trackInfo = new Track(trackId, "", trackName, trackArtists, 0, trackAlbumId, null, null, trackPreviewUrl);
 
             trackArrayList.add(trackInfo);
         }
@@ -291,5 +295,6 @@ public class Spotify {
 
         return albumArtist;
     }
+
 
 }
