@@ -11,9 +11,9 @@ public class Track implements SearchResults{
     public String trackAlbumName;
     public String trackAlbumArtist;
     public String trackPreviewUrl;
+    public String trackISRC;
 
-
-    public Track(String trackId, String trackImageUrl, String trackName, String trackArtist, int trackReleaseDate, String trackAlbumId, String trackAlbumName, String trackAlbumArtist, String trackPreviewUrl) {
+    public Track(String trackId, String trackImageUrl, String trackName, String trackArtist, int trackReleaseDate, String trackAlbumId, String trackAlbumName, String trackAlbumArtist, String trackPreviewUrl, String trackISRC) {
         this.trackId = trackId;
         this.trackImageUrl = trackImageUrl;
         this.trackName = trackName;
@@ -23,6 +23,7 @@ public class Track implements SearchResults{
         this.trackAlbumName = trackAlbumName;
         this.trackAlbumArtist = trackAlbumArtist;
         this.trackPreviewUrl = trackPreviewUrl;
+        this.trackISRC = trackISRC;
     }
 
     @Override
@@ -50,18 +51,22 @@ public class Track implements SearchResults{
         return trackArtist;
     }
 
+    @Override
     public int getReleaseDate() {
         return trackReleaseDate;
     }
 
+    @Override
     public String getAlbumId() {
         return trackAlbumId;
     }
 
+    @Override
     public String getAlbumName() {
         return trackAlbumName;
     }
 
+    @Override
     public String getAlbumArtist() {
         return trackAlbumArtist;
     }
@@ -69,5 +74,10 @@ public class Track implements SearchResults{
     @Override
     public String getPreviewUrl() {
         return trackPreviewUrl;
+    }
+
+    @Override
+    public String getISRC() {
+        return trackISRC;
     }
 }

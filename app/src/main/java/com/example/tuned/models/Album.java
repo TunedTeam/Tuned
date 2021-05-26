@@ -54,21 +54,27 @@ public class Album implements SearchResults, Serializable {
         return totalTracks;
     }
 
+    @Override
     public String getAlbumId() {
         return null;
     }
 
+    @Override
     public String getAlbumName() {
         return null;
     }
 
+    @Override
     public String getAlbumArtist() {
         return null;
     }
 
+    @Override
     public String getPreviewUrl() {
         return null;
     }
 
-
+    public String getISRC() {
+        return null;
+    }
 }

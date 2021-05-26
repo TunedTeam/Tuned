@@ -230,10 +230,10 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 tvNumComments.setText("");
             }
             else if (post.numOfComments == 1) {
-                tvNumComments.setText(post.numOfLikes + " comment");
+                tvNumComments.setText(post.numOfComments + " comment");
             }
             else if (post.numOfComments > 1) {
-                tvNumComments.setText(post.numOfLikes + " comments");
+                tvNumComments.setText(post.numOfComments + " comments");
             }
         }
 

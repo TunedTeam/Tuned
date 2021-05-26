@@ -21,4 +21,6 @@ public interface SearchResults {
     public String getAlbumArtist();
 
     public String getPreviewUrl();
+
+    public String getISRC();
 }

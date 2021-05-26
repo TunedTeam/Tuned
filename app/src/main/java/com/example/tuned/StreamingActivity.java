@@ -119,6 +119,8 @@ public class StreamingActivity extends AppCompatActivity {
         String trackName = bundle.getString("trackName");
         txtsname.setSelected(true);
         String url = bundle.getString("url");
+        String previewURL = bundle.getString("previewURL");
+        Log.i(TAG, "previewURL: " + previewURL);
         txtsname.setText(trackName);
 
 
@@ -131,7 +133,8 @@ public class StreamingActivity extends AppCompatActivity {
 
        // String url = "https://p.scdn.co/mp3-preview/92d40a2ae211cceb264e9ee1e67fe05f4d788200?cid=774b29d4f13844c495f206cafdad9c86";
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(url));
+//        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(url));
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(previewURL));
 
         mediaPlayer.start();
 
@@ -231,9 +234,11 @@ public class StreamingActivity extends AppCompatActivity {
                 mediaPlayer.release();
                 Log.d(TAG, "THE TOTAL TRACKS" + tracks.size());
                 position = ((position + 1)% tracks.size());
-                String uri = tracks.get(position).trackPreviewUrl;
+//                String uri = tracks.get(position).trackPreviewUrl;
+                String preview = bundle.getString("previewURL");
+                Log.i(TAG, "next preview: " + preview);
                //Log.d(TAG, "THE TOTAL TRACKS" + albums.get(position).totalTracks);
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(uri));
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(preview));
                 sname = tracks.get(position).trackName;
                 Log.d(TAG, "TRACK NAME" + sname);
                 txtsname.setText(sname);
@@ -257,8 +262,9 @@ public class StreamingActivity extends AppCompatActivity {
                 mediaPlayer.stop();
                 mediaPlayer.release();
                 position = ((position - 1) < 0)?(tracks.size() - 1): (position -1);
-                String uri = tracks.get(position).trackPreviewUrl;
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(uri));
+//                String uri = tracks.get(position).trackPreviewUrl;
+                String preview = bundle.getString("previewURL");
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(preview));
                 sname = tracks.get(position).trackName;
                 txtsname.setText(sname);
                 mediaPlayer.start();

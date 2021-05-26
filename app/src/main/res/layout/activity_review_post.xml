@@ -13,9 +13,9 @@
         android:id="@+id/rlTop"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/light_purple"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:background="@color/light_purple">
+        android:paddingEnd="20dp">
 
         <TextView
             android:id="@+id/tvBack"
@@ -41,285 +41,293 @@
 
     </RelativeLayout>
 
-    <View style="@style/Divider.Purple"
-        android:layout_below="@id/rlTop"
-        android:id="@+id/viewTop"/>
+    <View
+        android:id="@+id/viewTop"
+        style="@style/Divider.Purple"
+        android:layout_below="@id/rlTop" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_below="@id/viewTop"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_below="@id/viewTop">
 
-            <RelativeLayout
-                android:id="@+id/rlPostInfo"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/lavender"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp">
+                android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/ivProfilePicture"
-                    android:layout_width="30dp"
+                <RelativeLayout
+                    android:id="@+id/rlPostInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/lavender"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivProfilePicture"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="centerCrop"
+                        app:srcCompat="@drawable/defaultavatar" />
+
+                    <TextView
+                        android:id="@+id/tvUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/ivProfilePicture"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Username"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/ivResultImage"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_background" />
+
+                    <TextView
+                        android:id="@+id/tvResultName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvUsername"
+                        android:layout_marginTop="20dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Result Name"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvResultType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvResultName"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Result Type"
+                        android:textAlignment="center"
+                        android:textColor="@color/light_gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvResultBullet"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvResultName"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/tvResultType"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="•"
+                        android:textAlignment="center"
+                        android:textColor="@color/light_gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvResultArtist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvResultName"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@+id/tvResultBullet"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Result Artist"
+                        android:textAlignment="center"
+                        android:textColor="@color/light_gray"
+                        android:textSize="18sp" />
+
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/tvResultType"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="5dp"
+                        android:numStars="5"
+                        android:progressBackgroundTint="@color/light_gray"
+                        android:progressTint="@color/purple"
+                        android:scaleX="0.80"
+                        android:scaleY="0.80"
+                        android:secondaryProgressTint="@color/purple"
+                        android:stepSize="0.5"
+                        android:transformPivotX="-5dp"
+                        android:transformPivotY="-5dp" />
+
+                    <TextView
+                        android:id="@+id/tvReviewDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ratingBar"
+                        android:layout_marginTop="-5dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="Reviewed May 19, 2021"
+                        android:textAlignment="center"
+                        android:textColor="@color/light_gray"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvReviewTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvReviewDate"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
+                        android:maxLines="1"
+                        android:text="Title"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/tvReviewDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvReviewTitle"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Review description"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/ivLikeHeart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvReviewDescription"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_like_outline" />
+
+                    <TextView
+                        android:id="@+id/tvNumLikes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvReviewDescription"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/ivLikeHeart"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="20 likes"
+                        android:textAlignment="center"
+                        android:textColor="@color/light_gray"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/ivComment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvReviewDescription"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/tvNumLikes"
+                        android:src="@drawable/ic_comment" />
+
+                    <TextView
+                        android:id="@+id/tvNumComments"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvReviewDescription"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/ivComment"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center"
+                        android:text="5 comments"
+                        android:textAlignment="center"
+                        android:textColor="@color/light_gray"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlCommentsBar"
+                    android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/defaultavatar" />
+                    android:layout_below="@id/rlPostInfo"
+                    android:background="@color/light_purple">
 
-                <TextView
-                    android:id="@+id/tvUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/ivProfilePicture"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Username"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    <View style="@style/Divider.Purple" />
 
-                <ImageView
-                    android:id="@+id/ivResultImage"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    <TextView
+                        android:id="@+id/tvCommentBar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Comments"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/tvResultName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvUsername"
-                    android:layout_marginTop="20dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Result Name"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tvResultType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvResultName"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Result Type"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_gray"
-                    android:textSize="18sp" />
+                <View
+                    style="@style/Divider.Purple"
+                    android:layout_below="@id/rlCommentsBar" />
 
-                <TextView
-                    android:id="@+id/tvResultBullet"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvResultName"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/tvResultType"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:text="•"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_gray"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/tvResultArtist"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvResultName"
-                    android:layout_marginLeft="5dp"
-                    android:layout_toRightOf="@+id/tvResultBullet"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Result Artist"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_gray"
-                    android:textSize="18sp" />
-
-                <RatingBar
-                    android:id="@+id/ratingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/tvResultType"
-                    android:layout_alignParentStart="true"
+                <RelativeLayout
+                    android:id="@+id/rlRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/rlCommentsBar"
                     android:layout_marginTop="5dp"
-                    android:numStars="5"
-                    android:progressBackgroundTint="@color/light_gray"
-                    android:progressTint="@color/purple"
-                    android:scaleX="0.80"
-                    android:scaleY="0.80"
-                    android:secondaryProgressTint="@color/purple"
-                    android:stepSize="0.5"
-                    android:transformPivotX="-5dp"
-                    android:transformPivotY="-5dp" />
+                    android:layout_marginBottom="60dp">
 
-                <TextView
-                    android:id="@+id/tvReviewDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/ratingBar"
-                    android:layout_marginTop="-5dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:text="Reviewed May 19, 2021"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_gray"
-                    android:textSize="18sp" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvListComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:clipToPadding="false"
+                        android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvReviewTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvReviewDate"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:maxLines="1"
-                    android:text="Title"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textSize="22sp" />
+                    </androidx.recyclerview.widget.RecyclerView>
 
-                <TextView
-                    android:id="@+id/tvReviewDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvReviewTitle"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Review description"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/white"
-                    android:textSize="20sp" />
+                </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/ivLikeHeart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvReviewDescription"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_like_outline" />
+            </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvNumLikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvReviewDescription"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@id/ivLikeHeart"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:text="20 likes"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_gray"
-                    android:textSize="16sp" />
+        </ScrollView>
 
-                <ImageView
-                    android:id="@+id/ivComment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tvReviewDescription"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@id/tvNumLikes"
-                    android:src="@drawable/ic_comment" />
-
-                <TextView
-                    android:id="@+id/tvNumComments"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvReviewDescription"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@id/ivComment"
-                    android:fontFamily="@font/roboto_bold"
-                    android:gravity="center"
-                    android:text="5 comments"
-                    android:textAlignment="center"
-                    android:textColor="@color/light_gray"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rlCommentsBar"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_below="@id/rlPostInfo"
-                android:background="@color/light_purple">
-
-                <View style="@style/Divider.Purple" />
-
-                <TextView
-                    android:id="@+id/tvCommentBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="Comments"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-            </RelativeLayout>
-
-            <View
-                style="@style/Divider.Purple"
-                android:layout_below="@id/rlCommentsBar" />
-
-            <RelativeLayout
-                android:id="@+id/rlRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/rlCommentsBar"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="60dp">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvListComments"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:clipToPadding="false"
-                    android:orientation="vertical">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <View
         style="@style/Divider.Purple"

@@ -18,14 +18,24 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.tuned.AlbumActivity;
 import com.example.tuned.R;
+import com.example.tuned.Spotify.Spotify;
 import com.example.tuned.StreamingActivity;
 import com.example.tuned.models.Album;
 import com.example.tuned.models.Track;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import okhttp3.Headers;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
@@ -39,6 +49,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
     RelativeLayout container;
 
+    static Spotify spotify = new Spotify();
+    static SpotifyAppApi api = spotify.api;
+
     public AlbumAdapter(Context trackContext, ArrayList<Track> tracks) {
         this.trackContext = trackContext;
         this.tracks = tracks;
@@ -51,7 +64,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = rvInflater.inflate(R.layout.album_cell, parent, false);
 
-        return new ViewHolder(view,this);
+        return new ViewHolder(view, this);
     }
 
     @Override
@@ -71,32 +84,63 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 String trackId = tracks.get(position).trackId;
                 String trackName = tracks.get(position).trackName;
                 String trackAlbumId = tracks.get(position).trackAlbumId;
-                Log.d(TAG,"the id:" +  trackAlbumId);
+                Log.d(TAG, "the id:" + trackAlbumId);
 
                 //Log.d(TAG, "track photo: " + albumImage);
-                Log.d(TAG,"TOTAL TRACKS:" + tracks.size());
+                Log.d(TAG, "TOTAL TRACKS:" + tracks.size());
 
                 //String trackArtist = tracks.get(position).trackArtist;
-                String url = tracks.get(position).trackPreviewUrl;
+//                String url = tracks.get(position).trackPreviewUrl;
 
-                Log.d(TAG,"url: " + url);
+                String trackISRC = spotify.getTrackISRC(api, trackId);
+                String deezerUrl = "https://api.deezer.com/2.0/track/isrc:" + trackISRC;
+                Log.i(TAG, "deezerUrl: " + deezerUrl);
+
+//                Log.d(TAG, "url: " + url);
 
                 Bundle bundle = new Bundle();
 
-                bundle.putString("trackId",trackId);
-                bundle.putString("trackName",trackName);
+                bundle.putString("trackId", trackId);
+                bundle.putString("trackName", trackName);
                 bundle.putString("trackAlbumId", trackAlbumId);
                 bundle.putInt("position", position);
-               // bundle.putString("trackImage",trackImage);
-               // bundle.putString("trackArtist",trackArtist);
-                bundle.putString("url", url);
-                Intent i = new Intent(trackContext, StreamingActivity.class);
-                //Intent intent = new Intent(albumContext, StreamingActivity.class);
-               // intent.putExtra("albumImage",albumImage);
-                //i.putExtra("position", position);
-                i.putExtras(bundle);
-                trackContext.startActivity(i);
 
+                AsyncHttpClient client = new AsyncHttpClient();
+                client.get(deezerUrl, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int i, Headers headers, JSON json) {
+                        JSONObject jsonObject = json.jsonObject;
+
+                        try {
+                            String preview = jsonObject.getString("preview");
+                            tracks.get(position).trackPreviewUrl = preview;
+                            bundle.putString("previewURL", preview);
+                            Log.i(TAG, "preview: " + preview);
+
+                            Intent intent = new Intent(trackContext, StreamingActivity.class);
+                            intent.putExtras(bundle);
+                            trackContext.startActivity(intent);
+                        } catch (JSONException e) {
+                            Log.e(TAG, "Hit JSON exception", e);
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                        Log.d(TAG, "onFailure");
+                    }
+                });
+
+                // bundle.putString("trackImage",trackImage);
+                // bundle.putString("trackArtist",trackArtist);
+//                bundle.putString("url", url);
+//                Intent i = new Intent(trackContext, StreamingActivity.class);
+//                //Intent intent = new Intent(albumContext, StreamingActivity.class);
+//                // intent.putExtra("albumImage",albumImage);
+//                //i.putExtra("position", position);
+//                i.putExtras(bundle);
+//                trackContext.startActivity(i);
 
 
             }

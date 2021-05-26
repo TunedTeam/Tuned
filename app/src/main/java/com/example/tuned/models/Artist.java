@@ -37,23 +37,32 @@ public class Artist implements SearchResults{
         return null;
     }
 
+    @Override
     public int getReleaseDate() {
         return 0;
     }
 
+    @Override
     public String getAlbumId() {
         return null;
     }
 
+    @Override
     public String getAlbumName() {
         return null;
     }
 
+    @Override
     public String getAlbumArtist() {
         return null;
     }
 
+    @Override
     public String getPreviewUrl() {
+        return null;
+    }
+
+    public String getISRC() {
         return null;
     }
 }

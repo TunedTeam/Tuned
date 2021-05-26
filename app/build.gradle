@@ -77,4 +77,6 @@ dependencies {
         exclude group: 'org.apache.httpcomponents'
     }
 
+    // CodePath Async HTTP client
+    implementation 'com.codepath.libraries:asynchttpclient:2.0.0'
 }

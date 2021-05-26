@@ -62,6 +62,7 @@ public class ReviewPostActivity extends AppCompatActivity {
     RecyclerView rvListComments;
     ScrollView scrollView;
     TextView tvBack;
+    SwipeRefreshLayout swipeContainer;
 
     private Post post;
     private String post_id;
@@ -106,7 +107,7 @@ public class ReviewPostActivity extends AppCompatActivity {
 //          scrollView.smoothScrollTo(0, 200);
 //        }
 
-        Post post = bundle.getParcelable("post");
+        post = bundle.getParcelable("post");
 
         post_id = post.getObjectId();
         String postUsername = post.getUser().getUsername();
@@ -218,6 +219,24 @@ public class ReviewPostActivity extends AppCompatActivity {
         etComment.setRawInputType(InputType.TYPE_CLASS_TEXT);
 
         loadComments();
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                Log.i(TAG,"Fetching new data!");
+                loadComments();
+            }
+        });
     }
 
     private void closeKeyboard() {
@@ -261,6 +280,7 @@ public class ReviewPostActivity extends AppCompatActivity {
 
                 etComment.setText("");
                 commentList.add(comment);
+                commentsAdapter.notifyDataSetChanged();
                 closeKeyboard();
             }
         });
@@ -275,19 +295,16 @@ public class ReviewPostActivity extends AppCompatActivity {
         query.findInBackground(new FindCallback<Comment>() {
             @Override
             public void done(List<Comment> comments, ParseException e) {
-
+                Log.i(TAG, "test");
                 if (e != null) {
                     Log.e(TAG, "There was a problem loading the comments", e);
                     Toast.makeText(ReviewPostActivity.this, "There was a problem loading the comments", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                for (Comment comment : comments) {
-                    Log.i(TAG, "Comment: " + comment.getComment());
                     commentsAdapter.clear();
-                    commentList.addAll(comments);
-                    commentsAdapter.addAll(commentList);
-                }
+                    commentsAdapter.addAll(comments);
+                    swipeContainer.setRefreshing(false);
 
 //                commentsAdapter.clear();
 //                commentList.addAll(comments);
