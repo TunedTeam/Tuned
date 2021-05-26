@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/lavender">
+
+    <ImageView
+        android:id="@+id/ivProfilePicture"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/defaultavatar" />
+
+    <RelativeLayout
+        android:id="@+id/rlLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/ivProfilePicture">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60dp"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/tvUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="adrianab"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/tvUsername"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:text="This is a comment"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvCommentTimePosted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvComment"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="11h"
+                android:textAlignment="center"
+                android:textColor="@color/light_gray"
+                android:textSize="14sp" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvCommentNumLikes"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/tvComment"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_toRightOf="@id/tvCommentTimePosted"-->
+<!--                android:ellipsize="end"-->
+<!--                android:fontFamily="@font/roboto_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLines="1"-->
+<!--                android:text="3 likes"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/light_gray"-->
+<!--                android:textSize="14sp" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvCommentReply"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/tvComment"-->
+<!--                android:layout_marginLeft="15dp"-->
+<!--                android:layout_marginTop="15dp"-->
+<!--                android:layout_toRightOf="@id/tvCommentNumLikes"-->
+<!--                android:ellipsize="end"-->
+<!--                android:fontFamily="@font/roboto_bold"-->
+<!--                android:gravity="center"-->
+<!--                android:maxLines="1"-->
+<!--                android:text="Reply"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/light_gray"-->
+<!--                android:textSize="14sp" />-->
+
+        </RelativeLayout>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/ivLikeHeart"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:scaleType="center"-->
+<!--            android:src="@drawable/ic_like_outline" />-->
+
+    </RelativeLayout>
+
+    <View
+        style="@style/Divider.Purple"
+        android:layout_below="@id/rlLayout1" />
+
+</RelativeLayout>

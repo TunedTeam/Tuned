@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/purple">
+        android:background="@color/light_purple">
 
         <TextView
             android:id="@+id/tvBack"
@@ -50,7 +50,7 @@
 
     </RelativeLayout>
 
-    <View style="@style/Divider.Horizontal" />
+    <View style="@style/Divider.Purple" />
 
     <RelativeLayout
         android:id="@+id/rlTypeInfo"
@@ -212,13 +212,13 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvReview"
             android:hint="Title"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/purple"
             android:textSize="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/purple"
             android:fontFamily="@font/roboto_medium"
-            android:background="@drawable/custom_input"
+            android:background="@drawable/custom_input_white"
             android:paddingStart="10dp"
-            android:theme="@style/SearchViewStyle"/>
+            android:theme="@style/SearchViewStyle.White"/>
 
         <EditText
             android:id="@+id/tvReviewDescription"
@@ -230,13 +230,13 @@
             android:gravity="start"
             android:paddingTop="10dp"
             android:hint="Write a review"
-            android:textColorHint="@color/white"
+            android:textColorHint="@color/purple"
             android:textSize="16dp"
-            android:textColor="@color/white"
+            android:textColor="@color/purple"
             android:fontFamily="@font/roboto_medium"
-            android:background="@drawable/custom_input"
+            android:background="@drawable/custom_input_white"
             android:paddingStart="10dp"
-            android:theme="@style/SearchViewStyle"/>
+            android:theme="@style/SearchViewStyle.White"/>
 
     </RelativeLayout>
 

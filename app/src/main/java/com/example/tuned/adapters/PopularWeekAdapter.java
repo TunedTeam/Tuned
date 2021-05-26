@@ -68,7 +68,6 @@ public class PopularWeekAdapter extends RecyclerView.Adapter<PopularWeekAdapter.
             public void onClick(View view) {
                 Log.d(TAG, "onClick: clicked on an image: " + tracks.get(position).trackName);
                 // Toast.makeText(trackContext, tracks.get(position).trackName, Toast.LENGTH_SHORT).show();
-
                 String albumId = tracks.get(position).trackAlbumId;
                 String albumImage = spotify.getAlbumImage(api, albumId);
                 String albumName = spotify.getAlbumName(api, albumId);

@@ -54,9 +54,6 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        // hide the bnv when keyboard pops up
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         SearchView searchView = (SearchView) view.findViewById(R.id.svBar);
@@ -96,9 +93,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // hides the bnv when keyboard pops up
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     private void setUpOnClickListener(ListView listView, ArrayList<SearchResults> searchResults) {

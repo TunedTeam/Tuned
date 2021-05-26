@@ -115,7 +115,7 @@ public class CreateReviewSearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // hides the bnv when keyboard pops up
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        //getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 //        fabCreate = view.findViewById(R.id.fabCreate);
 //        fabCreate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.lavender)));
         //fabCreate.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(Objects.requireNonNull(getContext()),R.color.lavender)));
@@ -208,6 +208,4 @@ public class CreateReviewSearchFragment extends Fragment {
             }
         });
     }
-
-
 }

@@ -1,24 +1,40 @@
 package com.example.tuned;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.example.tuned.Post;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.tuned.adapters.CommentsAdapter;
+import com.example.tuned.utils.LikeAnim;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewPostActivity extends AppCompatActivity {
@@ -36,11 +52,21 @@ public class ReviewPostActivity extends AppCompatActivity {
     TextView tvReviewDate;
     TextView tvReviewTitle;
     TextView tvReviewDescription;
-    ImageView ivLike;
-    TextView tvLikes;
+    ImageView ivLikeHeart;
+    TextView tvNumLikes;
     ImageView ivComment;
-    TextView tvComments;
+    TextView tvNumComments;
+    LikeAnim mLikeAnim;
+    EditText etComment;
+    TextView tvSend;
+    RecyclerView rvListComments;
+    ScrollView scrollView;
+    TextView tvBack;
 
+    private Post post;
+    private String post_id;
+    List<Comment> commentList;
+    CommentsAdapter commentsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,34 +84,46 @@ public class ReviewPostActivity extends AppCompatActivity {
         tvReviewDate = findViewById(R.id.tvReviewDate);
         tvReviewTitle = findViewById(R.id.tvReviewTitle);
         tvReviewDescription = findViewById(R.id.tvReviewDescription);
-        ivLike = findViewById(R.id.ivLike);
-        tvLikes = findViewById(R.id.tvLikes);
+        ivLikeHeart = findViewById(R.id.ivLikeHeart);
+        tvNumLikes = findViewById(R.id.tvNumLikes);
         ivComment = findViewById(R.id.ivComment);
-        tvComments = findViewById(R.id.tvComments);
+        tvNumComments = findViewById(R.id.tvNumComments);
+        mLikeAnim = new LikeAnim(ivLikeHeart);
+        etComment = findViewById(R.id.etComment);
+        tvSend = findViewById(R.id.tvSend);
+        rvListComments = findViewById(R.id.rvListComments);
+        scrollView = findViewById(R.id.scrollView);
+        tvBack = findViewById(R.id.tvBack);
 
         Bundle bundle = getIntent().getExtras();
 
-        String postId = bundle.getString("postId");
-        String postUsername = bundle.getString("postUsername");
-        ParseFile postUserPicture = bundle.getParcelable("postUserPicture");
-        String postDescription = bundle.getString("postDescription");
-        String postTitle = bundle.getString("postTitle");
-        String postDate = bundle.getString("postDate");
-        Float postRating = bundle.getFloat("postRating");
-        String resultId = bundle.getString("resultId");
-        String resultImageUrl = bundle.getString("resultImageUrl");
-        String resultName = bundle.getString("resultName");
-        String resultType = bundle.getString("resultType");
-        String resultArtist = bundle.getString("resultArtist");
+//        scrollView.scrollTo(0, 300);
+//        scrollView.smoothScrollTo(0, 300);
+//        scrollView.smoothScrollBy(0, 300);
 
-//        ParseFile profilePic = (ParseFile) ParseUser.get(postUserId);
-//        ParseFile userProfilePic = (ParseFile) post.getUser().get("profile_picture");
-//
-//        Log.i("PostsAdapter", "user profile " + userProfilePic);
-//
-//
-        if(postUserPicture != null) {
-            Glide.with(getApplicationContext()).load(postUserPicture.getUrl())
+        scrollView.smoothScrollTo(0, 600);
+//        if (bundle.getString("scroll").equals("scroll")) {
+//          scrollView.smoothScrollTo(0, 200);
+//        }
+
+        Post post = bundle.getParcelable("post");
+
+        post_id = post.getObjectId();
+        String postUsername = post.getUser().getUsername();
+        ParseFile userProfilePic = (ParseFile) post.getUser().get("profile_picture");
+        String postDescription = post.getDescription();
+        String postTitle = post.getReviewTitle();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        String postDate = formatter.format(post.getCreatedAt());
+        Float postRating = post.getRating();
+        String resultId = post.getResultId();
+        String resultImageUrl = post.getResultImageUrl();
+        String resultName = post.getResultName();
+        String resultType = post.getResultType();
+        String resultArtist = post.getResultArtist();
+
+        if (userProfilePic != null) {
+            Glide.with(getApplicationContext()).load(userProfilePic.getUrl())
                     .placeholder(R.drawable.defaultavatar)
                     .circleCrop()
                     .into(ivProfilePicture);
@@ -96,6 +134,7 @@ public class ReviewPostActivity extends AppCompatActivity {
         tvReviewTitle.setText(postTitle);
         tvReviewDate.setText("Reviewed on " + postDate);
         ratingBar.setRating(postRating);
+        ratingBar.setIsIndicator(true);
 
         Glide.with(this)
                 .asBitmap()
@@ -105,5 +144,266 @@ public class ReviewPostActivity extends AppCompatActivity {
         tvResultName.setText(resultName);
         tvResultType.setText(resultType);
         tvResultArtist.setText(resultArtist);
+
+        if (!post.isLikedByUser) {
+            checkIsLikedByUser(post);
+            //mLikeAnim.toggleLikeOutline(context);
+            Drawable heartDrawable = getApplicationContext().getDrawable(R.drawable.ic_like_outline);
+            ivLikeHeart.setImageDrawable(heartDrawable);
+            if (post.numOfLikes == 0) {
+                tvNumLikes.setText("");
+            }
+        } else {
+            mLikeAnim.toggleLikeFilled(getApplicationContext());
+            if (post.numOfLikes == 0) {
+                tvNumLikes.setText("");
+            } else if (post.numOfLikes == 1) {
+                tvNumLikes.setText(post.numOfLikes + " like");
+            } else if (post.numOfLikes > 1) {
+                tvNumLikes.setText(post.numOfLikes + " likes");
+            }
+        }
+
+        ivLikeHeart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // if post is already liked get rid of the like
+                // else like the post
+                if (post.isLikedByUser) {
+                    removeLike(post);
+                } else {
+                    likePost(post);
+                }
+            }
+        });
+
+        ivComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // scroll down to comment and pop up keyboard
+            }
+        });
+
+        if (post.numOfComments == 0) {
+            tvNumComments.setText("");
+        } else if (post.numOfComments == 1) {
+            tvNumComments.setText(post.numOfLikes + " comment");
+        } else if (post.numOfComments > 1) {
+            tvNumComments.setText(post.numOfLikes + " comments");
+        }
+
+        commentList = new ArrayList<>();
+
+        commentsAdapter = new CommentsAdapter(this, commentList);
+
+        rvListComments.setAdapter(commentsAdapter);
+        rvListComments.setLayoutManager(new LinearLayoutManager(this));
+
+        tvSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postComment(post);
+            }
+        });
+
+        // Go back to your review screen
+        tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+        etComment.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        etComment.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+        loadComments();
     }
+
+    private void closeKeyboard() {
+        View view = getCurrentFocus();
+
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    private void postComment(Post post) {
+        String comment = etComment.getText().toString();
+
+        if (comment.isEmpty()) {
+            Toast.makeText(this, "Comment can not be empty!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        postCommentQuery(comment, post);
+    }
+
+    private void postCommentQuery(String text, Post post) {
+        Comment comment = new Comment();
+        comment.setComment(text);
+        comment.setPost(post);
+        comment.setUser(ParseUser.getCurrentUser());
+
+        post.numOfComments++;
+
+        comment.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+
+                if (e != null) {
+                    // something went wrong
+                    Log.e(TAG, "There was a problem posting the comment", e);
+                    Toast.makeText(ReviewPostActivity.this, "There was a problem posting the comment", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                etComment.setText("");
+                commentList.add(comment);
+                closeKeyboard();
+            }
+        });
+    }
+
+    private void loadComments() {
+        ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
+        query.include(Comment.KEY_POST);
+        query.include(Comment.KEY_USER);
+        query.whereEqualTo(Comment.KEY_POST, post);
+
+        query.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> comments, ParseException e) {
+
+                if (e != null) {
+                    Log.e(TAG, "There was a problem loading the comments", e);
+                    Toast.makeText(ReviewPostActivity.this, "There was a problem loading the comments", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                for (Comment comment : comments) {
+                    Log.i(TAG, "Comment: " + comment.getComment());
+                    commentsAdapter.clear();
+                    commentList.addAll(comments);
+                    commentsAdapter.addAll(commentList);
+                }
+
+//                commentsAdapter.clear();
+//                commentList.addAll(comments);
+            }
+        });
+    }
+
+    private void likePost(Post post) {
+        Like newLike = new Like();
+
+        newLike.setPost(post);
+        newLike.setUser(ParseUser.getCurrentUser());
+
+        newLike.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e != null) {
+                    // something went wrong
+                    Log.e(TAG, "There was a problem liking the post", e);
+                    Toast.makeText(getApplicationContext(), "There was a problem liking the post", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                Log.i(TAG, "Post " + post.getResultId() + " was liked by " + ParseUser.getCurrentUser().getUsername());
+                post.isLikedByUser = true;
+                post.numOfLikes++;
+
+                // do fill like animation
+                mLikeAnim.toggleLikeFilled(getApplicationContext());
+
+                if (post.numOfLikes == 1) {
+                    tvNumLikes.setText(post.numOfLikes + " like");
+                } else if (post.numOfLikes > 1) {
+                    tvNumLikes.setText(post.numOfLikes + " likes");
+                }
+            }
+        });
+    }
+
+    private void checkIsLikedByUser(Post post) {
+        ParseQuery<Like> query = ParseQuery.getQuery(Like.class);
+        query.include(Like.KEY_USER);
+        query.whereEqualTo(Like.KEY_POST, post);
+
+        query.findInBackground(new FindCallback<Like>() {
+            @Override
+            public void done(List<Like> likes, ParseException e) {
+
+                if (e != null) {
+                    // something went wrong
+                    Log.e(TAG, "There was a problem loading the likes", e);
+                    Toast.makeText(getApplicationContext(), "There was a problem loading the likes", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (post.numOfLikes == 0) {
+                    tvNumLikes.setText("");
+                } else if (post.numOfLikes == 1) {
+                    tvNumLikes.setText(post.numOfLikes + " like");
+                } else if (post.numOfLikes > 1) {
+                    tvNumLikes.setText(post.numOfLikes + " likes");
+                }
+                post.numOfLikes = likes.size();
+
+                for (Like aLike : likes) {
+                    if (aLike.getUser().getObjectId().equals(ParseUser.getCurrentUser().getObjectId())) {
+                        mLikeAnim.toggleLikeFilled(getApplicationContext());
+                        post.isLikedByUser = true;
+                    }
+                }
+            }
+        });
+    }
+
+    private void removeLike(Post post) {
+        ParseQuery<Like> query = ParseQuery.getQuery(Like.class);
+        query.whereEqualTo(Like.KEY_POST, post);
+        query.whereEqualTo(Like.KEY_USER, ParseUser.getCurrentUser());
+
+        query.getFirstInBackground(new GetCallback<Like>() {
+            @Override
+            public void done(Like like, ParseException e) {
+
+                if (e != null) {
+                    // something went wrong
+                    Log.e(TAG, "There was a problem disliking, e");
+                    Toast.makeText(getApplicationContext(), "There was a problem disliking", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                try {
+                    like.delete();
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                    ;
+                    Log.e(TAG, "There was a problem disliking, e");
+                    Toast.makeText(getApplicationContext(), "There was a problem disliking", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                post.isLikedByUser = false;
+                post.numOfLikes--;
+
+                //mLikeAnim.toggleLikeOutline(context);
+                Drawable heartDrawable = getApplicationContext().getDrawable(R.drawable.ic_like_outline);
+                ivLikeHeart.setImageDrawable(heartDrawable);
+
+                if (post.numOfLikes == 0) {
+                    tvNumLikes.setText("");
+                } else if (post.numOfLikes == 1) {
+                    tvNumLikes.setText(post.numOfLikes + " like");
+                } else if (post.numOfLikes > 1) {
+                    tvNumLikes.setText(post.numOfLikes + " likes");
+                }
+            }
+        });
+    }
+
 }

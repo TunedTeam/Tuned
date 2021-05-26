@@ -158,19 +158,19 @@
         android:maxLines="5"/>
 
     <ImageView
-        android:id="@+id/ivLike"
+        android:id="@+id/ivLikeHeart"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/tvReviewDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_like"
-        android:layout_below="@id/tvReviewDescription"
-        android:layout_marginTop="10dp"/>
+        android:src="@drawable/ic_like_outline"/>
 
     <TextView
-        android:id="@+id/tvLikes"
+        android:id="@+id/tvNumLikes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvReviewDescription"
-        android:layout_toRightOf="@id/ivLike"
+        android:layout_toRightOf="@id/ivLikeHeart"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"
         android:fontFamily="@font/roboto_bold"
@@ -186,12 +186,12 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_comment"
         android:layout_below="@id/tvReviewDescription"
-        android:layout_toRightOf="@id/tvLikes"
+        android:layout_toRightOf="@id/tvNumLikes"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"/>
 
     <TextView
-        android:id="@+id/tvComments"
+        android:id="@+id/tvNumComments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvReviewDescription"

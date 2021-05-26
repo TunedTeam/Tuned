@@ -96,7 +96,7 @@ public class StreamingActivity extends AppCompatActivity {
         txtsstop = findViewById(R.id.txtsstop);
         seekmusic = findViewById(R.id.seekbar);
         visualizer = findViewById(R.id.blast);
-        //trackPhoto = findViewById(R.id.trackPhoto);
+        trackPhoto = findViewById(R.id.trackPhoto);
 
         if (mediaPlayer != null) {
             mediaPlayer.stop();

@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:background="@color/purple">
+        android:background="@color/light_purple">
 
 <!--        <TextView-->
 <!--            android:id="@+id/tvCancel"-->
@@ -40,7 +40,7 @@
 
     </RelativeLayout>
 
-    <View style="@style/Divider.Horizontal" />
+    <View style="@style/Divider.Purple" />
 
     <SearchView
         android:id="@+id/svBar"
@@ -52,7 +52,7 @@
         android:background="@drawable/searchview_rounded"
         android:queryHint="Search..."
         android:queryBackground="@android:color/transparent"
-        android:theme="@style/SearchViewStyle">
+        android:theme="@style/SearchViewStyle.White">
     </SearchView>
 
     <ListView

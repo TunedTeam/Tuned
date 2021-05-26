@@ -1,26 +1,13 @@
 package com.example.tuned;
 
-import com.example.tuned.utils.TimeFormatter;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import java.util.List;
-
-@ParseClassName("Comment")
-public class Comment extends ParseObject {
-
-    public static final String KEY_COMMENT = "comment";
+@ParseClassName("Like")
+public class Like extends ParseObject {
     public static final String KEY_USER = "user_id";
     public static final String KEY_POST = "post_id";
-
-    public String getComment() {
-        return getString(KEY_COMMENT);
-    }
-
-    public void setComment(String comment) {
-        put(KEY_COMMENT, comment);
-    }
 
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
@@ -36,9 +23,5 @@ public class Comment extends ParseObject {
 
     public void setPost(Post post) {
         put(KEY_POST, post);
-    }
-
-    public static String getFormattedTimestamp(String createdAt) {
-        return TimeFormatter.getTimeDifference(createdAt);
     }
 }

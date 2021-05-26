@@ -248,7 +248,11 @@ public class ProfileFragment extends Fragment {
 
             if (resultCode == RESULT_OK) {
                 Bitmap takenImage = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-                ivProfilePicture.setImageBitmap(takenImage);
+                //ivProfilePicture.setImageBitmap(takenImage);
+                Glide.with(this).load(takenImage)
+                        .placeholder(R.drawable.defaultavatar)
+                        .circleCrop()
+                        .into(ivProfilePicture);
 
                 saveProfilePicture();
 
@@ -305,8 +309,11 @@ public class ProfileFragment extends Fragment {
             // Load the selected image into a preview
             // ImageView ivProfilePicture = (ImageView) getView().findViewById(R.id.ivProfilePicture);
 
-            ivProfilePicture.setImageBitmap(selectedImage);
-
+            //ivProfilePicture.setImageBitmap(selectedImage);
+            Glide.with(this).load(selectedImage)
+                    .placeholder(R.drawable.defaultavatar)
+                    .circleCrop()
+                    .into(ivProfilePicture);
 
             saveProfilePicture();
 

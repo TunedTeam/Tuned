@@ -28,14 +28,34 @@
         <!-- Set text color highlight for Search View to dark purple -->
         <item name="colorControlActivated">@color/purple_500</item>
     </style>
+    <style name="SearchViewStyle.White" parent="Widget.AppCompat.SearchView">
+        <!-- Set edit text color for Search View to white -->
+        <item name="android:editTextColor">@color/purple</item>
+        <!-- Set text hint color for Search View to white -->
+        <item name="android:textColorHint">@color/purple</item>
+        <!-- Set search icon color for Search View to white -->
+        <item name="android:textColorSecondary">@color/purple</item>
+        <!-- Set text color highlight for Search View to dark purple -->
+        <item name="colorControlActivated">@color/darker_purple</item>
+    </style>
     <!-- Style for View line divider -->
     <style name="Divider">
         <item name="android:background">@color/dark_purple</item>
     </style>
 
+    <style name="PurpleLine">
+        <item name="android:background">@color/purple</item>
+    </style>
+
     <style name="Divider.Horizontal" parent="Divider">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">4dp</item>
+        <item name="android:layout_height">2dp</item>
+
+    </style>
+
+    <style name="Divider.Purple" parent="PurpleLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
 
     </style>
 

@@ -53,8 +53,6 @@ public class CreateReviewFragment extends Fragment {
     EditText etReviewTitle;
     EditText etReviewComment;
 
-    FloatingActionButton fabCreate;
-
     public CreateReviewFragment() {
         // Required empty public constructor
     }
@@ -74,9 +72,6 @@ public class CreateReviewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-//        fabCreate = view.findViewById(R.id.fabCreate);
-//        fabCreate.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.lavender)));
 
         ivResultImage = view.findViewById(R.id.ivResultImage);
         tvResultName = view.findViewById(R.id.tvResultName);

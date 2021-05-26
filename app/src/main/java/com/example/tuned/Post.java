@@ -22,7 +22,10 @@ public class Post extends ParseObject {
     public static final String RESULT_TYPE = "resultType";
     public static final String REVIEW_TITLE = "reviewTitle";
     public static final String REVIEW_RATING = "reviewRating";
-    public static final String LIKED_BY_USER = "likedByUser";
+
+    public boolean isLikedByUser = false;
+    public int numOfLikes = 0;
+    public int numOfComments = 0;
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -102,13 +105,5 @@ public class Post extends ParseObject {
 
     public void setResultType(String resultType) {
         put(RESULT_TYPE, resultType);
-    }
-
-    public List<String> getLikedbyUser() {
-        return getList(LIKED_BY_USER);
-    }
-
-    public void setLikedByUser(List<String> likedByUser) {
-        put(LIKED_BY_USER, likedByUser);
     }
 }
