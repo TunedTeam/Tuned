@@ -72,6 +72,8 @@ public class PopularWeekAdapter extends RecyclerView.Adapter<PopularWeekAdapter.
                 String albumImage = spotify.getAlbumImage(api, albumId);
                 String albumName = spotify.getAlbumName(api, albumId);
                 String albumArtist = spotify.getAlbumArtist(api, albumId);
+                int totalTracks = spotify.getTotalTracks(api, albumId);
+                int albumReleaseDate = spotify.getAlbumReleaseDate(api, albumId);
 
                 Bundle bundle = new Bundle();
 
@@ -79,6 +81,8 @@ public class PopularWeekAdapter extends RecyclerView.Adapter<PopularWeekAdapter.
                 bundle.putString("albumImage",albumImage);
                 bundle.putString("albumName",albumName);
                 bundle.putString("albumArtist",albumArtist);
+                bundle.putInt("totalTracks", totalTracks);
+                bundle.putInt("albumReleaseDate", albumReleaseDate);
                 Intent i = new Intent(trackContext, AlbumActivity.class);
                 i.putExtras(bundle);
                 trackContext.startActivity(i);

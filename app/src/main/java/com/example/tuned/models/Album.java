@@ -74,6 +74,7 @@ public class Album implements SearchResults, Serializable {
         return null;
     }
 
+    @Override
     public String getISRC() {
         return null;
     }

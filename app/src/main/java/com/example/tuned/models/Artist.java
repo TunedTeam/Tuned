@@ -62,7 +62,13 @@ public class Artist implements SearchResults{
         return null;
     }
 
+    @Override
     public String getISRC() {
         return null;
+    }
+
+    @Override
+    public int getTotalTracks() {
+        return 0;
     }
 }

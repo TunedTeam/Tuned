@@ -4,13 +4,11 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.PorterDuff;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,13 +22,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.tuned.Spotify.Spotify;
 import com.example.tuned.models.Album;
 import com.example.tuned.models.Track;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
 
-import java.io.IOException;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import okhttp3.Headers;
 
 public class StreamingActivity extends AppCompatActivity {
 
@@ -57,8 +61,7 @@ public class StreamingActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == android.R.id.home)
-        {
+        if (item.getItemId() == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
@@ -66,8 +69,7 @@ public class StreamingActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        if(visualizer != null)
-        {
+        if (visualizer != null) {
             visualizer.release();
         }
         super.onDestroy();
@@ -83,7 +85,7 @@ public class StreamingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_streaming);
 
         //getSupportActionBar().setTitle("Now playing");
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         btnprev = findViewById(R.id.btnprev);
@@ -105,7 +107,7 @@ public class StreamingActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String trackId = bundle.getString("trackId");
-        position = bundle.getInt("position",0);
+        position = bundle.getInt("position", 0);
         String trackAlbumId = bundle.getString("trackAlbumId");
 
         //Log.d(TAG, "THE ALBUM ID" + trackAlbumId);
@@ -113,14 +115,15 @@ public class StreamingActivity extends AppCompatActivity {
 
         String albumImage = spotify.getAlbumImage(api, trackAlbumId);
         //String albumImage = null;
-         //albumImage = getIntent().getStringExtra(albumImage);
-       // position = getIntent().getIntExtra("position",-1);
-       // String trackImage = bundle.getString("trackImage");
+        //albumImage = getIntent().getStringExtra(albumImage);
+        // position = getIntent().getIntExtra("position",-1);
+        // String trackImage = bundle.getString("trackImage");
         String trackName = bundle.getString("trackName");
         txtsname.setSelected(true);
         String url = bundle.getString("url");
-        String previewURL = bundle.getString("previewURL");
-        Log.i(TAG, "previewURL: " + previewURL);
+        String trackPreview = bundle.getString("trackPreview");
+        //String trackPreview = tracks.get(position).trackDeezerPreview;
+        Log.i(TAG, "Deezer previewURL: " + trackPreview);
         txtsname.setText(trackName);
 
 
@@ -130,95 +133,100 @@ public class StreamingActivity extends AppCompatActivity {
                 .into(trackPhoto);
 
 
+        String trackISRC = tracks.get(position).trackISRC;
 
-       // String url = "https://p.scdn.co/mp3-preview/92d40a2ae211cceb264e9ee1e67fe05f4d788200?cid=774b29d4f13844c495f206cafdad9c86";
+        String deezerUrl = "https://api.deezer.com/2.0/track/isrc:" + trackISRC;
 
-//        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(url));
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(previewURL));
-
-        mediaPlayer.start();
-
-        updateseekbar = new Thread()
-        {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(deezerUrl, new JsonHttpResponseHandler() {
             @Override
-            public void run() {
-                int totalDuration = mediaPlayer.getDuration();
-                int currentposition = 0;
+            public void onSuccess(int i, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
 
-                while (currentposition < totalDuration)
-                {
-                    try {
-                        sleep(500);
-                        currentposition = mediaPlayer.getCurrentPosition();
-                        seekmusic.setProgress(currentposition);
-                    }
-                    catch (InterruptedException | IllegalStateException e)
-                    {
-                        e.printStackTrace();
-                    }
+                try {
+                    String previewURL = jsonObject.getString("preview");
 
-                }
-            }
-        };
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(previewURL));
 
-        seekmusic.setMax(mediaPlayer.getDuration());
-        updateseekbar.start();
-        seekmusic.getProgressDrawable().setColorFilter(getResources().getColor(R.color.dark_purple), PorterDuff.Mode.MULTIPLY);
-        seekmusic.getThumb().setColorFilter(getResources().getColor(R.color.dark_purple), PorterDuff.Mode.SRC_IN);
-
-        seekmusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                mediaPlayer.seekTo(seekBar.getProgress());
-
-            }
-        });
-
-        String endTime = createTime(mediaPlayer.getDuration());
-        txtsstop.setText(endTime);
-
-        final Handler handler = new Handler();
-        final int delay = 1000;
-
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                String currentTime = createTime(mediaPlayer.getCurrentPosition());
-                txtsstart.setText(currentTime);
-                handler.postDelayed(this,delay);
-            }
-        }, delay);
-
-        btnplay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mediaPlayer.isPlaying()) {
-                    btnplay.setBackgroundResource(R.drawable.ic_play);
-                    mediaPlayer.pause();
-                } else {
-                    btnplay.setBackgroundResource(R.drawable.ic_pause);
                     mediaPlayer.start();
-                }
-            }
-        });
-        //next listener
 
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                btnnext.performClick();
-            }
-        });
+                    updateseekbar = new Thread() {
+                        @Override
+                        public void run() {
+                            int totalDuration = mediaPlayer.getDuration();
+                            int currentposition = 0;
+
+                            while (currentposition < totalDuration) {
+                                try {
+                                    sleep(500);
+                                    currentposition = mediaPlayer.getCurrentPosition();
+                                    seekmusic.setProgress(currentposition);
+                                } catch (InterruptedException | IllegalStateException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }
+                    };
+
+                    seekmusic.setMax(mediaPlayer.getDuration());
+                    updateseekbar.start();
+                    seekmusic.getProgressDrawable().setColorFilter(getResources().getColor(R.color.dark_purple), PorterDuff.Mode.MULTIPLY);
+                    seekmusic.getThumb().setColorFilter(getResources().getColor(R.color.dark_purple), PorterDuff.Mode.SRC_IN);
+
+                    seekmusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                        @Override
+                        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                        }
+
+                        @Override
+                        public void onStartTrackingTouch(SeekBar seekBar) {
+
+                        }
+
+                        @Override
+                        public void onStopTrackingTouch(SeekBar seekBar) {
+                            mediaPlayer.seekTo(seekBar.getProgress());
+
+                        }
+                    });
+
+                    String endTime = createTime(mediaPlayer.getDuration());
+                    txtsstop.setText(endTime);
+
+                    final Handler handler = new Handler();
+                    final int delay = 1000;
+
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            String currentTime = createTime(mediaPlayer.getCurrentPosition());
+                            txtsstart.setText(currentTime);
+                            handler.postDelayed(this,delay);
+                        }
+                    }, delay);
+
+                    btnplay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (mediaPlayer.isPlaying()) {
+                                btnplay.setBackgroundResource(R.drawable.ic_play);
+                                mediaPlayer.pause();
+                            } else {
+                                btnplay.setBackgroundResource(R.drawable.ic_pause);
+                                mediaPlayer.start();
+                            }
+                        }
+                    });
+                    //next listener
+
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            btnnext.performClick();
+                        }
+                    });
 
         /*
         int audiosessionId = mediaPlayer.getAudioSessionId();
@@ -227,24 +235,45 @@ public class StreamingActivity extends AppCompatActivity {
             visualizer.setAudioSessionId(audiosessionId);
         }
 */
-        btnnext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-                Log.d(TAG, "THE TOTAL TRACKS" + tracks.size());
-                position = ((position + 1)% tracks.size());
+                    btnnext.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mediaPlayer.stop();
+                            mediaPlayer.release();
+                            Log.d(TAG, "THE TOTAL TRACKS" + tracks.size());
+                            position = ((position + 1) % tracks.size());
 //                String uri = tracks.get(position).trackPreviewUrl;
-                String preview = bundle.getString("previewURL");
-                Log.i(TAG, "next preview: " + preview);
-               //Log.d(TAG, "THE TOTAL TRACKS" + albums.get(position).totalTracks);
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(preview));
-                sname = tracks.get(position).trackName;
-                Log.d(TAG, "TRACK NAME" + sname);
-                txtsname.setText(sname);
-                mediaPlayer.start();
-                btnplay.setBackgroundResource(R.drawable.ic_pause);
-                startAnimation(trackPhoto);
+                            String isrc = tracks.get(position).trackISRC;
+
+                            String deezerPrev = "https://api.deezer.com/2.0/track/isrc:" + isrc;
+                            AsyncHttpClient client = new AsyncHttpClient();
+                            client.get(deezerPrev, new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int i, Headers headers, JSON json) {
+                                    JSONObject jsonObject = json.jsonObject;
+
+                                    try {
+                                        String previewURL = jsonObject.getString("preview");
+                                        Log.i(TAG, "next preview: " + previewURL);
+                                        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(previewURL));
+                                        sname = tracks.get(position).trackName;
+                                        Log.d(TAG, "TRACK NAME" + sname);
+                                        txtsname.setText(sname);
+                                        mediaPlayer.start();
+                                        btnplay.setBackgroundResource(R.drawable.ic_pause);
+                                        startAnimation(trackPhoto);
+                                    } catch (JSONException e) {
+                                        Log.e(TAG, "Hit JSON exception", e);
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                                    Log.d(TAG, "onFailure");
+                                }
+                            });
+
                 /*
                 int audiosessionId = mediaPlayer.getAudioSessionId();
                 if(audiosessionId != -1)
@@ -253,23 +282,48 @@ public class StreamingActivity extends AppCompatActivity {
                 }
 
                  */
-            }
-        });
+                        }
+                    });
 
-        btnprev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mediaPlayer.stop();
-                mediaPlayer.release();
-                position = ((position - 1) < 0)?(tracks.size() - 1): (position -1);
+                    btnprev.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mediaPlayer.stop();
+                            mediaPlayer.release();
+                            position = ((position - 1) < 0) ? (tracks.size() - 1) : (position - 1);
 //                String uri = tracks.get(position).trackPreviewUrl;
-                String preview = bundle.getString("previewURL");
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(preview));
-                sname = tracks.get(position).trackName;
-                txtsname.setText(sname);
-                mediaPlayer.start();
-                btnplay.setBackgroundResource(R.drawable.ic_pause);
-                startAnimation(trackPhoto);
+
+                            String isrc = tracks.get(position).trackISRC;
+
+                            String deezerPrev = "https://api.deezer.com/2.0/track/isrc:" + isrc;
+                            AsyncHttpClient client = new AsyncHttpClient();
+                            client.get(deezerPrev, new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int i, Headers headers, JSON json) {
+                                    JSONObject jsonObject = json.jsonObject;
+
+                                    try {
+                                        String previewURL = jsonObject.getString("preview");
+                                        Log.i(TAG, "prev preview: " + previewURL);
+                                        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(previewURL));
+                                        sname = tracks.get(position).trackName;
+                                        Log.d(TAG, "TRACK NAME" + sname);
+                                        txtsname.setText(sname);
+                                        mediaPlayer.start();
+                                        btnplay.setBackgroundResource(R.drawable.ic_pause);
+                                        startAnimation(trackPhoto);
+                                    } catch (JSONException e) {
+                                        Log.e(TAG, "Hit JSON exception", e);
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                                    Log.d(TAG, "onFailure");
+                                }
+                            });
+
                 /*
                 int audiosessionId = mediaPlayer.getAudioSessionId();
                 if(audiosessionId != -1)
@@ -278,55 +332,270 @@ public class StreamingActivity extends AppCompatActivity {
                 }
 
                  */
+                        }
+                    });
+
+                    btnff.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 10000);
+                            }
+                        }
+                    });
+
+                    btnfr.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 10000);
+                            }
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    Log.e(TAG, "Hit JSON exception", e);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+                Log.d(TAG, "onFailure");
             }
         });
 
-        btnff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mediaPlayer.isPlaying())
-                {
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 10000);
-                }
-            }
-        });
 
-        btnfr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mediaPlayer.isPlaying())
-                {
-                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 10000);
-                }
-            }
-        });
+        // String url = "https://p.scdn.co/mp3-preview/92d40a2ae211cceb264e9ee1e67fe05f4d788200?cid=774b29d4f13844c495f206cafdad9c86";
+
+//        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(url));
+//        mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(trackPreview));
+//
+//        mediaPlayer.start();
+//
+//        updateseekbar = new Thread() {
+//            @Override
+//            public void run() {
+//                int totalDuration = mediaPlayer.getDuration();
+//                int currentposition = 0;
+//
+//                while (currentposition < totalDuration) {
+//                    try {
+//                        sleep(500);
+//                        currentposition = mediaPlayer.getCurrentPosition();
+//                        seekmusic.setProgress(currentposition);
+//                    } catch (InterruptedException | IllegalStateException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
+//        };
+//
+//        seekmusic.setMax(mediaPlayer.getDuration());
+//        updateseekbar.start();
+//        seekmusic.getProgressDrawable().setColorFilter(getResources().getColor(R.color.dark_purple), PorterDuff.Mode.MULTIPLY);
+//        seekmusic.getThumb().setColorFilter(getResources().getColor(R.color.dark_purple), PorterDuff.Mode.SRC_IN);
+//
+//        seekmusic.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+//
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//
+//            }
+//
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//                mediaPlayer.seekTo(seekBar.getProgress());
+//
+//            }
+//        });
+//
+//        String endTime = createTime(mediaPlayer.getDuration());
+//        txtsstop.setText(endTime);
+//
+//        final Handler handler = new Handler();
+//        final int delay = 1000;
+//
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                try {
+//                    String currentTime = createTime(mediaPlayer.getCurrentPosition());
+//                    txtsstart.setText(currentTime);
+//                    handler.postDelayed(this, delay);
+//                } catch (final Exception e) {
+//                    e.printStackTrace();
+//                    if (e instanceof IllegalStateException) { // bypass IllegalStateException
+//                        // You can again call the method and make a counter for deadlock situation or implement your own code according to your situation
+//                        boolean checkAgain = true;
+//                        int counter = 0;
+//                        for (int i = 0; i < 2; i++) {
+//                            if (checkAgain) {
+//                                if (mediaPlayer != null & mediaPlayer.isPlaying()) {
+//                                    mediaPlayer.reset();
+//                                    String currentTime = createTime(mediaPlayer.getCurrentPosition());
+//                                    txtsstart.setText(currentTime);
+//                                    handler.postDelayed(this, delay);
+//                                } else {
+//                                    String currentTime = createTime(0);
+//                                    txtsstart.setText(currentTime);
+//                                    handler.postDelayed(this, delay);
+//                                }
+//                                if (mediaPlayer.getCurrentPosition() > 0) {
+//                                    checkAgain = false;
+//                                    counter++;
+//                                }
+//                            } else {
+//                                if (counter == 0) {
+//                                    throw e;
+//                                }
+//                            }
+//                        }
+//
+//
+//                    }
+//                }
+//            }
+//        }, delay);
+//
+//        btnplay.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (mediaPlayer.isPlaying()) {
+//                    btnplay.setBackgroundResource(R.drawable.ic_play);
+//                    mediaPlayer.pause();
+//                } else {
+//                    btnplay.setBackgroundResource(R.drawable.ic_pause);
+//                    mediaPlayer.start();
+//                }
+//            }
+//        });
+//        //next listener
+//
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                btnnext.performClick();
+//            }
+//        });
+//
+//        /*
+//        int audiosessionId = mediaPlayer.getAudioSessionId();
+//        if(audiosessionId != -1)
+//        {
+//            visualizer.setAudioSessionId(audiosessionId);
+//        }
+//*/
+//        btnnext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mediaPlayer.stop();
+//                mediaPlayer.release();
+//                Log.d(TAG, "THE TOTAL TRACKS" + tracks.size());
+//                position = ((position + 1) % tracks.size());
+////                String uri = tracks.get(position).trackPreviewUrl;
+//
+//                String previewURL = tracks.get(position).trackDeezerPreview;
+//
+//                Log.i(TAG, "next preview: " + previewURL);
+//
+//                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(previewURL));
+//                sname = tracks.get(position).trackName;
+//                Log.d(TAG, "TRACK NAME" + sname);
+//                txtsname.setText(sname);
+//                mediaPlayer.start();
+//                btnplay.setBackgroundResource(R.drawable.ic_pause);
+//                startAnimation(trackPhoto);
+//
+//                /*
+//                int audiosessionId = mediaPlayer.getAudioSessionId();
+//                if(audiosessionId != -1)
+//                {
+//                    visualizer.setAudioSessionId(audiosessionId);
+//                }
+//
+//                 */
+//            }
+//        });
+//
+//        btnprev.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mediaPlayer.stop();
+//                mediaPlayer.release();
+//                position = ((position - 1) < 0) ? (tracks.size() - 1) : (position - 1);
+////                String uri = tracks.get(position).trackPreviewUrl;
+//
+//                String previewURL = tracks.get(position).trackDeezerPreview;
+//
+//                Log.i(TAG, "next preview: " + previewURL);
+//
+//                mediaPlayer = MediaPlayer.create(getApplicationContext(), Uri.parse(previewURL));
+//                sname = tracks.get(position).trackName;
+//                Log.d(TAG, "TRACK NAME" + sname);
+//                txtsname.setText(sname);
+//                mediaPlayer.start();
+//                btnplay.setBackgroundResource(R.drawable.ic_pause);
+//                startAnimation(trackPhoto);
+//
+//                /*
+//                int audiosessionId = mediaPlayer.getAudioSessionId();
+//                if(audiosessionId != -1)
+//                {
+//                    visualizer.setAudioSessionId(audiosessionId);
+//                }
+//
+//                 */
+//            }
+//        });
+//
+//        btnff.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (mediaPlayer.isPlaying()) {
+//                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 10000);
+//                }
+//            }
+//        });
+//
+//        btnfr.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (mediaPlayer.isPlaying()) {
+//                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 10000);
+//                }
+//            }
+//        });
+//    }
     }
 
-    public void startAnimation(View view){
-        ObjectAnimator animator = ObjectAnimator.ofFloat(trackPhoto, "rotation", 0f,360f);
+    public void startAnimation(View view) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(trackPhoto, "rotation", 0f, 360f);
         animator.setDuration(1000);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.playTogether(animator);
         animatorSet.start();
     }
 
-    public String createTime(int duration)
-    {
+    public String createTime(int duration) {
         String time = "";
-        int min = duration/1000/60;
-        int sec = duration/1000%60;
+        int min = duration / 1000 / 60;
+        int sec = duration / 1000 % 60;
 
-        time+=min+":";
+        time += min + ":";
 
-        if(sec<10)
-        {
-            time+="0";
+        if (sec < 10) {
+            time += "0";
         }
-        time+=sec;
+        time += sec;
 
         return time;
     }
-
-
 
 }

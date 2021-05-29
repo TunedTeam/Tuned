@@ -106,6 +106,8 @@ public class SearchFragment extends Fragment {
                     String albumImage = searchResults.get(i).getImage();
                     String albumName = searchResults.get(i).getName();
                     String albumArtist = searchResults.get(i).getArtist();
+                    int totalTracks = searchResults.get(i).getTotalTracks();
+                    int albumReleaseDate = searchResults.get(i).getReleaseDate();
 
                     Bundle bundle = new Bundle();
 
@@ -113,6 +115,8 @@ public class SearchFragment extends Fragment {
                     bundle.putString("albumImage",albumImage);
                     bundle.putString("albumName",albumName);
                     bundle.putString("albumArtist",albumArtist);
+                    bundle.putInt("totalTracks", totalTracks);
+                    bundle.putInt("albumReleaseDate", albumReleaseDate);
                     Intent intent = new Intent(getContext(), AlbumActivity.class);
                     intent.putExtras(bundle);
                     getContext().startActivity(intent);
@@ -123,6 +127,8 @@ public class SearchFragment extends Fragment {
                     String albumImage = spotify.getAlbumImage(api, albumId);
                     String albumName = spotify.getAlbumName(api, albumId);
                     String albumArtist = spotify.getAlbumArtist(api, albumId);
+                    int totalTracks = spotify.getTotalTracks(api, albumId);
+                    int albumReleaseDate = spotify.getAlbumReleaseDate(api, albumId);
 
                     Bundle bundle = new Bundle();
 
@@ -130,6 +136,8 @@ public class SearchFragment extends Fragment {
                     bundle.putString("albumImage",albumImage);
                     bundle.putString("albumName",albumName);
                     bundle.putString("albumArtist",albumArtist);
+                    bundle.putInt("totalTracks", totalTracks);
+                    bundle.putInt("albumReleaseDate", albumReleaseDate);
                     Intent intent = new Intent(getContext(), AlbumActivity.class);
                     intent.putExtras(bundle);
                     getContext().startActivity(intent);

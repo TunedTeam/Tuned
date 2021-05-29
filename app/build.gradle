@@ -78,5 +78,8 @@ dependencies {
     }
 
     // CodePath Async HTTP client
-    implementation 'com.codepath.libraries:asynchttpclient:2.0.0'
+    implementation 'com.codepath.libraries:asynchttpclient:2.1.1'
+
+    // OkHTTP Client
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
 }

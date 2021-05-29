@@ -80,6 +80,7 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
                 String albumImage = albums.get(position).albumImageUrl;
                 String albumName = albums.get(position).albumName;
                 String albumArtist = albums.get(position).albumArtist;
+                int albumReleaseDate = albums.get(position).albumReleaseDate;
                 int totalTracks = albums.get(position).totalTracks;
 
                 Log.d(TAG,"The total tracks" + totalTracks);
@@ -91,6 +92,7 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
                 bundle.putString("albumName",albumName);
                 bundle.putString("albumArtist",albumArtist);
                 bundle.putInt("totalTracks", totalTracks);
+                bundle.putInt("albumReleaseDate", albumReleaseDate);
                 Intent i = new Intent(albumContext, AlbumActivity.class);
                 i.putExtras(bundle);
                 albumContext.startActivity(i);

@@ -73,6 +73,8 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
                 String albumImage = spotify.getAlbumImage(api, albumId);
                 String albumName = spotify.getAlbumName(api, albumId);
                 String albumArtist = spotify.getAlbumArtist(api, albumId);
+                int totalTracks = spotify.getTotalTracks(api, albumId);
+                int albumReleaseDate = spotify.getAlbumReleaseDate(api, albumId);
 
                 Bundle bundle = new Bundle();
 
@@ -80,6 +82,8 @@ public class TopTracksAdapter extends RecyclerView.Adapter<TopTracksAdapter.View
                 bundle.putString("albumImage",albumImage);
                 bundle.putString("albumName",albumName);
                 bundle.putString("albumArtist",albumArtist);
+                bundle.putInt("totalTracks", totalTracks);
+                bundle.putInt("albumReleaseDate", albumReleaseDate);
                 Intent i = new Intent(trackContext, AlbumActivity.class);
                 i.putExtras(bundle);
                 trackContext.startActivity(i);

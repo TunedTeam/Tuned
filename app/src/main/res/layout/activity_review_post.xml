@@ -48,6 +48,7 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
+        android:layout_below="@id/viewTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

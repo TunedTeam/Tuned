@@ -23,4 +23,6 @@ public interface SearchResults {
     public String getPreviewUrl();
 
     public String getISRC();
+
+    public int getTotalTracks();
 }

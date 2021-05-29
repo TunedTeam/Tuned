@@ -34,6 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import okhttp3.Headers;
 
@@ -85,17 +86,13 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 String trackName = tracks.get(position).trackName;
                 String trackAlbumId = tracks.get(position).trackAlbumId;
                 Log.d(TAG, "the id:" + trackAlbumId);
-
                 //Log.d(TAG, "track photo: " + albumImage);
+                int totalTracks = tracks.size();
                 Log.d(TAG, "TOTAL TRACKS:" + tracks.size());
 
+                String trackPreview = tracks.get(position).trackDeezerPreview;
                 //String trackArtist = tracks.get(position).trackArtist;
 //                String url = tracks.get(position).trackPreviewUrl;
-
-                String trackISRC = spotify.getTrackISRC(api, trackId);
-                String deezerUrl = "https://api.deezer.com/2.0/track/isrc:" + trackISRC;
-                Log.i(TAG, "deezerUrl: " + deezerUrl);
-
 //                Log.d(TAG, "url: " + url);
 
                 Bundle bundle = new Bundle();
@@ -104,33 +101,12 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
                 bundle.putString("trackName", trackName);
                 bundle.putString("trackAlbumId", trackAlbumId);
                 bundle.putInt("position", position);
+                bundle.putString("trackPreview", trackPreview);
+                bundle.putInt("totalTracks", totalTracks);
 
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.get(deezerUrl, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int i, Headers headers, JSON json) {
-                        JSONObject jsonObject = json.jsonObject;
-
-                        try {
-                            String preview = jsonObject.getString("preview");
-                            tracks.get(position).trackPreviewUrl = preview;
-                            bundle.putString("previewURL", preview);
-                            Log.i(TAG, "preview: " + preview);
-
-                            Intent intent = new Intent(trackContext, StreamingActivity.class);
-                            intent.putExtras(bundle);
-                            trackContext.startActivity(intent);
-                        } catch (JSONException e) {
-                            Log.e(TAG, "Hit JSON exception", e);
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int i, Headers headers, String s, Throwable throwable) {
-                        Log.d(TAG, "onFailure");
-                    }
-                });
+                Intent intent = new Intent(trackContext, StreamingActivity.class);
+                intent.putExtras(bundle);
+                trackContext.startActivity(intent);
 
                 // bundle.putString("trackImage",trackImage);
                 // bundle.putString("trackArtist",trackArtist);
@@ -150,6 +126,31 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 //        holder.ratingBar.setRating();
 //
 //        holder.tvRating.setText();
+
+//        public void getDeezerPreview() {
+//
+//            AsyncHttpClient client = new AsyncHttpClient();
+//            client.get(deezerUrl, new JsonHttpResponseHandler() {
+//                @Override
+//                public void onSuccess(int i, Headers headers, JSON json) {
+//                    JSONObject jsonObject = json.jsonObject;
+//
+//                    try {
+//                        previewURL = jsonObject.getString("preview");
+//                        Log.i("Spotify", "checking previewurl: " + previewURL);
+//
+//                    } catch (JSONException e) {
+//                        Log.e("Spotify", "Hit JSON exception", e);
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(int i, Headers headers, String s, Throwable throwable) {
+//                    Log.d("Spotify", "onFailure");
+//                }
+//            });
+//        }
 
     }
 
