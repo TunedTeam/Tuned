@@ -12,7 +12,6 @@
 ### Description
 Social music app to explore different genres of music and rate, review, and interact with other users.
 
-<img src="UI/latestUpdate.gif" width=250>
 
 ### App Evaluation
 - **Category:** Social Networking / Music
@@ -21,6 +20,10 @@ Social music app to explore different genres of music and rate, review, and inte
 - **Market:** Anyone is able to use this app, it is especially tailored to music fanatics.
 - **Habit:** Could be used as often as user want to use the app for, or whenever they want to track the latest music they have listened to and review it.
 - **Scope:** User starts out by rating / reviewing any latest albums or songs they have heard and from there they can read reviews from other users and follow them.
+
+## Latest update
+
+https://www.youtube.com/watch?v=HKn-iogBrRY
 
 ## Product Spec
 
