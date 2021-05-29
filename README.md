@@ -1,5 +1,7 @@
 # Tuned
 
+<img src="UI/tunedlogo.gif" width=250>
+
 ## Table of Contents
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
@@ -9,6 +11,8 @@
 ## Overview
 ### Description
 Social music app to explore different genres of music and rate, review, and interact with other users.
+
+<img src="UI/latestUpdate.gif" width=250>
 
 ### App Evaluation
 - **Category:** Social Networking / Music
@@ -34,12 +38,12 @@ Social music app to explore different genres of music and rate, review, and inte
 
 **Optional Nice-to-have Stories**
 
-- [ ] Ability for user to listen to a 30-second preview of a song from the app
+- [x] Ability for user to listen to a 30-second preview of a song from the app
 - [ ] Artist page including artist different albums / songs
 - [ ] Diary to keep track on what songs user listened to on a specific date
 - [ ] User can make lists (add tracks / albums to a list for others to view)
 - [ ] User can see lists
-- [ ] User can comment / like a review or list of another user
+- [x] User can comment / like a review or list of another user
 - [ ] User can follow other users
 
 ### 2. Screen Archetypes
@@ -74,20 +78,6 @@ Social music app to explore different genres of music and rate, review, and inte
 * Search
 * Create
 * Alerts
-
-## UPDATES
-
-### 04/19/21
-<img src="UI/updateSprint4.gif" width=250>
-
-### 04/11/21
-<img src="UI/updateSprint3.gif" width=250>
-
-### 04/04/21
-<img src="UI/updateSprint2.gif" width=250>
-
-### 03/28/21
-<img src="UI/updateSprint1.gif" width=250>
 
 ## Wireframes
 
@@ -267,4 +257,18 @@ Social music app to explore different genres of music and rate, review, and inte
     `GET`    | /track/{id} | gets specific track by :id
     `GET`    | /search | get spotify catalog information about albums, artists, tracks
     `GET`    | /browse | get all categories
+
+## UPDATES
+
+### 04/19/21
+<img src="UI/updateSprint4.gif" width=250>
+
+### 04/11/21
+<img src="UI/updateSprint3.gif" width=250>
+
+### 04/04/21
+<img src="UI/updateSprint2.gif" width=250>
+
+### 03/28/21
+<img src="UI/updateSprint1.gif" width=250>
 
