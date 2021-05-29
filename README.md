@@ -1,6 +1,6 @@
 # Tuned
 
-<img src="UI/tunedlogo.gif" width=250>
+<img src="UI/tunedlogo.png" width=250>
 
 ## Table of Contents
 1. [Overview](#Overview)
