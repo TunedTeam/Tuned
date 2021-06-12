@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.tuned.R;
 import com.example.tuned.models.SearchResults;
 
@@ -71,11 +73,13 @@ public class ResultAdapter extends ArrayAdapter<SearchResults> {
                 Glide.with(getContext())
                         .asBitmap()
                         .load(R.drawable.image_not_found)
+                        .transform(new CenterCrop(),new RoundedCorners(10))
                         .into(ivResultImage);
             } else {
                 Glide.with(getContext())
                         .asBitmap()
                         .load(result.getImage())
+                        .transform(new CenterCrop(),new RoundedCorners(10))
                         .into(ivResultImage);
             }
         } else if (result.getType().equals("track")) {
@@ -88,11 +92,13 @@ public class ResultAdapter extends ArrayAdapter<SearchResults> {
                 Glide.with(getContext())
                         .asBitmap()
                         .load(R.drawable.image_not_found)
+                        .transform(new CenterCrop(),new RoundedCorners(10))
                         .into(ivResultImage);
             } else {
                 Glide.with(getContext())
                         .asBitmap()
                         .load(result.getImage())
+                        .transform(new CenterCrop(),new RoundedCorners(10))
                         .into(ivResultImage);
             }
         }

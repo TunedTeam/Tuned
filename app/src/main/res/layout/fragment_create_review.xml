@@ -60,8 +60,8 @@
         android:layout_below="@id/viewTop">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -71,7 +71,6 @@
                 android:paddingStart="15dp"
                 android:paddingTop="30dp"
                 android:paddingEnd="15dp">
-
 
                 <ImageView
                     android:id="@+id/ivResultImage"
@@ -128,7 +127,6 @@
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
-
 
                 <TextView
                     android:id="@+id/tvResultBullet"
@@ -223,9 +221,10 @@
                     android:layout_height="60dp"
                     android:layout_below="@+id/tvReview"
                     android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
                     android:background="@drawable/custom_input_white"
                     android:fontFamily="@font/roboto_medium"
-                    android:hint="Title"
+                    android:hint="Write a title"
                     android:paddingStart="10dp"
                     android:textColor="@color/purple"
                     android:textColorHint="@color/purple"

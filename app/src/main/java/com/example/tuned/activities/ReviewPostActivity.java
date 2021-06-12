@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.tuned.parse.Comment;
 import com.example.tuned.parse.Like;
 import com.example.tuned.parse.Post;
@@ -142,6 +145,7 @@ public class ReviewPostActivity extends AppCompatActivity {
         Glide.with(this)
                 .asBitmap()
                 .load(resultImageUrl)
+                .transform(new CenterCrop(),new RoundedCorners(10))
                 .into(ivResultImage);
 
         tvResultName.setText(resultName);
@@ -237,6 +241,44 @@ public class ReviewPostActivity extends AppCompatActivity {
                 // once the network request has completed successfully.
                 Log.i(TAG,"Fetching new data!");
                 loadComments();
+            }
+        });
+
+        ivProfilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), UserPageActivity.class);
+                Bundle bundle = new Bundle();
+
+                String username = post.getUser().getUsername();
+                String userpic = ((ParseFile) post.getUser().get("profile_picture")).getUrl();
+                ParseUser parseUser = post.getUser();
+
+                bundle.putString("username", username);
+                bundle.putString("userpic", userpic);
+                bundle.putParcelable("parseUser", parseUser);
+
+                i.putExtras(bundle);
+                startActivity(i);
+            }
+        });
+
+        tvUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), UserPageActivity.class);
+                Bundle bundle = new Bundle();
+
+                String username = post.getUser().getUsername();
+                String userpic = ((ParseFile) post.getUser().get("profile_picture")).getUrl();
+                ParseUser parseUser = post.getUser();
+
+                bundle.putString("username", username);
+                bundle.putString("userpic", userpic);
+                bundle.putParcelable("parseUser", parseUser);
+
+                i.putExtras(bundle);
+                startActivity(i);
             }
         });
     }

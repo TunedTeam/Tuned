@@ -71,4 +71,9 @@ public class Artist implements SearchResults{
     public int getTotalTracks() {
         return 0;
     }
+
+    @Override
+    public String getTrackURI() {
+        return null;
+    }
 }

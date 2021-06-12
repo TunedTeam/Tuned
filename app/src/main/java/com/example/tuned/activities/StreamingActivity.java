@@ -3,6 +3,8 @@ package com.example.tuned.activities;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -46,6 +48,7 @@ public class StreamingActivity extends AppCompatActivity {
     ImageView trackPhoto;
     BarVisualizer visualizer;
     TextView tvBack;
+    Button btnPlaySpotify;
 
     String sname;
     private Context trackContext;
@@ -56,6 +59,8 @@ public class StreamingActivity extends AppCompatActivity {
     private ArrayList<Track> track = new ArrayList<>();
     private ArrayList<Album> albums = new ArrayList<>();
     Thread updateseekbar;
+
+    boolean isSpotifyInstalled;
 
     private static final String YOUTUBE_API_KEY = "AIzaSyDuYKMkpL9wfSp9Vd5rn6l3MeZQOm4PMaQ";
     public static final String VIDEOS_URL = "https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
@@ -103,6 +108,7 @@ public class StreamingActivity extends AppCompatActivity {
         trackPhoto = findViewById(R.id.trackPhoto);
         tvBack = findViewById(R.id.tvBack);
         txtartist = findViewById(R.id.txtartist);
+        btnPlaySpotify = findViewById(R.id.btnPlaySpotify);
 
         tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -582,11 +588,56 @@ public class StreamingActivity extends AppCompatActivity {
 //            @Override
 //            public void onClick(View view) {
 //                if (mediaPlayer.isPlaying()) {
+        
 //                    mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 10000);
 //                }
 //            }
 //        });
 //    }
+
+        // checks to see if spotify is installed on the phone
+        PackageManager pm = getPackageManager();
+
+        try {
+            pm.getPackageInfo("com.spotify.music", 0);
+            isSpotifyInstalled = true;
+        } catch (PackageManager.NameNotFoundException e) {
+            isSpotifyInstalled = false;
+        }
+
+        // using the power of deep linking, either open up spotify app or play store spotify app
+        btnPlaySpotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isSpotifyInstalled == true) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(tracks.get(position).getTrackURI()));
+                    intent.putExtra(Intent.EXTRA_REFERRER,
+                            Uri.parse("android-app://" + getApplicationContext().getPackageName()));
+                    startActivity(intent);
+                } else {
+                    final String appPackageName = "com.spotify.music";
+                    final String referrer = "adjust_campaign=PACKAGE_NAME&adjust_tracker=ndjczk&utm_source=adjust_preinstall";
+
+                    try {
+                        Uri uri = Uri.parse("market://details")
+                                .buildUpon()
+                                .appendQueryParameter("id", appPackageName)
+                                .appendQueryParameter("referrer", referrer)
+                                .build();
+                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    } catch (android.content.ActivityNotFoundException ignored) {
+                        Uri uri = Uri.parse("https://play.google.com/store/apps/details")
+                                .buildUpon()
+                                .appendQueryParameter("id", appPackageName)
+                                .appendQueryParameter("referrer", referrer)
+                                .build();
+                        startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                    }
+                }
+            }
+        });
+
     }
 
     public void startAnimation(View view) {

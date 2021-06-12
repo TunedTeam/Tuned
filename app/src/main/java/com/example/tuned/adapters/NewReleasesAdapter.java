@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.tuned.activities.AlbumActivity;
 import com.example.tuned.spotify.Spotify;
 import com.example.tuned.models.Album;
@@ -57,6 +59,7 @@ public class NewReleasesAdapter extends RecyclerView.Adapter<NewReleasesAdapter.
         Glide.with(albumContext)
                 .asBitmap()
                 .load(albums.get(position).albumImageUrl)
+                .transform(new CenterCrop(),new RoundedCorners(10))
                 .into(holder.ivAlbumArt);
 
         holder.tvAlbumName.setText(albums.get(position).albumName);

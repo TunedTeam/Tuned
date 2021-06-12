@@ -15,10 +15,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.tuned.parse.Post;
 import com.example.tuned.R;
 import com.parse.ParseException;
@@ -49,6 +52,8 @@ public class CreateReviewFragment extends Fragment {
     TextView tvSave;
     EditText etReviewTitle;
     EditText etReviewComment;
+
+    ScrollView scrollView;
 
     public CreateReviewFragment() {
         // Required empty public constructor
@@ -102,6 +107,7 @@ public class CreateReviewFragment extends Fragment {
             Glide.with(getContext())
                     .asBitmap()
                     .load(resultImageUrl)
+                    .transform(new CenterCrop(),new RoundedCorners(10))
                     .into(ivResultImage);
 
         } else if (getArguments().getString("resultType").equals("artist")) {
@@ -142,6 +148,7 @@ public class CreateReviewFragment extends Fragment {
             Glide.with(getContext())
                     .asBitmap()
                     .load(resultImageUrl)
+                    .transform(new CenterCrop(),new RoundedCorners(10))
                     .into(ivResultImage);
         }
 

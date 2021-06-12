@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tuned"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.UserPageActivity"></activity>
+        <activity android:name=".activities.CreateListActivity"></activity>
+        <activity android:name=".activities.AddToListActivity" />
+        <activity android:name=".activities.UserPageActivity" />
         <activity android:name=".activities.ReviewPostActivity" />
         <activity android:name=".activities.AlbumActivity" />
         <activity android:name=".activities.SignupActivity" />

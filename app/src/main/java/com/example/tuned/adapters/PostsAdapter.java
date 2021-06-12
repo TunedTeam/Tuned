@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.tuned.activities.UserPageActivity;
 import com.example.tuned.parse.Like;
 import com.example.tuned.parse.Post;
 import com.example.tuned.R;
@@ -140,27 +143,43 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
 
             }
 
-//            ivProfileImage.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent i = new Intent(context, UserPageActivity.class);
-//                    Bundle bundle = new Bundle();
-//
-//                    i.putExtras(bundle);
-//                    context.startActivity(i);
-//                }
-//            });
-//
-//            tvUsername.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Intent i = new Intent(context, UserPageActivity.class);
-//                    Bundle bundle = new Bundle();
-//
-//                    i.putExtras(bundle);
-//                    context.startActivity(i);
-//                }
-//            });
+            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, UserPageActivity.class);
+                    Bundle bundle = new Bundle();
+
+                    String username = post.getUser().getUsername();
+                    String userpic = ((ParseFile) post.getUser().get("profile_picture")).getUrl();
+                    ParseUser parseUser = post.getUser();
+
+                    bundle.putString("username", username);
+                    bundle.putString("userpic", userpic);
+                    bundle.putParcelable("parseUser", parseUser);
+
+                    i.putExtras(bundle);
+                    context.startActivity(i);
+                }
+            });
+
+            tvUsername.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(context, UserPageActivity.class);
+                    Bundle bundle = new Bundle();
+
+                    String username = post.getUser().getUsername();
+                    String userpic = ((ParseFile) post.getUser().get("profile_picture")).getUrl();
+                    ParseUser parseUser = post.getUser();
+
+                    bundle.putString("username", username);
+                    bundle.putString("userpic", userpic);
+                    bundle.putParcelable("parseUser", parseUser);
+
+                    i.putExtras(bundle);
+                    context.startActivity(i);
+                }
+            });
 
             if (post.getResultType().equals("Artist")) {
                 tvResultType.setText(post.getResultType());
@@ -183,6 +202,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context)
                         .asBitmap()
                         .load(post.getResultImageUrl())
+                        .transform(new CenterCrop(),new RoundedCorners(10))
                         .into(ivResultImage);
 
             } else if (post.getResultType().equals("Track")) {
@@ -194,6 +214,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 Glide.with(context)
                         .asBitmap()
                         .load(post.getResultImageUrl())
+                        .transform(new CenterCrop(),new RoundedCorners(10))
                         .into(ivResultImage);
 
             }
@@ -210,6 +231,12 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                 ivLikeHeart.setImageDrawable(heartDrawable);
                 if (post.numOfLikes == 0) {
                     tvNumLikes.setText("");
+                }
+                else if (post.numOfLikes == 1) {
+                    tvNumLikes.setText(post.numOfLikes + " like");
+                }
+                else if (post.numOfLikes > 1) {
+                    tvNumLikes.setText(post.numOfLikes + " likes");
                 }
             } else {
                 mLikeAnim.toggleLikeFilled(context);

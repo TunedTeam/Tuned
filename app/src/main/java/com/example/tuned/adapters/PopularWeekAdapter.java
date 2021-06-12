@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.tuned.activities.AlbumActivity;
 import com.example.tuned.R;
 import com.example.tuned.spotify.Spotify;
@@ -57,6 +59,7 @@ public class PopularWeekAdapter extends RecyclerView.Adapter<PopularWeekAdapter.
         Glide.with(trackContext)
                 .asBitmap()
                 .load(tracks.get(position).trackImageUrl)
+                .transform(new CenterCrop(),new RoundedCorners(10))
                 .into(holder.ivAlbumArt);
 
         holder.tvAlbumName.setText(tracks.get(position).trackName);

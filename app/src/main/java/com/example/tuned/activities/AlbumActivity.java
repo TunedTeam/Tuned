@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.tuned.R;
 import com.example.tuned.spotify.Spotify;
 import com.example.tuned.adapters.AlbumAdapter;
@@ -78,6 +80,7 @@ public class AlbumActivity extends AppCompatActivity {
         Glide.with(this)
                 .asBitmap()
                 .load(albumImage)
+                .transform(new CenterCrop(),new RoundedCorners(10))
                 .into(ivAlbumArt);
 
         tvAlbumName.setText(albumName);
