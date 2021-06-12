@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/lavender"
     android:orientation="vertical"
-    tools:context=".ReviewPostActivity">
+    tools:context=".activities.ReviewPostActivity">
 
     <RelativeLayout
         android:id="@+id/rlTop"
@@ -75,8 +75,8 @@
 
                     <ImageView
                         android:id="@+id/ivProfilePicture"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
@@ -96,7 +96,7 @@
                         android:text="Username"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="16sp" />
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:id="@+id/ivResultImage"
@@ -118,6 +118,7 @@
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
                         android:maxLines="1"
+                        android:maxEms="12"
                         android:text="Result Name"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -212,7 +213,7 @@
                         android:text="Title"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tvReviewDescription"
@@ -226,7 +227,7 @@
                         android:text="Review description"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:id="@+id/ivLikeHeart"

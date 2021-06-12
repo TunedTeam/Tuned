@@ -1,44 +1,19 @@
-package com.example.tuned.Spotify;
-
-import android.content.Intent;
-import android.util.Log;
+package com.example.tuned.spotify;
 
 import com.adamratzman.spotify.SpotifyApiBuilderKt;
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.adamratzman.spotify.SpotifyRestAction;
-import com.adamratzman.spotify.javainterop.SpotifyContinuation;
 import com.adamratzman.spotify.models.PagingObject;
-import com.adamratzman.spotify.models.PlayableUri;
 import com.adamratzman.spotify.models.PlaylistTrack;
-import com.adamratzman.spotify.models.ReleaseDate;
 import com.adamratzman.spotify.models.SimpleAlbum;
-import com.adamratzman.spotify.models.SimpleArtist;
 import com.adamratzman.spotify.models.SimpleTrack;
 import com.adamratzman.spotify.models.SpotifySearchResult;
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.tuned.StreamingActivity;
 import com.example.tuned.models.Album;
 import com.example.tuned.models.Artist;
 import com.example.tuned.models.SearchResults;
 import com.example.tuned.models.Track;
 
-import org.jetbrains.annotations.NotNull;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import kotlin.coroutines.Continuation;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class Spotify {
 

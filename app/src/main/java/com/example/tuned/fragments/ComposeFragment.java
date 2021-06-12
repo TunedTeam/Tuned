@@ -15,8 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.tuned.LoginActivity;
-import com.example.tuned.Post;
+import com.example.tuned.activities.LoginActivity;
+import com.example.tuned.parse.Post;
 import com.example.tuned.R;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;

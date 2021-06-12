@@ -34,7 +34,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 app:backgroundTint="@color/dark_purple"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/roboto_black"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 />
@@ -52,7 +52,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 app:backgroundTint="@color/dark_purple"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/roboto_black"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 />
@@ -73,7 +73,7 @@
                 android:paddingStart="0dp"
                 android:paddingEnd="0dp"
                 app:backgroundTint="@color/dark_purple"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/roboto_black"
                 android:textStyle="bold"
                 android:textSize="14sp"
                 />

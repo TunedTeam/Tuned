@@ -1,11 +1,9 @@
-package com.example.tuned;
+package com.example.tuned.parse;
 
 import com.example.tuned.utils.TimeFormatter;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
-
-import java.util.List;
 
 @ParseClassName("Comment")
 public class Comment extends ParseObject {

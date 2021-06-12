@@ -1,39 +1,30 @@
 package com.example.tuned.fragments;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.R;
-import com.example.tuned.Spotify.Spotify;
+import com.example.tuned.spotify.Spotify;
 import com.example.tuned.adapters.ResultAdapter;
-import com.example.tuned.models.Album;
 import com.example.tuned.models.SearchResults;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class CreateReviewSearchFragment extends Fragment {
 
@@ -46,6 +37,15 @@ public class CreateReviewSearchFragment extends Fragment {
     FloatingActionButton fabCreate;
 
     private ListView listView;
+
+    private ExtendedFloatingActionButton fabAll;
+    private ExtendedFloatingActionButton fabAlbums;
+    private ExtendedFloatingActionButton fabTracks;
+    private ExtendedFloatingActionButton fabArtists;
+
+    private boolean boolAlbum = false;
+    private boolean boolTrack = false;
+    private boolean boolArtist = false;
 
 //    private TextView tvCancel;
 
@@ -70,6 +70,11 @@ public class CreateReviewSearchFragment extends Fragment {
 
         SearchView searchView = (SearchView) view.findViewById(R.id.svBar);
 
+        fabAll = view.findViewById(R.id.fabAll);
+        fabAlbums = view.findViewById(R.id.fabAlbums);
+        fabTracks = view.findViewById(R.id.fabTracks);
+        fabArtists = view.findViewById(R.id.fabArtists);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -87,6 +92,120 @@ public class CreateReviewSearchFragment extends Fragment {
                     searchResults.addAll(spotify.searchTrackResult(api, s));
                     searchResults.addAll(spotify.searchArtistResult(api, s));
 
+                    fabAll.setVisibility(View.VISIBLE);
+                    fabAll.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+
+                    fabAlbums.setVisibility(View.VISIBLE);
+                    fabTracks.setVisibility(View.VISIBLE);
+                    fabArtists.setVisibility(View.VISIBLE);
+
+                    if (boolAlbum == true) {
+                        searchResults.clear();
+                        searchResults.addAll(spotify.searchAlbumResult(api, s));
+                        adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
+                        listView.setAdapter(adapter);
+                    }
+
+                    if (boolTrack == true) {
+                        searchResults.clear();
+                        searchResults.addAll(spotify.searchTrackResult(api, s));
+                        adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
+                        listView.setAdapter(adapter);
+                    }
+
+                    if (boolArtist == true) {
+                        searchResults.clear();
+                        searchResults.addAll(spotify.searchArtistResult(api, s));
+                        adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
+                        listView.setAdapter(adapter);
+                    }
+
+                    fabAll.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            boolAlbum = false;
+                            boolTrack = false;
+                            boolArtist = false;
+
+
+                            fabAll.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+                            fabAlbums.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabTracks.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabArtists.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+
+
+                            searchResults.clear();
+                            searchResults.addAll(spotify.searchAlbumResult(api, s));
+                            searchResults.addAll(spotify.searchTrackResult(api, s));
+                            searchResults.addAll(spotify.searchArtistResult(api, s));
+                            ResultAdapter adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
+                            listView.setAdapter(adapter);
+
+                        }
+                    });
+
+                    fabAlbums.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            boolAlbum = true;
+                            boolTrack = false;
+                            boolArtist = false;
+
+
+                            fabAll.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabAlbums.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+                            fabTracks.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabArtists.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+
+                            searchResults.clear();
+                            searchResults.addAll(spotify.searchAlbumResult(api, s));
+                            ResultAdapter adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
+                            listView.setAdapter(adapter);
+                        }
+                    });
+
+                    fabTracks.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            boolAlbum = false;
+                            boolTrack = true;
+                            boolArtist = false;
+
+
+                            fabAll.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabAlbums.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabTracks.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+                            fabArtists.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+
+
+                            searchResults.clear();
+                            searchResults.addAll(spotify.searchTrackResult(api, s));
+                            ResultAdapter adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
+                            listView.setAdapter(adapter);
+                        }
+                    });
+
+                    fabArtists.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            boolAlbum = false;
+                            boolTrack = false;
+                            boolArtist = true;
+
+
+                            fabAll.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabAlbums.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabTracks.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.dark_purple)));
+                            fabArtists.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.purple)));
+
+
+                            searchResults.clear();
+                            searchResults.addAll(spotify.searchArtistResult(api, s));
+                            ResultAdapter adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
+                            listView.setAdapter(adapter);
+                        }
+                    });
+
                     adapter = new ResultAdapter(getContext(), android.R.layout.simple_list_item_1, searchResults);
                     listView.setAdapter(adapter);
                     setUpOnClickListener(listView, searchResults);
@@ -98,6 +217,8 @@ public class CreateReviewSearchFragment extends Fragment {
             }
         });
 
+        return view;
+
 //        tvCancel = view.findViewById(R.id.tvCancel);
 //
 //        tvCancel.setOnClickListener(new View.OnClickListener() {
@@ -106,8 +227,6 @@ public class CreateReviewSearchFragment extends Fragment {
 //                getActivity().onBackPressed();
 //            }
 //        });
-
-        return view;
     }
 
     @Override

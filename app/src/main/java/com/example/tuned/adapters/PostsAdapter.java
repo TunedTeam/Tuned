@@ -8,8 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -19,10 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.tuned.Like;
-import com.example.tuned.Post;
+import com.example.tuned.parse.Like;
+import com.example.tuned.parse.Post;
 import com.example.tuned.R;
-import com.example.tuned.ReviewPostActivity;
+import com.example.tuned.activities.ReviewPostActivity;
 import com.example.tuned.utils.LikeAnim;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -141,6 +139,28 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                         .into(ivProfileImage);
 
             }
+
+//            ivProfileImage.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent i = new Intent(context, UserPageActivity.class);
+//                    Bundle bundle = new Bundle();
+//
+//                    i.putExtras(bundle);
+//                    context.startActivity(i);
+//                }
+//            });
+//
+//            tvUsername.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    Intent i = new Intent(context, UserPageActivity.class);
+//                    Bundle bundle = new Bundle();
+//
+//                    i.putExtras(bundle);
+//                    context.startActivity(i);
+//                }
+//            });
 
             if (post.getResultType().equals("Artist")) {
                 tvResultType.setText(post.getResultType());

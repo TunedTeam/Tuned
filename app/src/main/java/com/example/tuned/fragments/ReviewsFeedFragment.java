@@ -18,12 +18,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ScrollView;
 
-import com.example.tuned.Post;
+import com.example.tuned.parse.Post;
 //import com.example.instagram.PostsAdapter;
 import com.example.tuned.adapters.PostsAdapter;
 import com.example.tuned.R;

@@ -12,197 +12,211 @@
     android:paddingBottom="10dp"
     android:background="@color/lavender">
 
-    <ImageView
-        android:id="@+id/ivProfilePicture"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:scaleType="centerCrop"
-        android:layout_alignParentEnd="true"
-        app:srcCompat="@drawable/defaultavatar" />
-
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/ivProfilePicture"
-        android:layout_marginRight="10dp"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Username"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:ellipsize="end"
-        android:maxLines="1"/>
-
-    <ImageView
-        android:id="@+id/ivResultImage"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:scaleType="centerCrop"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_launcher_background" />
-
-    <TextView
-        android:id="@+id/tvResultName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ivResultImage"
-        android:layout_marginLeft="5dp"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Result Name"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:ellipsize="end"
-        android:maxLines="1"/>
-
-    <TextView
-        android:id="@+id/tvResultType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/ivResultImage"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@+id/tvResultName"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Result Type"
-        android:textColor="@color/light_gray"
-        android:textSize="16sp"
-        android:ellipsize="end"
-        android:maxLines="1"/>
-
-    <TextView
-        android:id="@+id/tvResultBullet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tvResultType"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@+id/tvResultName"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:fontFamily="@font/roboto_bold"
-        android:text="•"
-        android:textColor="@color/light_gray"
-        android:textSize="16sp"/>
-
-    <TextView
-        android:id="@+id/tvResultArtist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tvResultBullet"
-        android:layout_marginLeft="5dp"
-        android:layout_below="@+id/tvResultName"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Result Artist"
-        android:textColor="@color/light_gray"
-        android:textSize="16sp"
-        android:ellipsize="end"
-        android:maxLines="1"/>
-
-    <RatingBar
-        android:id="@+id/ratingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ivResultImage"
-        android:layout_marginTop="5dp"
-        android:numStars="5"
-        android:stepSize="0.5"
-        android:scaleX="0.45"
-        android:scaleY="0.45"
-        android:transformPivotX="-5dp"
-        android:transformPivotY="-5dp"
-        android:progressTint="@color/purple"
-        android:secondaryProgressTint="@color/purple"
-        android:progressBackgroundTint="@color/light_gray"/>
-
-    <TextView
-        android:id="@+id/tvReviewTitle"
+    <RelativeLayout
+        android:id="@+id/rlProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/ivResultImage"
-        android:layout_marginTop="30dp"
-        android:text="Title"
-        android:textColorHint="@color/white"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/roboto_bold"
-        android:ellipsize="end"
-        android:maxLines="1"/>
+        android:paddingBottom="10dp"
+        android:layout_alignParentStart="true">
 
-    <TextView
-        android:id="@+id/tvReviewDescription"
+        <ImageView
+            android:id="@+id/ivProfilePicture"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/defaultavatar" />
+
+        <TextView
+            android:id="@+id/tvUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivProfilePicture"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Username"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlResults"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tvReviewTitle"
-        android:layout_marginTop="10dp"
-        android:text="Review description"
-        android:textColorHint="@color/white"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/roboto_medium"
-        android:ellipsize="end"
-        android:maxLines="5"/>
+        android:layout_below="@+id/rlProfile">
 
-    <ImageView
-        android:id="@+id/ivLikeHeart"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/tvReviewDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_like_outline"/>
+        <ImageView
+            android:id="@+id/ivResultImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/tvNumLikes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvReviewDescription"
-        android:layout_toRightOf="@id/ivLikeHeart"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:text="20 likes"
-        android:textAlignment="center"
-        android:textColor="@color/light_gray"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tvResultName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivResultImage"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Result Name"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
-    <ImageView
-        android:id="@+id/ivComment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_comment"
-        android:layout_below="@id/tvReviewDescription"
-        android:layout_toRightOf="@id/tvNumLikes"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/tvResultType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivResultImage"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/tvResultName"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Result Type"
+            android:textColor="@color/light_gray"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
 
-    <TextView
-        android:id="@+id/tvNumComments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvReviewDescription"
-        android:layout_toRightOf="@id/ivComment"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:text="5 comments"
-        android:textAlignment="center"
-        android:textColor="@color/light_gray"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tvResultBullet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvResultType"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/tvResultName"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="•"
+            android:textColor="@color/light_gray"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tvResultArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvResultBullet"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/tvResultName"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Result Artist"
+            android:textColor="@color/light_gray"
+            android:textSize="16sp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ivResultImage"
+            android:layout_marginTop="5dp"
+            android:numStars="5"
+            android:stepSize="0.5"
+            android:scaleX="0.45"
+            android:scaleY="0.45"
+            android:transformPivotX="-5dp"
+            android:transformPivotY="-5dp"
+            android:progressTint="@color/purple"
+            android:secondaryProgressTint="@color/purple"
+            android:progressBackgroundTint="@color/light_gray"/>
+
+        <TextView
+            android:id="@+id/tvReviewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ivResultImage"
+            android:layout_marginTop="30dp"
+            android:text="Title"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_bold"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/tvReviewDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tvReviewTitle"
+            android:layout_marginTop="10dp"
+            android:text="Review description"
+            android:textColorHint="@color/white"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_medium"
+            android:ellipsize="end"
+            android:maxLines="5"/>
+
+        <ImageView
+            android:id="@+id/ivLikeHeart"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/tvReviewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_like_outline"/>
+
+        <TextView
+            android:id="@+id/tvNumLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvReviewDescription"
+            android:layout_toRightOf="@id/ivLikeHeart"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="20 likes"
+            android:textAlignment="center"
+            android:textColor="@color/light_gray"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_comment"
+            android:layout_below="@id/tvReviewDescription"
+            android:layout_toRightOf="@id/tvNumLikes"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/tvNumComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvReviewDescription"
+            android:layout_toRightOf="@id/ivComment"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:text="5 comments"
+            android:textAlignment="center"
+            android:textColor="@color/light_gray"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

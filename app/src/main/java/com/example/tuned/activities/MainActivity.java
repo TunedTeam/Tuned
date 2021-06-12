@@ -1,4 +1,4 @@
-package com.example.tuned;
+package com.example.tuned.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.example.tuned.R;
 import com.example.tuned.fragments.ComposeFragment;
 import com.example.tuned.fragments.CreateReviewFragment;
 import com.example.tuned.fragments.CreateReviewSearchFragment;

@@ -9,12 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.tuned.Comment;
-import com.example.tuned.Post;
+import com.example.tuned.parse.Comment;
 import com.example.tuned.R;
 import com.parse.ParseFile;
 

@@ -1,17 +1,15 @@
-package com.example.tuned;
+package com.example.tuned.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -23,6 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.tuned.parse.Comment;
+import com.example.tuned.parse.Like;
+import com.example.tuned.parse.Post;
+import com.example.tuned.R;
 import com.example.tuned.adapters.CommentsAdapter;
 import com.example.tuned.utils.LikeAnim;
 import com.parse.FindCallback;

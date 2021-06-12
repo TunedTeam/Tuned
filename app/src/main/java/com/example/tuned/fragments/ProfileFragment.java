@@ -1,22 +1,16 @@
 package com.example.tuned.fragments;
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,54 +23,35 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.os.Build;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.tuned.LoginActivity;
-import com.example.tuned.MainActivity;
-import com.example.tuned.Post;
+import com.example.tuned.activities.LoginActivity;
+import com.example.tuned.parse.Post;
 import com.example.tuned.adapters.PostsAdapter;
 import com.example.tuned.R;
 import com.parse.FindCallback;
 import com.parse.LogOutCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-
-import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -100,6 +75,7 @@ public class ProfileFragment extends Fragment {
     TextView tvUserName;
     RecyclerView rvUserPosts;
     Post post;
+    TextView tvUserReviews;
 
     public ProfileFragment() {
     }
@@ -125,6 +101,8 @@ public class ProfileFragment extends Fragment {
 
         tvUserName = view.findViewById(R.id.tvUsername);
 
+        tvUserReviews = view.findViewById(R.id.tvUserReviews);
+
         rvUserPosts = view.findViewById(R.id.rvUserPosts);
 
         rvUserPosts.setAdapter(postsAdapter);
@@ -133,6 +111,8 @@ public class ProfileFragment extends Fragment {
         queryPosts();
 
         tvUserName.setText("@" + parseUser.getUsername());
+
+        tvUserReviews.setText(parseUser.getUsername() + "'s reviews");
 
         ParseFile userProfilePic = (ParseFile) parseUser.get(PROFILE_PICTURE);
        if (userProfilePic != null)

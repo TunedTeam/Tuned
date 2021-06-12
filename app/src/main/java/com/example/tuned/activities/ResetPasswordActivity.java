@@ -1,4 +1,4 @@
-package com.example.tuned;
+package com.example.tuned.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.tuned.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;

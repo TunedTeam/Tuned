@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
-        android:name=".ParseApplication"
+        android:name=".parse.ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Tuned"
@@ -17,11 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tuned"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ReviewPostActivity"></activity>
-        <activity android:name=".AlbumActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".StreamingActivity" />
+        <activity android:name=".activities.UserPageActivity"></activity>
+        <activity android:name=".activities.ReviewPostActivity" />
+        <activity android:name=".activities.AlbumActivity" />
+        <activity android:name=".activities.SignupActivity" />
+        <activity android:name=".activities.ResetPasswordActivity" />
+        <activity android:name=".activities.StreamingActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -33,14 +34,16 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".activities.MainActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -11,9 +11,9 @@
         android:id="@+id/rlTop"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/light_purple"
         android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:background="@color/light_purple">
+        android:paddingEnd="20dp">
 
         <TextView
             android:id="@+id/tvBack"
@@ -50,195 +50,210 @@
 
     </RelativeLayout>
 
-    <View style="@style/Divider.Purple" />
+    <View android:id="@+id/viewTop"
+        style="@style/Divider.Purple" />
 
-    <RelativeLayout
-        android:id="@+id/rlTypeInfo"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:paddingTop="30dp"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/viewTop">
 
-
-        <ImageView
-            android:id="@+id/ivResultImage"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_launcher_background" />
-
-        <TextView
-            android:id="@+id/tvResultName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivResultImage"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Result Name"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:ellipsize="end"
-            android:maxLines="1"/>
-
-        <TextView
-            android:id="@+id/tvResultArtist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivResultImage"
-            android:layout_marginLeft="20dp"
-            android:layout_below="@+id/tvResultName"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Result Artist"
-            android:textColor="@color/light_gray"
-            android:textSize="20sp"
-            android:ellipsize="end"
-            android:maxLines="1"/>
-
-        <TextView
-            android:id="@+id/tvResultType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/ivResultImage"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_below="@+id/tvResultArtist"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Result Type"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-
-
-        <TextView
-            android:id="@+id/tvResultBullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tvResultType"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_below="@+id/tvResultArtist"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_bold"
-            android:text="•"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-
-        <TextView
-            android:id="@+id/tvResultYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/tvResultBullet"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="5dp"
-            android:layout_below="@+id/tvResultArtist"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_bold"
-            android:text="2020"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rlRate"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:paddingTop="10dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
-
-        <TextView
-            android:id="@+id/tvRate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Rate"
-            android:textColor="@color/white"
-            android:textSize="30sp"/>
-
-        <RatingBar
-            android:id="@+id/ratingBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tvRate"
-            android:layout_marginTop="5dp"
-            android:numStars="5"
-            android:stepSize="0.5"
-            android:progressTint="@color/purple"
-            android:secondaryProgressTint="@color/purple"
-            android:progressBackgroundTint="@color/light_gray"/>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rlReview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="10dp"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp">
-
-        <TextView
-            android:id="@+id/tvReview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:textAlignment="center"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Rate"
-            android:textColor="@color/white"
-            android:textSize="30sp"/>
-
-        <EditText
-            android:id="@+id/etReviewTitle"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/tvReview"
-            android:hint="Title"
-            android:textColorHint="@color/purple"
-            android:textSize="16dp"
-            android:textColor="@color/purple"
-            android:fontFamily="@font/roboto_medium"
-            android:background="@drawable/custom_input_white"
-            android:paddingStart="10dp"
-            android:theme="@style/SearchViewStyle.White"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/tvReviewDescription"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/etReviewTitle"
-            android:layout_marginTop="10dp"
-            android:gravity="start"
-            android:paddingTop="10dp"
-            android:hint="Write a review"
-            android:textColorHint="@color/purple"
-            android:textSize="16dp"
-            android:textColor="@color/purple"
-            android:fontFamily="@font/roboto_medium"
-            android:background="@drawable/custom_input_white"
-            android:paddingStart="10dp"
-            android:theme="@style/SearchViewStyle.White"/>
+            <RelativeLayout
+                android:id="@+id/rlTypeInfo"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:paddingStart="15dp"
+                android:paddingTop="30dp"
+                android:paddingEnd="15dp">
 
-    </RelativeLayout>
 
+                <ImageView
+                    android:id="@+id/ivResultImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/tvResultName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/ivResultImage"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Result Name"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tvResultArtist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvResultName"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/ivResultImage"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="Result Artist"
+                    android:textAlignment="center"
+                    android:textColor="@color/light_gray"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tvResultType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvResultArtist"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toRightOf="@+id/ivResultImage"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:text="Result Type"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:id="@+id/tvResultBullet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvResultArtist"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toRightOf="@+id/tvResultType"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:text="•"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tvResultYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvResultArtist"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_toRightOf="@+id/tvResultBullet"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:text="2020"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlRate"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:id="@+id/tvRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:text="Rate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvRate"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="5dp"
+                    android:numStars="5"
+                    android:progressBackgroundTint="@color/light_gray"
+                    android:progressTint="@color/purple"
+                    android:secondaryProgressTint="@color/purple"
+                    android:stepSize="0.5" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlReview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="20dp"
+                android:paddingTop="10dp"
+                android:paddingEnd="20dp">
+
+                <TextView
+                    android:id="@+id/tvReview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/roboto_bold"
+                    android:gravity="center"
+                    android:text="Rate"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
+
+                <EditText
+                    android:id="@+id/etReviewTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_below="@+id/tvReview"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/custom_input_white"
+                    android:fontFamily="@font/roboto_medium"
+                    android:hint="Title"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/purple"
+                    android:textColorHint="@color/purple"
+                    android:textSize="16dp"
+                    android:theme="@style/SearchViewStyle.White" />
+
+                <EditText
+                    android:id="@+id/tvReviewDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/etReviewTitle"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/custom_input_white"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="start"
+                    android:hint="Write a review"
+                    android:paddingStart="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/purple"
+                    android:textColorHint="@color/purple"
+                    android:textSize="16dp"
+                    android:theme="@style/SearchViewStyle.White" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

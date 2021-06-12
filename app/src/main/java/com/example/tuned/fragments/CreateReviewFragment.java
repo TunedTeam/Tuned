@@ -1,6 +1,5 @@
 package com.example.tuned.fragments;
 
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,10 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.tuned.Post;
+import com.example.tuned.parse.Post;
 import com.example.tuned.R;
-import com.example.tuned.SignupActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;

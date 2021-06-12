@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.CreateReviewSearchFragment"
     android:orientation="vertical"
     android:background="@color/lavender">
-
 
     <RelativeLayout
         android:id="@+id/rlTop"
@@ -55,11 +55,93 @@
         android:theme="@style/SearchViewStyle.White">
     </SearchView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabAll"
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="All"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:backgroundTint="@color/dark_purple"
+            android:fontFamily="@font/roboto_black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:visibility="invisible"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabAlbums"
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Albums"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:backgroundTint="@color/dark_purple"
+            android:fontFamily="@font/roboto_black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:visibility="invisible"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabTracks"
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Tracks"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:backgroundTint="@color/dark_purple"
+            android:fontFamily="@font/roboto_black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:visibility="invisible"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabArtists"
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Artists"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp"
+            app:backgroundTint="@color/dark_purple"
+            android:fontFamily="@font/roboto_black"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
+
     <ListView
         android:id="@+id/lvResults"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:paddingBottom="55dp">
     </ListView>
 
 </LinearLayout>

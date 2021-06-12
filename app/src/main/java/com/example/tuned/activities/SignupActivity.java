@@ -1,4 +1,4 @@
-package com.example.tuned;
+package com.example.tuned.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

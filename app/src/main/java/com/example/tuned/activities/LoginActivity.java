@@ -1,4 +1,4 @@
-package com.example.tuned;
+package com.example.tuned.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tuned.R;
-import com.example.tuned.MainActivity;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;

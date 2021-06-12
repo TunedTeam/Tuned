@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.tuned.Post;
+import com.example.tuned.parse.Post;
 //import com.example.instagram.PostsAdapter;
 import com.example.tuned.adapters.PostsAdapter;
 import com.example.tuned.R;

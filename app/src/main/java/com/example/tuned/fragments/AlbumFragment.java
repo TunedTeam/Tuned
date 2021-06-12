@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.example.tuned.R;
-import com.example.tuned.Spotify.Spotify;
+import com.example.tuned.spotify.Spotify;
 import com.example.tuned.adapters.AlbumAdapter;
 import com.example.tuned.models.Track;
 

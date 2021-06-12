@@ -1,7 +1,6 @@
 package com.example.tuned.adapters;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -19,24 +17,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
-import com.bumptech.glide.Glide;
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.tuned.AlbumActivity;
 import com.example.tuned.R;
-import com.example.tuned.Spotify.Spotify;
-import com.example.tuned.StreamingActivity;
-import com.example.tuned.models.Album;
+import com.example.tuned.spotify.Spotify;
+import com.example.tuned.activities.StreamingActivity;
 import com.example.tuned.models.Track;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import okhttp3.Headers;
 
 public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> {
 
@@ -84,6 +70,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                 String trackId = tracks.get(position).trackId;
                 String trackName = tracks.get(position).trackName;
+                String trackArtist = tracks.get(position).trackArtist;
                 String trackAlbumId = tracks.get(position).trackAlbumId;
                 Log.d(TAG, "the id:" + trackAlbumId);
                 //Log.d(TAG, "track photo: " + albumImage);
@@ -99,6 +86,7 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.ViewHolder> 
 
                 bundle.putString("trackId", trackId);
                 bundle.putString("trackName", trackName);
+                bundle.putString("trackArtist", trackArtist);
                 bundle.putString("trackAlbumId", trackAlbumId);
                 bundle.putInt("position", position);
                 bundle.putString("trackPreview", trackPreview);

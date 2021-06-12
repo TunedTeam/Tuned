@@ -7,26 +7,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
-import com.example.tuned.AlbumActivity;
-import com.example.tuned.Spotify.Spotify;
-import com.example.tuned.fragments.AlbumFragment;
+import com.example.tuned.activities.AlbumActivity;
+import com.example.tuned.spotify.Spotify;
 import com.example.tuned.models.Album;
 import com.example.tuned.R;
-import com.example.tuned.models.Track;
 
 import java.util.ArrayList;
 

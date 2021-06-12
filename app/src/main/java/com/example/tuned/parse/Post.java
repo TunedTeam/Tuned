@@ -1,4 +1,4 @@
-package com.example.tuned;
+package com.example.tuned.parse;
 
 import com.parse.ParseClassName;
 import com.parse.ParseFile;

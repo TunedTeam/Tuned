@@ -1,13 +1,10 @@
 package com.example.tuned.fragments;
 
 import android.content.res.ColorStateList;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -20,9 +17,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -32,10 +26,9 @@ import com.example.tuned.adapters.PopularWeekAdapter;
 import com.example.tuned.adapters.TopTracksAdapter;
 import com.example.tuned.models.Album;
 import com.example.tuned.R;
-import com.example.tuned.Spotify.Spotify;
+import com.example.tuned.spotify.Spotify;
 import com.example.tuned.models.Track;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;

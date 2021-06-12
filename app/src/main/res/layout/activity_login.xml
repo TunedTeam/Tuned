@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:gravity="bottom"
     android:background="@drawable/albumcover1"
-    tools:context="com.example.tuned.LoginActivity">
+    tools:context="com.example.tuned.activities.LoginActivity">
 
     <EditText
         android:id="@+id/etUsername"

@@ -1,4 +1,4 @@
-package com.example.tuned;
+package com.example.tuned.activities;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -24,7 +24,8 @@ import com.adamratzman.spotify.SpotifyAppApi;
 import com.bumptech.glide.Glide;
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.example.tuned.Spotify.Spotify;
+import com.example.tuned.R;
+import com.example.tuned.spotify.Spotify;
 import com.example.tuned.models.Album;
 import com.example.tuned.models.Track;
 import com.gauravk.audiovisualizer.visualizer.BarVisualizer;
@@ -40,10 +41,11 @@ public class StreamingActivity extends AppCompatActivity {
 
     public static final String TAG = "StreamingActivity";
     Button btnplay, btnnext, btnprev, btnff, btnfr;
-    TextView txtsname, txtsstart, txtsstop;
+    TextView txtsname, txtartist, txtsstart, txtsstop;
     SeekBar seekmusic;
     ImageView trackPhoto;
     BarVisualizer visualizer;
+    TextView tvBack;
 
     String sname;
     private Context trackContext;
@@ -99,6 +101,15 @@ public class StreamingActivity extends AppCompatActivity {
         seekmusic = findViewById(R.id.seekbar);
         visualizer = findViewById(R.id.blast);
         trackPhoto = findViewById(R.id.trackPhoto);
+        tvBack = findViewById(R.id.tvBack);
+        txtartist = findViewById(R.id.txtartist);
+
+        tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -119,12 +130,15 @@ public class StreamingActivity extends AppCompatActivity {
         // position = getIntent().getIntExtra("position",-1);
         // String trackImage = bundle.getString("trackImage");
         String trackName = bundle.getString("trackName");
+        String trackArtist = bundle.getString("trackArtist");
         txtsname.setSelected(true);
+        txtartist.setSelected(true);
         String url = bundle.getString("url");
         String trackPreview = bundle.getString("trackPreview");
         //String trackPreview = tracks.get(position).trackDeezerPreview;
         Log.i(TAG, "Deezer previewURL: " + trackPreview);
         txtsname.setText(trackName);
+        txtartist.setText(trackArtist);
 
 
         Glide.with(this)
